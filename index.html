@@ -451,15 +451,22 @@ section { padding: 100px 0; }
   width: 100%;
   overflow: hidden;
   background: #050505;
+  --vr: 177.78%;
+}
+
+.video-orient-wrapper::after {
+  content: '';
+  display: block;
+  padding-top: var(--vr);
 }
 
 /* Default aspect ratios */
-.short-videos-grid .video-orient-wrapper { aspect-ratio: 9/16; }
-.horizontal-videos-grid .video-orient-wrapper { aspect-ratio: 16/9; }
+.short-videos-grid .video-orient-wrapper { --vr: 177.78%; }
+.horizontal-videos-grid .video-orient-wrapper { --vr: 56.25%; }
 
 /* JS orientation overrides */
-.video-orient-wrapper.is-portrait { aspect-ratio: 9/16 !important; }
-.video-orient-wrapper.is-landscape { aspect-ratio: 16/9 !important; }
+.video-orient-wrapper.is-portrait { --vr: 177.78% !important; }
+.video-orient-wrapper.is-landscape { --vr: 56.25% !important; }
 
 .video-orient-wrapper video {
   position: absolute;
