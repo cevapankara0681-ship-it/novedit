@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /site1.html
+Disallow: /site2.html
+Disallow: /site3.html
+Disallow: /site4.html
+
+Sitemap: https://www.novedit.com.tr/sitemap.xml
