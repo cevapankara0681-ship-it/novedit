@@ -137,16 +137,48 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
 .filter-btn:hover, .filter-btn.active { background: var(--text-white); color: var(--bg-dark); border-color: var(--text-white); }
 
 /* ─── VİDEO GRID STİLLERİ ─── */
-.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-bottom: 80px; align-items: start; }
-.video-item { background: var(--bg-card); border: 1px solid var(--border); position: relative; transition: all 0.4s ease; overflow: hidden; }
+.portfolio-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+  gap: 20px; 
+  margin-bottom: 80px; 
+  align-items: start; /* Siyah boşlukları kalıcı olarak engeller */
+}
+
+.video-item { 
+  background: var(--bg-card); 
+  border: 1px solid var(--border); 
+  position: relative; 
+  transition: all 0.4s ease; 
+  overflow: hidden; 
+}
+
+/* 🚀 YATAY VİDEOLARI BÜYÜTME SİHRİ: Yatay videolar 2 sütun kaplar */
+@media (min-width: 768px) {
+  .video-item:has(.horizontal) {
+    grid-column: span 2;
+  }
+}
+
 .video-item:hover { border-color: var(--text-white); transform: translateY(-4px); }
 .video-item.hide { display: none; }
+
 .video-orient-wrapper { position: relative; width: 100%; padding-bottom: 177.78%; background: #000; overflow: hidden; }
 .video-orient-wrapper.horizontal { padding-bottom: 56.25%; }
 .video-orient-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
 .video-info { padding: 15px; border-top: 1px solid var(--border); background: var(--bg-card); }
 .video-cat-label { font-size: 10px; font-weight: 700; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; }
-.video-title { font-size: 14px; font-weight: 600; color: var(--text-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Çok uzun başlıkların tasarımı bozmasını engeller, sonuna ... koyar */
+.video-title { 
+  font-size: 14px; 
+  font-weight: 600; 
+  color: var(--text-white); 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
   
 /* ─── WEB SİTELERİ GRID STİLLERİ ─── */
 .web-samples-section { padding: 100px 0; background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
