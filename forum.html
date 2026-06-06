@@ -165,13 +165,12 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; }
     return "az önce";
   }
 
-  /* ─── SUPABASE YAPILANDIRMASI (ÇAKIŞMA GİDERİLDİ) ─── */
-  const supabaseUrl = 'https://lcwsccfautsefmxsikinf.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjd3NjY2ZhdXRzZWZteHNraW5mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NTY5NDgsImV4cCI6MjA5NjMzMjk0OH0.Frp-ukDNUGWQ6wvsab2LUWq8o-SS9Lj6pqqGnp5l7zw';
+ /* ─── SUPABASE YAPILANDIRMASI (ÇAKIŞMA GİDERİLDİ) ─── */
+  const supabaseUrl = 'https://lcwsccfautsefmxsikinf.supabase.co'; 
+  const supabaseKey = 'sb_publishable_3hqQFmO9okI3O5ITKgJbsA_0Ga23UUz'; 
   
-  // 'supabase' kütüphaneden global geldiği için çakışmasın diye adını supabaseClient yaptık
   const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
+  
   /* ─── GOOGLE OAUTH GİRİŞ İŞLEMİ ─── */
   async function signInWithGoogle() {
     try {
