@@ -3,118 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOV Edit Forum | Topluluk</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<style>
-/* GENEL TASARIM */
-:root { --bg-dark: #000; --bg-card: #0a0a0a; --bg-hover: #151515; --text: #fff; --gray: #888; --border: #222; --accent: #fff; }
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-body { background: var(--bg-dark); color: var(--text); line-height: 1.6; overflow-x: hidden; }
-.container { width: 90%; max-width: 1000px; margin: auto; padding-top: 100px; padding-bottom: 50px; }
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-/* BUTONLAR */
-.btn { background: var(--accent); color: #000; padding: 12px 24px; border: none; cursor: pointer; font-weight: 700; font-size: 14px; text-transform: uppercase; border-radius: 2px; transition: 0.3s; }
-.btn:hover { opacity: 0.8; }
-.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+<title>NOV Edit Forum | Tartışma ve Destek Topluluğu</title>
+<meta name="description" content="NOV Edit dijital topluluğuna Google hesabınızla anında katılın. Web tasarım, video düzenleme ve dijital pazarlama üzerine tartışın.">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/jpeg" href="logo.jpg">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+/* ─── KÖK RENKLER VE GEOMETRİ ─── */
+:root {
+  --bg-dark: #000000;
+  --bg-card: #0a0a0a;
+  --bg-hover: #121212;
+  --text-white: #ffffff;
+  --text-gray: #888888;
+  --text-light: #cccccc;
+  --border: #222222;
+  --border-hover: #444444;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; overflow-x: hidden; }
+.container { width: 90%; max-width: 1100px; margin: auto; }
+
+/* ─── NAVİGASYON ─── */
+.nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.93); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 22px; font-weight: 800; letter-spacing: 3px; color: var(--text-white); text-transform: uppercase; text-decoration: none; }
+.nav-auth-btn { background: var(--text-white); color: var(--bg-dark); padding: 8px 18px; border-radius: 2px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 13px; transition: 0.3s; }
+.nav-auth-btn:hover { opacity: 0.9; }
+
+/* ─── FORUM LAYOUT ─── */
+.forum-container { display: grid; grid-template-columns: 3fr 1fr; gap: 40px; padding: 140px 0 60px; min-height: 80px; }
+
+/* Konu Listesi Görünümü */
+.forum-main { display: flex; flex-direction: column; gap: 15px; }
+.forum-topic { background: var(--bg-card); border: 1px solid var(--border); padding: 25px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-radius: 4px; }
+.forum-topic:hover { border-color: var(--border-hover); background: var(--bg-hover); transform: translateX(4px); }
+.topic-info h3 { font-size: 18px; font-weight: 600; color: var(--text-white); margin-bottom: 6px; }
+.topic-info p { font-size: 13px; color: var(--text-gray); }
+.topic-go { color: var(--text-white); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid transparent; transition: 0.3s; }
+.forum-topic:hover .topic-go { border-color: var(--text-white); }
+
+/* Kenar Çubuğu Panel Stilleri */
+.forum-sidebar { display: flex; flex-direction: column; gap: 20px; }
+.sidebar-box { background: var(--bg-card); border: 1px solid var(--border); padding: 30px; text-align: center; border-radius: 4px; }
+.sidebar-box h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+.btn-primary { display: block; width: 100%; background: var(--text-white); color: var(--bg-dark); padding: 14px; text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; border: none; cursor: pointer; transition: 0.3s; letter-spacing: 1px; border-radius: 2px; }
+.btn-primary:hover { opacity: 0.85; }
+.btn-outline { display: block; width: 100%; background: transparent; color: var(--text-white); border: 1px solid var(--border); padding: 12px; text-decoration: none; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.3s; margin-top: 10px; border-radius: 2px; }
 .btn-outline:hover { background: var(--border); }
 
-/* ÜST MENÜ */
-.header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
-.header-bar h1 { font-size: 32px; font-weight: 800; letter-spacing: -1px; }
-
-/* KONU LİSTESİ */
-.topic-card { background: var(--bg-card); border: 1px solid var(--border); padding: 25px; margin-bottom: 15px; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; }
-.topic-card:hover { border-color: #555; transform: translateY(-2px); background: var(--bg-hover); }
-.topic-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
-.topic-meta { font-size: 13px; color: var(--gray); }
-
-/* KONU DETAY EKRANI (İÇİ) */
+/* ─── DETAYLI TARTIŞMA EKRANI ─── */
 #topicDetailView { display: none; }
-.back-btn { background: transparent; color: var(--gray); border: none; font-size: 14px; cursor: pointer; margin-bottom: 20px; display: flex; align-items: center; gap: 5px; }
-.back-btn:hover { color: var(--text); }
-.detail-header { background: var(--bg-card); border: 1px solid var(--border); padding: 30px; border-radius: 4px; margin-bottom: 30px; }
-.detail-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+.back-btn { background: transparent; color: var(--text-gray); border: none; font-size: 14px; cursor: pointer; margin-bottom: 25px; display: flex; align-items: center; gap: 8px; transition: 0.3s; font-weight: 500; }
+.back-btn:hover { color: var(--text-white); }
+.detail-header { background: var(--bg-card); border: 1px solid var(--border); padding: 35px; border-radius: 4px; margin-bottom: 30px; }
+.detail-title { font-size: 26px; font-weight: 800; line-height: 1.4; margin-bottom: 12px; }
+.detail-meta { font-size: 13px; color: var(--text-gray); }
 
-/* YORUMLAR */
-.reply-card { background: var(--bg-dark); border-left: 3px solid var(--border); padding: 20px; margin-bottom: 15px; }
-.reply-author { font-weight: 600; font-size: 14px; color: var(--accent); margin-bottom: 5px; }
-.reply-content { font-size: 15px; color: #ddd; white-space: pre-wrap; }
-.reply-box { margin-top: 40px; background: var(--bg-card); padding: 25px; border: 1px solid var(--border); border-radius: 4px; }
-.reply-box textarea { width: 100%; height: 120px; background: #000; border: 1px solid var(--border); color: #fff; padding: 15px; margin-bottom: 15px; resize: vertical; font-size: 14px; outline: none; }
-.reply-box textarea:focus { border-color: var(--gray); }
+/* Cevap Kartları */
+.reply-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--text-white); padding: 20px; margin-bottom: 15px; border-radius: 0 4px 4px 0; }
+.reply-author { font-weight: 700; font-size: 14px; margin-bottom: 6px; color: var(--text-light); }
+.reply-content { font-size: 15px; color: #dddddd; white-space: pre-wrap; }
 
-/* YENİ KONU MODALI (GELİŞMİŞ) */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 9999; }
-.modal-content { background: var(--bg-card); border: 1px solid var(--border); width: 90%; max-width: 500px; padding: 40px; position: relative; border-radius: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-.modal-close { position: absolute; top: 20px; right: 25px; font-size: 24px; color: var(--gray); cursor: pointer; transition: 0.3s; }
-.modal-close:hover { color: #fff; }
-.modal-content h2 { font-size: 24px; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-.modal-content input, .modal-content select { width: 100%; background: #000; border: 1px solid var(--border); color: #fff; padding: 15px; margin-bottom: 20px; font-size: 15px; outline: none; }
-.modal-content input:focus { border-color: var(--gray); }
+/* Cevap Formu */
+.reply-box { margin-top: 40px; background: var(--bg-card); padding: 30px; border: 1px solid var(--border); border-radius: 4px; }
+.reply-box h3 { font-size: 18px; margin-bottom: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.reply-box textarea { width: 100%; height: 140px; background: var(--bg-dark); border: 1px solid var(--border); color: #fff; padding: 15px; margin-bottom: 15px; resize: vertical; font-size: 14px; outline: none; transition: 0.3s; }
+.reply-box textarea:focus { border-color: var(--text-gray); }
 
-/* Mobil Uyum */
+/* ─── MERKEZİ GELİŞMİŞ MODAL (ARKA PLAN KİLİTLİ) ─── */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 9999; pointer-events: auto; }
+.modal-overlay.active { display: flex; }
+.modal-content { background: var(--bg-card); border: 1px solid var(--border); width: 90%; max-width: 520px; padding: 40px; position: relative; border-radius: 6px; box-shadow: 0 25px 60px rgba(0,0,0,0.6); animation: modalFade 0.3s ease; }
+@keyframes modalFade { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-close { position: absolute; top: 20px; right: 25px; font-size: 28px; color: var(--text-gray); cursor: pointer; transition: 0.3s; line-height: 1; }
+.modal-close:hover { color: var(--text-white); }
+.modal-content h2 { font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+.modal-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-gray); margin-bottom: 6px; display: block; font-weight: 600; }
+.modal-content input, .modal-content select { width: 100%; background: var(--bg-dark); border: 1px solid var(--border); color: #fff; padding: 14px; margin-bottom: 20px; font-size: 14px; outline: none; transition: 0.3s; border-radius: 2px; }
+.modal-content input:focus, .modal-content select:focus { border-color: var(--text-gray); }
+
+/* ─── MOBİL UYUM (RESPONSIVE) ─── */
 @media (max-width: 768px) {
-  .header-bar { flex-direction: column; align-items: flex-start; gap: 15px; }
-  .topic-card { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .forum-container { grid-template-columns: 1fr; padding-top: 100px; gap: 30px; }
+  .forum-sidebar { order: -1; }
+  .nav .container { flex-direction: row; }
+  .logo { font-size: 18px; }
+  .detail-title { font-size: 20px; }
+  .forum-topic { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .topic-go { font-size: 11px; }
 }
 </style>
 </head>
 <body>
 
-<div class="container">
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="logo">NOV Edit</a>
+    <a class="nav-auth-btn" id="navLoginBtn" onclick="signInWithGoogle()">Giriş Yap</a>
+  </div>
+</nav>
+
+<section class="container forum-container">
   
-  <div id="topicListView">
-    <div class="header-bar">
-      <div>
-        <h1>NOV Edit Forum</h1>
-        <p style="color:var(--gray); font-size:14px; margin-top:5px;">Tartışmalara katılın, sorular sorun.</p>
-      </div>
-      <div id="authButtons">
-        <button class="btn" onclick="signInWithGoogle()" id="loginBtn">Google ile Giriş Yap</button>
-        <div id="userMenu" style="display:none; align-items:center; gap:15px;">
-          <span id="userNameDisplay" style="font-size:13px; color:var(--gray);"></span>
-          <button class="btn" onclick="openModal('newTopicModal')">Yeni Konu Aç</button>
-          <button class="btn btn-outline" style="padding:10px 15px;" onclick="signOut()">Çıkış</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="topicListContainer">
-      <p style="color:var(--gray); text-align:center; padding:40px;">Konular yükleniyor...</p>
-    </div>
-  </div>
-
-  <div id="topicDetailView">
-    <button class="back-btn" onclick="closeTopicDetail()">← Konu Listesine Dön</button>
+  <div class="forum-left">
     
-    <div class="detail-header">
-      <h2 class="detail-title" id="detailTitle">Konu Başlığı</h2>
-      <p class="topic-meta" id="detailMeta">Yazar • Tarih • Kategori</p>
+    <div id="topicListView">
+      <div id="topicListContainer">
+        <p style="color: var(--text-gray); text-align: center; padding: 40px;">Konular veritabanından çekiliyor...</p>
+      </div>
     </div>
 
-    <div id="repliesContainer">
+    <div id="topicDetailView">
+      <button class="back-btn" onclick="closeTopicDetail()">← Konu Listesine Dön</button>
+      
+      <div class="detail-header">
+        <h2 class="detail-title" id="detailTitle">Yükleniyor...</h2>
+        <p class="detail-meta" id="detailMeta"></p>
       </div>
 
-    <div class="reply-box">
-      <h3 style="margin-bottom:15px; font-size:18px;">Cevap Yaz</h3>
-      <textarea id="replyContent" placeholder="Bu konu hakkındaki düşüncelerinizi buraya yazın..."></textarea>
-      <button class="btn" id="submitReplyBtn" onclick="submitReply()">Gönder</button>
-      <p id="replyLoginWarning" style="color:#ff4444; font-size:13px; margin-top:10px; display:none;">Yorum yazmak için giriş yapmalısınız.</p>
+      <div id="repliesContainer">
+        </div>
+
+      <div class="reply-box">
+        <h3>Fikirlerini Paylaş</h3>
+        <textarea id="replyContent" placeholder="Tartışmaya katkıda bulunacak bir şeyler yazın..."></textarea>
+        <button class="btn-primary" id="submitReplyBtn" onclick="submitReply()">Cevabı Yayınla</button>
+        <p id="replyLoginWarning" style="color:#ff4444; font-size:13px; margin-top:12px; display:none; text-align: center;">Tartışmaya mesaj yazabilmek için Google hesabınızla giriş yapmalısınız.</p>
+      </div>
     </div>
+
   </div>
 
-</div>
+  <div class="forum-sidebar">
+    
+    <div class="sidebar-box" id="userPanelPlaceholder">
+      <h4>Topluluk Forumu</h4>
+      <p style="font-size: 12px; color: var(--text-gray); margin-bottom: 20px; line-height: 1.5;">Konu başlatmak veya tartışmalara katılmak için giriş yapın.</p>
+      <button class="btn-primary" onclick="signInWithGoogle()">Google ile Giriş</button>
+    </div>
+
+    <div class="sidebar-box" id="userPanelActive" style="display: none;">
+      <h4>Profil Paneli</h4>
+      <p id="loggedInUserName" style="font-size: 14px; font-weight: 600; color: var(--text-white); margin-bottom: 20px;"></p>
+      <button class="btn-primary" onclick="openModal('newTopicModal')">Yeni Konu Başlat</button>
+      <button class="btn-outline" onclick="signOut()">Oturumu Kapat</button>
+    </div>
+
+  </div>
+
+</section>
 
 <div class="modal-overlay" id="newTopicModal">
   <div class="modal-content">
     <span class="modal-close" onclick="closeModal('newTopicModal')">×</span>
     <h2>Yeni Konu Başlat</h2>
     
-    <label style="font-size:12px; color:var(--gray); margin-bottom:5px; display:block;">Konu Başlığı</label>
-    <input type="text" id="topicTitle" placeholder="Örn: SEO uyumlu web sitesi nasıl yapılır?">
+    <label class="modal-label">Tartışma Başlığı</label>
+    <input type="text" id="topicTitle" placeholder="Örn: Premiere Pro render sürelerini kısaltma yolları">
     
-    <label style="font-size:12px; color:var(--gray); margin-bottom:5px; display:block;">Kategori</label>
+    <label class="modal-label">Kategori Seçimi</label>
     <select id="topicCategory">
       <option value="Web Tasarım">Web Tasarım</option>
       <option value="Video Düzenleme">Video Düzenleme</option>
@@ -122,162 +179,201 @@ body { background: var(--bg-dark); color: var(--text); line-height: 1.6; overflo
       <option value="Genel">Genel</option>
     </select>
 
-    <button class="btn" style="width:100%; padding:15px;" onclick="createNewTopic()">Konuyu Paylaş</button>
+    <button class="btn-primary" style="padding: 16px;" onclick="createNewTopic()">Konuyu Paylaş</button>
   </div>
 </div>
 
+<footer style="text-align: center; padding: 40px 0; color: var(--text-gray); border-top: 1px solid var(--border); font-size: 13px;">
+  <p>© 2026 NOV Tasarım | Tüm hakları saklıdır.</p>
+</footer>
+
 <script>
-/* --- SUPABASE BAĞLANTISI --- */
-const supabaseUrl = 'https://lcwsccfautsefmxskinf.supabase.co';
-const supabaseKey = 'sb_publishable_3hqQFmO9okI3O5ITKgJbsA_0Ga23UUz';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  /* ─── GERÇEK ZAMAN HESAPLAMA MOTORU ─── */
+  function timeAgo(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
 
-let currentUser = null;
-let currentActiveTopicId = null;
+    let interval = seconds / 31536000;
+    if (interval > 1) return Math.floor(interval) + " yıl önce";
+    interval = seconds / 2592000;
+    if (interval > 1) return Math.floor(interval) + " ay önce";
+    interval = seconds / 86400;
+    if (interval > 1) return Math.floor(interval) + " gün önce";
+    interval = seconds / 3600;
+    if (interval >= 1) return Math.floor(interval) + " saat önce";
+    interval = seconds / 60;
+    if (interval >= 1) return Math.floor(interval) + " dakika önce";
+    return "az önce";
+  }
 
-/* --- SİSTEM BAŞLANGICI VE GİRİŞ KONTROLÜ --- */
-window.addEventListener('DOMContentLoaded', async () => {
-  // 1. Kullanıcıyı kontrol et
-  const { data: { session } } = await supabase.auth.getSession();
-  updateAuthState(session?.user);
+  /* ─── SUPABASE GÜVENLİ İLİŞKİLENDİRME (KORUMALI SÜRÜM) ─── */
+  const supabaseUrl = 'https://lcwsccfautsefmxskinf.supabase.co';
+  const supabaseKey = 'sb_publishable_3hqQFmO9okI3O5ITKgJbsA_0Ga23UUz';
+  
+  // İsim çakışması engellendi
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-  supabase.auth.onAuthStateChange((_event, session) => {
+  let currentUser = null;
+  let currentActiveTopicId = null;
+
+  /* ─── ÇEKİRDEK BAŞLANGIÇ MOTORU ─── */
+  window.addEventListener('DOMContentLoaded', async () => {
+    // 1. Kullanıcı oturum kontrolü
+    const { data: { session } } = await supabaseClient.auth.getSession();
     updateAuthState(session?.user);
+
+    supabaseClient.auth.onAuthStateChange((_event, session) => {
+      updateAuthState(session?.user);
+    });
+
+    // 2. Canlı verileri veritabanından çağır
+    loadTopicsList();
   });
 
-  // 2. Ana listedeki konuları yükle
-  loadTopicsList();
-});
-
-function updateAuthState(user) {
-  currentUser = user;
-  if (user) {
-    document.getElementById('loginBtn').style.display = 'none';
-    document.getElementById('userMenu').style.display = 'flex';
-    document.getElementById('userNameDisplay').innerText = user.user_metadata.full_name || user.email;
-    document.getElementById('replyLoginWarning').style.display = 'none';
-    document.getElementById('submitReplyBtn').disabled = false;
-  } else {
-    document.getElementById('loginBtn').style.display = 'block';
-    document.getElementById('userMenu').style.display = 'none';
-    document.getElementById('replyLoginWarning').style.display = 'block';
-    document.getElementById('submitReplyBtn').disabled = true;
+  /* ─── KULLANICI YETKİ KONTROL PANELİ ─── */
+  function updateAuthState(user) {
+    currentUser = user;
+    if (user) {
+      document.getElementById('navLoginBtn').style.display = 'none';
+      document.getElementById('userPanelPlaceholder').style.display = 'none';
+      document.getElementById('userPanelActive').style.display = 'block';
+      document.getElementById('loggedInUserName').innerText = "Hoş geldin, " + (user.user_metadata.full_name || user.email);
+      document.getElementById('replyLoginWarning').style.display = 'none';
+      document.getElementById('submitReplyBtn').style.display = 'block';
+    } else {
+      document.getElementById('navLoginBtn').style.display = 'block';
+      document.getElementById('userPanelPlaceholder').style.display = 'block';
+      document.getElementById('userPanelActive').style.display = 'none';
+      document.getElementById('replyLoginWarning').style.display = 'block';
+      document.getElementById('submitReplyBtn').style.display = 'none';
+    }
   }
-}
 
-/* --- GİRİŞ / ÇIKIŞ İŞLEMLERİ --- */
-async function signInWithGoogle() { await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.href }}); }
-async function signOut() { await supabase.auth.signOut(); location.reload(); }
+  /* ─── GOOGLE AUTH KİMLİK DOĞRULAMA ─── */
+  async function signInWithGoogle() { 
+    await supabaseClient.auth.signInWithOAuth({ 
+      provider: 'google', 
+      options: { redirectTo: window.location.origin + '/forum.html' } 
+    }); 
+  }
+  async function signOut() { await supabaseClient.auth.signOut(); location.reload(); }
 
-/* --- 1. EKRAN: KONULARI LİSTELEME --- */
-async function loadTopicsList() {
-  const { data: topics, error } = await supabase.from('topics').select('*').order('created_at', { ascending: false });
-  const container = document.getElementById('topicListContainer');
-  
-  if (error) { container.innerHTML = '<p style="color:red;">Veriler çekilemedi.</p>'; return; }
-  if (!topics || topics.length === 0) { container.innerHTML = '<p style="color:var(--gray);">Henüz konu açılmamış. İlk sen başlat!</p>'; return; }
+  /* ─── MODAL KONTROLLERİ (ARKAPLAN ETKİSİZLEŞTİRME) ─── */
+  function openModal(id) { document.getElementById(id).classList.add('active'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-  container.innerHTML = topics.map(t => `
-    <div class="topic-card" onclick="openTopicDetail(${t.id}, '${t.title.replace(/'/g, "\\'")}', '${t.author_name}', '${t.category}')">
-      <div>
-        <h3 class="topic-title">${t.title}</h3>
-        <p class="topic-meta">${t.author_name} • Kategori: ${t.category}</p>
+  /* ─── LİSTE: GERÇEK VERİLERİ ÇEKME VE BASMA ─── */
+  async function loadTopicsList() {
+    const container = document.getElementById('topicListContainer');
+    const { data: topics, error } = await supabaseClient.from('topics').select('*').order('created_at', { ascending: false });
+    
+    if (error) { 
+      container.innerHTML = '<p style="color:red; text-align:center;">Veritabanı bağlantı hatası oluştu.</p>'; 
+      return; 
+    }
+    if (!topics || topics.length === 0) { 
+      container.innerHTML = '<p style="color:var(--text-gray); text-align:center; padding:40px;">Henüz hiç konu açılmamış. İlk tartışmayı yukarıdan sen başlat!</p>'; 
+      return; 
+    }
+
+    container.innerHTML = topics.map(t => {
+      const timeString = timeAgo(t.created_at);
+      return `
+        <div class="forum-topic" onclick="openTopicDetail(${t.id}, '${t.title.replace(/'/g, "\\'")}', '${t.author_name}', '${t.category}')">
+          <div class="topic-info">
+            <h3>${t.title}</h3>
+            <p>Açan: <strong>${t.author_name}</strong> • <span>${timeString}</span> • Kategori: ${t.category}</p>
+          </div>
+          <div class="topic-go">İncele →</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  /* ─── DETAY: KONU İÇİNE GİRME VE TARTIŞMALAR ─── */
+  async function openTopicDetail(id, title, author, category) {
+    currentActiveTopicId = id;
+    document.getElementById('topicListView').style.display = 'none';
+    document.getElementById('topicDetailView').style.display = 'block';
+    
+    document.getElementById('detailTitle').innerText = title;
+    document.getElementById('detailMeta').innerText = `Konuyu Açan: ${author} | Kategori: ${category}`;
+    
+    loadReplies(id);
+  }
+
+  function closeTopicDetail() {
+    currentActiveTopicId = null;
+    document.getElementById('topicDetailView').style.display = 'none';
+    document.getElementById('topicListView').style.display = 'block';
+    loadTopicsList();
+  }
+
+  /* ─── YORUMLARI ÇEKME MOTORU ─── */
+  async function loadReplies(topicId) {
+    const container = document.getElementById('repliesContainer');
+    container.innerHTML = '<p style="color:var(--text-gray);">Tartışma akışı yükleniyor...</p>';
+
+    const { data: replies, error } = await supabaseClient.from('replies').select('*').eq('topic_id', topicId).order('created_at', { ascending: true });
+
+    if (error) { container.innerHTML = '<p style="color:red;">Yorumlar getirilirken bir hata oluştu.</p>'; return; }
+    if (!replies || replies.length === 0) {
+      container.innerHTML = '<p style="color:var(--text-gray); padding:20px 0; border-bottom:1px solid var(--border);">Bu konu hakkında henüz kimse fikir belirtmemiş. İlk yorumu sen yaz!</p>';
+      return;
+    }
+
+    container.innerHTML = replies.map(r => `
+      <div class="reply-card">
+        <div class="reply-author">${r.author_name}</div>
+        <div class="reply-content">${r.content}</div>
       </div>
-      <div style="color:var(--accent); font-weight:bold;">Tartışmaya Katıl →</div>
-    </div>
-  `).join('');
-}
-
-/* --- 2. EKRAN: KONU DETAYI VE YORUMLAR --- */
-async function openTopicDetail(id, title, author, category) {
-  currentActiveTopicId = id;
-  
-  // Arayüzü değiştir
-  document.getElementById('topicListView').style.display = 'none';
-  document.getElementById('topicDetailView').style.display = 'block';
-  
-  // Başlıkları doldur
-  document.getElementById('detailTitle').innerText = title;
-  document.getElementById('detailMeta').innerText = `Açan: ${author} • Kategori: ${category}`;
-  
-  // Yorumları Yükle
-  loadReplies(id);
-}
-
-function closeTopicDetail() {
-  currentActiveTopicId = null;
-  document.getElementById('topicDetailView').style.display = 'none';
-  document.getElementById('topicListView').style.display = 'block';
-  // Geri döndüğünde listeyi tazele
-  loadTopicsList();
-}
-
-async function loadReplies(topicId) {
-  const container = document.getElementById('repliesContainer');
-  container.innerHTML = '<p style="color:var(--gray);">Yorumlar yükleniyor...</p>';
-
-  const { data: replies, error } = await supabase.from('replies').select('*').eq('topic_id', topicId).order('created_at', { ascending: true });
-
-  if (error) { container.innerHTML = '<p style="color:red;">Yorumlar yüklenemedi.</p>'; return; }
-  
-  if (!replies || replies.length === 0) {
-    container.innerHTML = '<p style="color:var(--gray); padding:20px 0; border-bottom:1px solid var(--border);">Henüz yorum yapılmamış. İlk cevabı sen yaz!</p>';
-    return;
+    `).join('');
   }
 
-  container.innerHTML = replies.map(r => `
-    <div class="reply-card">
-      <div class="reply-author">${r.author_name}</div>
-      <div class="reply-content">${r.content}</div>
-    </div>
-  `).join('');
-}
+  /* ─── VERİTABANINA YORUM YAZMA ─── */
+  async function submitReply() {
+    if (!currentUser) return;
+    const contentInput = document.getElementById('replyContent');
+    const content = contentInput.value.trim();
+    
+    if (!content) { alert("Lütfen boş yorum göndermeyin."); return; }
 
-async function submitReply() {
-  if (!currentUser) return;
-  const contentInput = document.getElementById('replyContent');
-  const content = contentInput.value.trim();
-  
-  if (!content) { alert("Lütfen bir cevap yazın."); return; }
+    const { error } = await supabaseClient.from('replies').insert([{
+      topic_id: currentActiveTopicId,
+      author_name: currentUser.user_metadata.full_name || currentUser.email,
+      content: content
+    }]);
 
-  const { error } = await supabase.from('replies').insert([{
-    topic_id: currentActiveTopicId,
-    author_name: currentUser.user_metadata.full_name || currentUser.email,
-    content: content
-  }]);
-
-  if (error) { alert("Hata: " + error.message); } 
-  else {
-    contentInput.value = ''; // Kutuyu temizle
-    loadReplies(currentActiveTopicId); // Yorumları anında yenile
+    if (error) { alert("Yorum iletilemedi: " + error.message); } 
+    else {
+      contentInput.value = '';
+      loadReplies(currentActiveTopicId);
+    }
   }
-}
 
-/* --- YENİ KONU MODALI İŞLEMLERİ --- */
-function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+  /* ─── VERİTABANINA YENİ KONU EKLEME ─── */
+  async function createNewTopic() {
+    if (!currentUser) return;
+    const title = document.getElementById('topicTitle').value.trim();
+    const category = document.getElementById('topicCategory').value;
+    
+    if (!title) { alert("Lütfen geçerli bir forum başlığı girin."); return; }
 
-async function createNewTopic() {
-  if (!currentUser) { alert("Giriş yapmalısınız!"); return; }
-  
-  const title = document.getElementById('topicTitle').value.trim();
-  const category = document.getElementById('topicCategory').value;
-  
-  if (!title) { alert("Lütfen konu başlığı girin."); return; }
+    const { error } = await supabaseClient.from('topics').insert([{
+      title: title,
+      category: category,
+      author_name: currentUser.user_metadata.full_name || currentUser.email
+    }]);
 
-  const { error } = await supabase.from('topics').insert([{
-    title: title,
-    category: category,
-    author_name: currentUser.user_metadata.full_name || currentUser.email
-  }]);
-
-  if (error) { alert("Hata: " + error.message); } 
-  else {
-    document.getElementById('topicTitle').value = ''; // İçini temizle
-    closeModal('newTopicModal'); // Pencereyi kapat
-    loadTopicsList(); // Listeyi yenile
+    if (error) { alert("Konu açılırken hata meydana geldi: " + error.message); } 
+    else {
+      document.getElementById('topicTitle').value = '';
+      closeModal('newTopicModal');
+      loadTopicsList();
+    }
   }
-}
 </script>
+
 </body>
 </html>
