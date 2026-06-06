@@ -147,7 +147,6 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; }
 
 <script>
   /* ─── GERÇEK ZAMAN HESAPLAMA MOTORU ─── */
-  // Veritabanından gelen UTC zaman damgasını (ISO) anlık zamana çevirir.
   function timeAgo(dateString) {
     const date = new Date(dateString);
     const now = new Date();
@@ -166,17 +165,17 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; }
     return "az önce";
   }
 
-  /* ─── SUPABASE YAPILANDIRMASI ─── */
-  // BU ALANA SUPABASE URL VE KEY BİLGİLERİNİ GİRECEKSİN.
-/* ─── SUPABASE YAPILANDIRMASI ─── */
+  /* ─── SUPABASE YAPILANDIRMASI (ÇAKIŞMA GİDERİLDİ) ─── */
   const supabaseUrl = 'https://lcwsccfautsefmxsikinf.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjd3NjY2ZhdXRzZWZteHNraW5mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NTY5NDgsImV4cCI6MjA5NjMzMjk0OH0.Frp-ukDNUGWQ6wvsab2LUWq8o-SS9Lj6pqqGnp5l7zw';
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  
+  // 'supabase' kütüphaneden global geldiği için çakışmasın diye adını supabaseClient yaptık
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
   /* ─── GOOGLE OAUTH GİRİŞ İŞLEMİ ─── */
   async function signInWithGoogle() {
     try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabaseClient.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: window.location.origin + '/forum.html'
@@ -184,13 +183,13 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; }
       });
       if (error) throw error;
     } catch (error) {
-      alert("Google giriş tetikleyicisi hazır. (Sistemin tam çalışması için Supabase ayarlarını yapmalısın)");
+      alert("Giriş yapılırken bir hata oluştu: " + error.message);
     }
   }
 
   /* ─── ÇIKIŞ İŞLEMİ ─── */
   async function signOut() {
-    await supabase.auth.signOut();
+    await supabaseClient.auth.signOut();
     updateUI(null);
   }
 
@@ -217,16 +216,15 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; }
   window.addEventListener('DOMContentLoaded', async () => {
     
     // 1. Kullanıcı Oturum Kontrolü
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await supabaseClient.auth.getSession();
     updateUI(session?.user);
 
     // Oturum değiştiğinde (Giriş/Çıkış yapıldığında) arayüzü anında güncelle
-    supabase.auth.onAuthStateChange((_event, session) => {
+    supabaseClient.auth.onAuthStateChange((_event, session) => {
       updateUI(session?.user);
     });
 
-    // 2. Geçici Konuları Gerçek Zaman ile Render Etme (Veritabanı bağlanana kadar test amaçlı)
-    // Şimdiki zamandan 45 dakika öncesini ve 5 saat öncesini simüle ediyoruz.
+    // 2. Geçici Konuları Gerçek Zaman ile Render Etme
     const now = Date.now();
     const mockTopics = [
       {
@@ -234,19 +232,19 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; }
         author: "Admin",
         category: "Web Tasarım",
         replies: 12,
-        createdAt: new Date(now - 45 * 60000).toISOString() // 45 dakika önce
+        createdAt: new Date(now - 45 * 60000).toISOString()
       },
       {
         title: "Premiere Pro'da Color Grading İçin En İyi LUT'lar",
         author: "Furkan U.",
         category: "Video Düzenleme",
         replies: 34,
-        createdAt: new Date(now - 5 * 3600000).toISOString() // 5 saat önce
+        createdAt: new Date(now - 5 * 3600000).toISOString()
       }
     ];
 
     const topicListEl = document.getElementById('topicList');
-    topicListEl.innerHTML = ''; // İçi temizle
+    topicListEl.innerHTML = ''; 
     
     mockTopics.forEach(topic => {
       const timeString = timeAgo(topic.createdAt);
@@ -266,6 +264,5 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; }
 
   });
 </script>
-
 </body>
 </html>
