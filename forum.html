@@ -133,9 +133,29 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; }
         <img id="userAvatar" src="" alt="Profil" style="width: 32px; height: 32px; border-radius: 50%; display: none;">
         <p id="loggedInUserName" style="font-size: 13px; font-weight: 600; color: var(--text-white);"></p>
       </div>
-      <button class="btn-primary" onclick="alert('Yeni konu açma modülü Supabase Database kurulduğunda aktifleşecek.')">Yeni Konu Aç</button>
+    <button class="btn-primary" onclick="openModal('newTopicModal')">Yeni Konu Aç</button>
       <button class="btn-outline" onclick="signOut()">Çıkış Yap</button>
     </div>
+
+    <div class="modal-overlay" id="newTopicModal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('newTopicModal')">&times;</span>
+    <h2>Yeni Konu Başlat</h2>
+    <div class="input-group">
+      <label>Konu Başlığı</label>
+      <input type="text" id="topicTitle" placeholder="Örn: Next.js ile veritabanı yönetimi...">
+    </div>
+    <div class="input-group">
+      <label>Kategori</label>
+      <select id="topicCategory" style="width: 100%; background: var(--bg-dark); color: var(--text-white); border: 1px solid var(--border); padding: 12px; margin-top: 5px;">
+        <option value="Web Tasarım">Web Tasarım</option>
+        <option value="Video Düzenleme">Video Düzenleme</option>
+        <option value="Dijital Pazarlama">Dijital Pazarlama</option>
+      </select>
+    </div>
+    <button class="btn-primary" onclick="createTopic()">Konuyu Paylaş</button>
+  </div>
+</div>
 
   </div>
 
@@ -211,6 +231,45 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; }
     }
   }
 
+/* ─── YENİ KONU OLUŞTURMA İŞLEMİ ─── */
+  async function createTopic() {
+    const title = document.getElementById('topicTitle').value;
+    const category = document.getElementById('topicCategory').value;
+    
+    // Kullanıcıyı al
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    
+    if (!user) {
+      alert("Konu açmak için önce giriş yapmalısın.");
+      return;
+    }
+
+    if (!title) {
+      alert("Lütfen bir başlık gir.");
+      return;
+    }
+
+    // Veritabanına (topics tablosuna) ekle
+    const { error } = await supabaseClient
+      .from('topics')
+      .insert([
+        { 
+          title: title, 
+          category: category, 
+          author_name: user.user_metadata.full_name || user.email,
+          replies: 0 
+        }
+      ]);
+
+    if (error) {
+      alert("Hata oluştu: " + error.message);
+    } else {
+      alert("Konun başarıyla paylaşıldı!");
+      closeModal('newTopicModal');
+      location.reload(); // Sayfayı yenile
+    }
+  }
+  
   /* ─── SAYFA YÜKLENDİĞİNDE ÇALIŞACAKLAR ─── */
   window.addEventListener('DOMContentLoaded', async () => {
     
