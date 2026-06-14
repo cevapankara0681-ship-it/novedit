@@ -376,91 +376,26 @@ footer { text-align: center; padding: 60px 0 40px; color: var(--text-gray); bord
   }
 }
 
-/* ─── YAMAN MEDYA BAĞLANTILI KURUMSAL FOOTER STİLLERİ ─── */
-.site-footer { 
-  background: var(--bg-card); 
-  border-top: 1px solid var(--border); 
-  padding: 80px 0 40px; 
-  font-size: 14px; 
-  color: var(--text-light); 
-}
+/* Footer Sütunlarını ve İçeriklerini Ortalar */
 .footer-grid { 
   display: grid; 
-  grid-template-columns: 2fr 1fr 1fr; 
-  gap: 60px; 
-  margin-bottom: 60px; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 40px; 
+  text-align: center; 
 }
 .footer-col { 
   display: flex; 
   flex-direction: column; 
-  gap: 20px; 
-}
-.footer-logo { 
-  font-size: 20px; 
-  font-weight: 800; 
-  letter-spacing: 3px; 
-  color: var(--text-white); 
-  text-transform: uppercase; 
-  text-decoration: none; 
-}
-.footer-desc { 
-  color: var(--text-gray); 
-  line-height: 1.6; 
-  max-width: 340px; 
-  font-size: 13px; 
-}
-.footer-umbrella { 
-  display: inline-block; 
-  font-size: 11px; 
-  font-weight: 700; 
-  text-transform: uppercase; 
-  letter-spacing: 2px; 
-  color: var(--text-white); 
-  border-left: 2px solid var(--text-white); 
-  padding-left: 12px; 
-  margin-top: 5px; 
-}
-.footer-title { 
-  font-size: 12px; 
-  font-weight: 800; 
-  text-transform: uppercase; 
-  letter-spacing: 2px; 
-  color: var(--text-white); 
-  margin-bottom: 5px; 
+  align-items: center; /* İçerikleri yatayda ortalar */
+  gap: 15px; 
 }
 .footer-links { 
   list-style: none; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 12px; 
+  padding: 0; 
 }
-.footer-links a { 
-  color: var(--text-gray); 
-  text-decoration: none; 
-  transition: color 0.3s ease; 
-  font-size: 13px; 
-}
-.footer-links a:hover { 
-  color: var(--text-white); 
-}
-.footer-bottom { 
-  border-top: 1px solid var(--border); 
-  padding-top: 40px; 
-  text-align: center; 
-  font-size: 12px; 
-  color: var(--text-gray); 
-  letter-spacing: 1px; 
-}
-
-/* ─── FOOTER MOBİL UYUM EKLENTİLERİ ─── */
-@media (max-width: 1024px) {
-  .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; }
-}
-
+/* Mobil için düzeltme */
 @media (max-width: 768px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-  .footer-desc { max-width: 100%; }
-  .footer-umbrella { border-left: none; border-top: 2px solid var(--text-white); padding-left: 0; padding-top: 10px; margin: 10px auto 0; display: inline-block; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 
 </style>
@@ -677,34 +612,32 @@ footer { text-align: center; padding: 60px 0 40px; color: var(--text-gray); bord
       <div class="footer-col">
         <a href="index.html" class="footer-logo">NOV Edit | Tasarım</a>
         <p class="footer-desc">Markanızı dijital dünyada öne çıkarmak için profesyonel video kurgu, modern web tasarım ve hedef odaklı dijital reklam çözümleri üretiyoruz.</p>
-        <div>
-          <span class="footer-umbrella">© 2026 NOV Platformu. Tüm Hakları Yaman Medya Tarafından Saklıdır.</span>
-        </div>
+        <span class="footer-umbrella">Bir YAMAN MEDYA Kuruluşudur</span>
       </div>
       
       <div class="footer-col">
         <h4 class="footer-title">Hızlı Menü</h4>
         <ul class="footer-links">
-          <li><a href="index.html" title="Ana Sayfa">Ana Sayfa</a></li>
-          <li><a href="index.html#hizmetlerimiz" title="Hizmetlerimiz">Hizmetler</a></li>
-          <li><a href="portfoy.html" title="Örnek Çalışmalarımız">Örnek Çalışmalar</a></li>
-          <li><a href="surecimiz.html" title="İş Sürecimiz">İş Sürecimiz</a></li>
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="index.html#hizmetlerimiz">Hizmetler</a></li>
+          <li><a href="portfoy.html">Örnek Çalışmalar</a></li>
+          <li><a href="surecimiz.html">İş Sürecimiz</a></li>
         </ul>
       </div>
       
       <div class="footer-col">
         <h4 class="footer-title">İletişim & Destek</h4>
         <ul class="footer-links">
-          <li style="color: var(--text-gray);">Gebze / Kocaeli</li>
-          <li><a href="tel:+905331400419">Müşteri Hattı: +90 (533) 140 04 19</a></li>
-          <li><a href="https://wa.me/905331400419" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600; letter-spacing: 0.5px;">WhatsApp Hattı →</a></li>
+          <li>Gebze / Kocaeli</li>
+          <li><a href="tel:+905331400419">+90 (533) 140 04 19</a></li>
+          <li><a href="https://wa.me/905331400419" style="color: #25D366; font-weight: 600;">WhatsApp Destek →</a></li>
         </ul>
       </div>
 
     </div>
     
     <div class="footer-bottom">
-      <p>© 2026 NOV Edit & Tasarım. Tüm hakları saklıdır. Nov Edit bir Yaman Medya iştirakidir.</p>
+      <p>© 2026 NOV Platformu. Tüm Hakları Yaman Medya Tarafından Saklıdır.</p>
     </div>
   </div>
 </footer>
