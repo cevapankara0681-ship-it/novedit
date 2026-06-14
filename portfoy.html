@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<!-- Google Analytics / Tag Manager -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11312566463"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -15,7 +14,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="google-site-verification" content="eFs4S7evlMEZ7f52gHJspAEyF8xWQIANzplqstJ22Yw" />
 
-<!-- 🚀 SEO: VURUCU BAŞLIK VE AÇIKLAMA -->
 <title>NOV Edit Portföy | Gebze Video Düzenleme ve Web Tasarım Örnekleri</title>
 <meta name="description" content="NOV Edit'in Gebze'de ve Türkiye genelinde yaptığı profesyonel video düzenleme, web tasarım ve reklam çalışmalarını inceleyin. Nov edit video edit gebze video referansları.">
 <meta name="keywords" content="video edit portföy, gebze video düzenleme, gıda sektörü tanıtım videosu, inşaat reklam videosu, nov edit video edit gebze video, web tasarım referansları, yurtdışı video kurgu, nov edit çalışmalar">
@@ -23,14 +21,12 @@
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="language" content="Turkish">
 
-<!-- Yerel SEO (Local SEO) Coğrafi Etiketler -->
 <meta name="geo.region" content="TR-41">
 <meta name="geo.placename" content="Gebze">
 <meta name="geo.position" content="40.792183;29.423303">
 <meta name="ICBM" content="40.792183, 29.423303">
 <link rel="canonical" href="https://www.novedit.com.tr/portfoy.html">
 
-<!-- Open Graph Sinyalleri -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.novedit.com.tr/portfoy.html">
 <meta property="og:title" content="NOV Edit Portföy | Sektörel Video ve Web Tasarım Örnekleri">
@@ -45,7 +41,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-<!-- 🚀 SEO: GOOGLE İÇİN PORTFÖY YAPISAL VERİSİ (SCHEMA.ORG) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -193,6 +188,20 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
 .web-sample-location { font-size: 12px; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px; }
 .web-sample-desc { font-size: 14px; color: var(--text-light); line-height: 1.6; flex: 1; margin-bottom: 15px;}
 
+/* ─── YENİ: SOSYAL MEDYA HESAPLARI STİLLERİ ─── */
+.social-media-section { padding: 100px 0; background: var(--bg-dark); }
+.social-samples-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.social-card { background: var(--bg-card); border: 1px solid var(--border); padding: 36px 28px; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 15px; }
+.social-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--text-white); transform: scaleX(0); transition: transform 0.4s ease; }
+.social-card:hover { transform: translateY(-8px); border-color: var(--border-hover); background: var(--bg-hover); }
+.social-card:hover::before { transform: scaleX(1); }
+.social-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-gray); border: 1px solid var(--border); padding: 4px 10px; display: inline-block; align-self: flex-start; }
+.social-name { font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-white); }
+.social-details-box { background: var(--bg-dark); border: 1px solid var(--border); padding: 20px; font-size: 13px; color: var(--text-light); line-height: 1.8; margin-bottom: 10px; flex: 1; }
+.social-details-box strong { color: var(--text-white); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 11px; margin-right: 5px; }
+.social-action-btns { display: flex; gap: 12px; margin-top: auto; }
+.social-action-btns .button { flex: 1; padding: 12px 20px; font-size: 12px; }
+
 /* ─── MOBİL UYUM ─── */
 @media (max-width: 1024px) {
   .web-samples-grid { grid-template-columns: repeat(2, 1fr); }
@@ -204,7 +213,9 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
   .page-title { font-size: 28px; }
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
   .web-samples-grid { grid-template-columns: 1fr; }
+  .social-samples-grid { grid-template-columns: 1fr; } /* Sosyal medya mobil uyum */
   .filter-btn { padding: 8px 12px; font-size: 10px; }
+  .social-action-btns { flex-direction: column; }
 }
 @media (max-width: 480px) {
   .portfolio-grid { grid-template-columns: 1fr; }
@@ -248,9 +259,7 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
 
   <div class="portfolio-grid" id="video-gallery">
     
-    <!-- GIDA SEKTÖRÜ -->
     <div class="video-item" data-category="gida">
-      <!-- YouTube Yatay Format Sınıfı Eklendi (.horizontal) -->
       <div class="video-orient-wrapper horizontal">
         <iframe src="https://www.youtube.com/embed/gSeGjGL3JaQ?rel=0&modestbranding=1&vq=hd1080" title="NOV Edit Söğüşçü Restoran Tanıtım Videosu" allowfullscreen loading="lazy"></iframe>
       </div>
@@ -280,9 +289,7 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
       </div>
     </div>
 
-    <!-- İNŞAAT SEKTÖRÜ -->
     <div class="video-item" data-category="insaat">
-      <!-- Shorts Formatı Sınıfı Eklendi (Dikey) -->
       <div class="video-orient-wrapper">
         <iframe src="https://www.youtube.com/embed/XLF_MFXDEnM?rel=0&modestbranding=1&vq=hd1080" title="NOV Edit Başak Kapı İnşaat Reklam Videosu" allowfullscreen loading="lazy"></iframe>
       </div>
@@ -302,7 +309,6 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
       </div>
     </div>
 
-    <!-- EĞİTİM SEKTÖRÜ -->
     <div class="video-item" data-category="egitim">
       <div class="video-orient-wrapper horizontal">
         <iframe src="https://www.youtube.com/embed/c5c7y0SW234?rel=0&modestbranding=1&vq=hd1080" title="NOV Edit Fare Kapanı Kurulum Videosu ve Tanıtımı" allowfullscreen loading="lazy"></iframe>
@@ -313,7 +319,6 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
       </div>
     </div>
 
-    <!-- KUYUMCULUK SEKTÖRÜ -->
     <div class="video-item" data-category="kuyumcu">
       <div class="video-orient-wrapper">
         <iframe src="https://www.youtube.com/embed/sporJNep88w?rel=0&modestbranding=1&vq=hd1080" title="NOV Edit Güneş Kuyumculuk Reklam Shorts Videosu" allowfullscreen loading="lazy"></iframe>
@@ -324,7 +329,6 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
       </div>
     </div>
 
-    <!-- YURTDIŞI -->
     <div class="video-item" data-category="yurtdisi">
       <div class="video-orient-wrapper">
         <iframe src="https://www.youtube.com/embed/ChFUBRcYAnM?rel=0&modestbranding=1&vq=hd1080" title="NOV Edit Finlandiya Güzellik Salonu Reklam Videosu" allowfullscreen loading="lazy"></iframe>
@@ -345,7 +349,6 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
       </div>
     </div>
 
-    <!-- KLİP KATEGORİSİ -->
     <div class="video-item" data-category="klip">
       <div class="video-orient-wrapper horizontal">
         <iframe src="https://www.youtube.com/embed/bw7TCigeQ0U?rel=0&modestbranding=1&vq=hd1080" title="NOV Edit Olamaz Sensiz Yarim Müzik Klibi Montajı" allowfullscreen loading="lazy"></iframe>
@@ -391,6 +394,50 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
         <p class="web-sample-location">Lojistik Uygulaması</p>
         <p class="web-sample-desc">Lojistik sektörüne yönelik uygulamanın dijital vizyonu. Özelleştirilmiş diyaloglar, marka kimliği ve AI destekli promosyon içerikleriyle güçlendirilmiş tanıtım altyapısı.</p>
         <a href="#" class="button outline" style="pointer-events: none; opacity: 0.7;" aria-disabled="true">Geliştirme Aşamasında</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="social-media-section" aria-label="Sosyal Medya Yönetimi">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Sosyal Medya</span>
+      <h2 class="section-title">Yönettiğimiz Hesaplar</h2>
+      <p class="section-subtitle">Markaların dijital dünyadaki yüzü olmaya devam ediyoruz. NOV Edit olarak sosyal medya süreçlerini sıfırdan zirveye taşıdığımız iş ortaklarımız.</p>
+    </div>
+
+    <div class="social-samples-grid">
+      
+      <article class="social-card">
+        <span class="social-tag">Restoran / Gıda Sektörü</span>
+        <h3 class="social-name">Görele Pide</h3>
+        
+        <div class="social-details-box">
+          <p><strong>Adres:</strong> Osman Yılmaz, İlyas Uzuner Cd. No:15/A, 41400 Gebze/Kocaeli</p>
+          <div style="margin-top: 8px;"></div>
+          <p><strong>İletişim:</strong> (0262) 641 26 28</p>
+        </div>
+
+        <div class="social-action-btns">
+          <a href="https://instagram.com/gebzegorelepide" class="button outline" target="_blank" rel="noopener noreferrer" title="Görele Pide Instagram Hesabını İncele">Instagram'a Git →</a>
+          </div>
+      </article>
+
+      <article class="social-card">
+        <span class="social-tag">Tatlı & Kafe / Gıda Sektörü</span>
+        <h3 class="social-name">Payiz Tatlı Kadayıf</h3>
+        
+        <div class="social-details-box">
+          <p><strong>Adres:</strong> Nenehatun, Battal Gazi Cd. No:93, 41700 Darıca/Kocaeli</p>
+          <div style="margin-top: 8px;"></div>
+          <p><strong>İletişim:</strong> 0546 298 00 12</p>
+        </div>
+
+        <div class="social-action-btns">
+          <a href="https://instagram.com/payizdarica" class="button outline" target="_blank" rel="noopener noreferrer" title="Payiz Tatlı Kadayıf Instagram Hesabını İncele">Instagram'a Git →</a>
+        </div>
       </article>
 
     </div>
