@@ -301,6 +301,81 @@ footer { text-align: center; padding: 60px 0 40px; color: var(--text-gray); bord
   .whatsapp-float { top: auto; bottom: 24px; transform: none; border-radius: 50px 0 0 50px; }
   .wf-icon { width: 52px; height: 52px; }
 }
+
+/* ─── ÖZEL CTA BUTONLARI (PORTFÖY VE FİYATLAR) ─── */
+.main-cta-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 36px;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ana Buton: Örnek Çalışmalar (Parlama ve Büyüme Efekti) */
+.cta-btn.primary-pulse {
+  background: var(--text-white);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  border: 2px solid var(--text-white);
+}
+
+.cta-btn.primary-pulse:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: var(--text-white);
+}
+
+/* İkincil Buton: Fiyatlar (Cam/Transparan Efekti) */
+.cta-btn.secondary-glass {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-white);
+  border: 2px solid var(--border-hover);
+  backdrop-filter: blur(10px);
+}
+
+.cta-btn.secondary-glass:hover {
+  transform: translateY(-6px);
+  border-color: var(--text-white);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.cta-btn .icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Mobil Cihazlar İçin Buton Uyumu */
+@media (max-width: 768px) {
+  .main-cta-container {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 20px;
+  }
+  .cta-btn {
+    width: 100%;
+    padding: 20px 24px;
+  }
+}
+
 </style>
 </head>
 
@@ -332,7 +407,7 @@ footer { text-align: center; padding: 60px 0 40px; color: var(--text-gray); bord
     <h1 class="hero-h1">Profesyonel Video Düzenleme, Web & Reklam</h1>
     <p class="hero-subtitle">Nov edit video edit: Markanızı büyütmek için ihtiyacınız olan her şey. Gebze merkezli profesyonel video kurgu, modern web siteleri ve dijital reklam çözümleri.</p>
     <div class="hero-buttons">
-      <a href="#video-paketleri" class="button">Paketleri Gör</a>
+      <a href="price.html" class="button">Paketleri Gör</a>
       <a href="https://wa.me/905331400419" class="button outline" rel="noopener noreferrer">WhatsApp ile Ulaş</a>
     </div>
   </div>
@@ -381,13 +456,19 @@ footer { text-align: center; padding: 60px 0 40px; color: var(--text-gray); bord
   </div>
 </section>
 
-<div class="hero-buttons">
-  <a href="portfoy.html" class="button">Örnek Çalışmalara Göz At</a>
-</div>
-
-<div class="hero-buttons">
-<a href="price.html" class="button">Fiyatlara Göz At</a>
-</div>
+<section class="container" style="padding: 20px 0 80px 0;">
+  <div class="main-cta-container fade-up">
+    <a href="portfoy.html" class="cta-btn primary-pulse" title="Örnek Çalışmalarımızı İnceleyin">
+      <span class="icon" aria-hidden="true">🎬</span>
+      <span>Örnek Çalışmalara Göz At</span>
+    </a>
+    
+    <a href="price.html" class="cta-btn secondary-glass" title="Hizmet Paketleri ve Fiyatlar">
+      <span class="icon" aria-hidden="true">💳</span>
+      <span>Fiyatlara Göz At</span>
+    </a>
+  </div>
+</section>
 
 
 <section id="referanslar" class="marquee-section" aria-label="Müşteri Referanslarımız">
