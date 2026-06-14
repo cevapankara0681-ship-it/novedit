@@ -321,10 +321,25 @@ footer { text-align: center; padding: 60px 0 40px; color: var(--text-gray); bord
   </div>
 </nav>
 
+<section class="container" style="padding: 40px 0;">
+  <div class="cta-section fade-up" style="background: var(--bg-hover); padding: 50px 40px; border-color: var(--border-hover);">
+    <h2 style="font-size: 28px;">Hizmet Paketlerimiz ve Fiyatlar</h2>
+    <p style="margin-bottom: 25px;">Video prodüksiyon, web tasarım ve marka yönetimi için şeffaf fiyatlandırma politikamızı inceleyin.</p>
+    <button id="fiyat-toggle-btn" class="button" onclick="toggleFiyatlar()" title="Fiyatları Göster">Fiyatları Gör ↓</button>
+  </div>
+</section>
+
+<div id="fiyatlar-container" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
+  
+  </div>
+  
 <section class="hero-video" aria-label="NOV Edit Tanıtım">
   <video autoplay muted loop playsinline preload="metadata" aria-label="NOV Edit Profesyonel Video Düzenleme Tanıtımı">
     <source src="videolar/tanitim.mp4" type="video/mp4">
   </video>
+
+
+  
   <div class="hero-overlay">
     <h1 class="hero-h1">Profesyonel Video Düzenleme, Web & Reklam</h1>
     <p class="hero-subtitle">Nov edit video edit: Markanızı büyütmek için ihtiyacınız olan her şey. Gebze merkezli profesyonel video kurgu, modern web siteleri ve dijital reklam çözümleri.</p>
@@ -514,13 +529,10 @@ footer { text-align: center; padding: 60px 0 40px; color: var(--text-gray); bord
   </div>
 </section>
 
-<section class="container" style="padding: 100px 0;">
-  <div class="cta-section fade-up" style="background: var(--bg-hover); padding: 60px 40px; border-color: var(--text-white);">
-    <h2>NOV Edit Referanslarını İnceleyin</h2>
-    <p style="margin-bottom: 25px;">Gıda, inşaat, eğitim, kuyumcu gibi çeşitli sektörler için hazırladığımız video kurguları ve E-Ticaret / Kurumsal web sitesi projelerimizi inceleyin.</p>
-    <a href="portfoy.html" class="button" title="NOV Edit Portföy ve Örnek Çalışmalar">Örnek Çalışmalara Git →</a>
-  </div>
-</section>
+<div class="hero-buttons">
+  <a href="portfoy.html" class="button">Örnek Çalışmalara Göz At</a>
+  <button onclick="toggleFiyatlar()" class="button outline">Fiyat Bilgisi</button>
+</div>
 
 <section id="referanslar" class="marquee-section" aria-label="Müşteri Referanslarımız">
   <div class="marquee-header">
@@ -667,6 +679,44 @@ footer { text-align: center; padding: 60px 0 40px; color: var(--text-gray); bord
     });
   });
 })();
+
+/* BU KODU EN ALTTAKİ <script> ETİKETİNİZİN İÇİNE EKLEYİN */
+function toggleFiyatlar() {
+  var container = document.getElementById('fiyatlar-container');
+  var btn = document.getElementById('fiyat-toggle-btn');
+  
+  if (container.style.display === 'none' || container.style.display === '') {
+    container.style.display = 'block';
+    setTimeout(function() {
+      container.style.opacity = '1';
+      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 10);
+    btn.innerHTML = 'Fiyatları Gizle ↑';
+  } else {
+    container.style.opacity = '0';
+    setTimeout(function() {
+      container.style.display = 'none';
+    }, 500);
+    btn.innerHTML = 'Fiyatları Gör ↓';
+  }
+}
+
+// Üst menüden tıklanırsa fiyat tablosunu otomatik açma
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var targetId = this.getAttribute('href');
+      if (targetId === '#video-paketleri' || targetId === '#web-paketleri') {
+        var container = document.getElementById('fiyatlar-container');
+        if (container && (container.style.display === 'none' || container.style.display === '')) {
+          e.preventDefault(); // Varsayılan zıplamayı durdur
+          toggleFiyatlar(); // Paneli aç ve kaydır
+        }
+      }
+    });
+  });
+});
+  
 </script>
 
 </body>
