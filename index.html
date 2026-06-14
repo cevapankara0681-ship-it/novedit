@@ -536,43 +536,6 @@ footer { text-align: center; padding: 60px 0 40px; color: var(--text-gray); bord
   });
 })();
 
-/* BU KODU EN ALTTAKİ <script> ETİKETİNİZİN İÇİNE EKLEYİN */
-function toggleFiyatlar() {
-  var container = document.getElementById('fiyatlar-container');
-  var btn = document.getElementById('fiyat-toggle-btn');
-  
-  if (container.style.display === 'none' || container.style.display === '') {
-    container.style.display = 'block';
-    setTimeout(function() {
-      container.style.opacity = '1';
-      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 10);
-    btn.innerHTML = 'Fiyatları Gizle ↑';
-  } else {
-    container.style.opacity = '0';
-    setTimeout(function() {
-      container.style.display = 'none';
-    }, 500);
-    btn.innerHTML = 'Fiyatları Gör ↓';
-  }
-}
-
-// Üst menüden tıklanırsa fiyat tablosunu otomatik açma
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.nav-links a').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      var targetId = this.getAttribute('href');
-      if (targetId === '#video-paketleri' || targetId === '#web-paketleri') {
-        var container = document.getElementById('fiyatlar-container');
-        if (container && (container.style.display === 'none' || container.style.display === '')) {
-          e.preventDefault(); // Varsayılan zıplamayı durdur
-          toggleFiyatlar(); // Paneli aç ve kaydır
-        }
-      }
-    });
-  });
-});
-  
 </script>
 
 </body>
