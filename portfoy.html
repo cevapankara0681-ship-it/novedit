@@ -59,7 +59,7 @@
   "about": [
     {"@type": "Thing", "name": "Gebze Video Düzenleme Çalışmaları"},
     {"@type": "Thing", "name": "Kocaeli Web Tasarım Referansları"},
-    {"@type": "Thing", "name": "Sektörel Reklam Videoları"}
+    {"@type": "Thing", "name": "Sektörel Reklam Videolar"}
   ]
 }
 </script>
@@ -328,8 +328,22 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
 /* Mobil için düzeltme */
 @media (max-width: 768px) {
   .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-}  
+}
 
+/* ─── ÖNE ÇIKANLAR YENİ EKLENTİ STİLLERİ ─── */
+.featured-section { padding-top: 60px; margin-bottom: 20px; }
+.featured-group { margin-bottom: 50px; }
+.featured-group-title { font-size: 20px; font-weight: 700; color: var(--text-white); margin-bottom: 20px; border-left: 3px solid var(--text-white); padding-left: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.scrollable-video-wrapper { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 15px; }
+.scrollable-video-wrapper::-webkit-scrollbar { height: 6px; }
+.scrollable-video-wrapper::-webkit-scrollbar-track { background: var(--bg-dark); }
+.scrollable-video-wrapper::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
+.scrollable-video-wrapper .video-item { flex: 0 0 280px; scroll-snap-align: start; }
+@media (max-width: 768px) {
+  .scrollable-video-wrapper .video-item { flex: 0 0 85%; }
+}
+.single-featured-video { display: block; width: 100%; }
+.single-featured-video .video-item { width: 100%; display: block; }
 </style>
 </head>
 <body>
@@ -359,6 +373,77 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
     </div>
   </div>
 </header>
+
+<section class="container featured-section" aria-label="Öne Çıkan Video Çalışmaları">
+  <div class="section-header" style="margin-bottom: 40px;">
+    <span class="section-label">Öne Çıkanlar</span>
+    <h2 class="section-title">Öne Çıkan Video Çalışmaları</h2>
+    <p class="section-subtitle">Farklı sektörler için hazırladığımız en dikkat çeken güncel video kurgu projelerimiz.</p>
+  </div>
+
+  <div class="featured-group">
+    <h3 class="featured-group-title">Nergis Çiçekçilik - Gebze</h3>
+    <div class="single-featured-video">
+      <div class="video-item">
+        <div class="video-orient-wrapper horizontal">
+          <iframe src="https://www.youtube.com/embed/yBi5msJrVLs?rel=0&modestbranding=1&vq=hd1080" title="Nergis Çiçekçilik Sinematik Tanıtım" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-cat-label">Sinematik Video</span>
+          <h3 class="video-title">Sinematik Tanıtım</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="featured-group">
+    <h3 class="featured-group-title">Uğur Usta Dondurma - Darıca</h3>
+    <div class="scrollable-video-wrapper">
+      <div class="video-item">
+        <div class="video-orient-wrapper">
+          <iframe src="https://www.youtube.com/embed/mkdYrAEIqSk?rel=0&modestbranding=1&vq=hd1080" title="Çilekli Dondurma Tanıtımı" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-cat-label">Dondurma Sektörü</span>
+          <h3 class="video-title">Çilekli Dondurma Tanıtımı</h3>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-orient-wrapper">
+          <iframe src="https://www.youtube.com/embed/6GI1TB1aBYM?rel=0&modestbranding=1&vq=hd1080" title="Oreo'lu Dondurma Tanıtımı" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-cat-label">Dondurma Sektörü</span>
+          <h3 class="video-title">Oreo'lu Dondurma Tanıtımı</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="featured-group">
+    <h3 class="featured-group-title">Barlas Ticaret - Darıca</h3>
+    <div class="scrollable-video-wrapper">
+      <div class="video-item">
+        <div class="video-orient-wrapper">
+          <iframe src="https://www.youtube.com/embed/Fn_1PrIPb5M?rel=0&modestbranding=1&vq=hd1080" title="Sıfır Telefon Tanıtımı 1" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-cat-label">Teknoloji / İletişim</span>
+          <h3 class="video-title">Sıfır Telefon Tanıtımı 1</h3>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-orient-wrapper">
+          <iframe src="https://www.youtube.com/embed/ILLXvt5ORk0?rel=0&modestbranding=1&vq=hd1080" title="Sıfır Telefon Tanıtımı 2" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-cat-label">Teknoloji / İletişim</span>
+          <h3 class="video-title">Sıfır Telefon Tanıtımı 2</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="container" aria-label="Video Düzenleme Portföyü">
   
