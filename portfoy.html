@@ -345,32 +345,77 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
 .single-featured-video { display: block; width: 100%; }
 .single-featured-video .video-item { width: 100%; display: block; }
 
-/* ─── YENİ TEMALAR (DIAMOND, GOLD, BRONZE) VE ESNAF BAŞLIĞI ─── */
+/* ─── YENİ TEMALAR (PREMIUM MODERN KART TASARIMLARI) ─── */
 
-/* Ana Kategori Başlığı Stili */
-.main-category-header { text-align: center; margin: 100px 0 60px; padding-bottom: 30px; border-bottom: 1px solid var(--border); }
+/* Ana Kategori Başlığı Stili (Esnaflar İçin) */
+.main-category-header { text-align: center; margin: 120px 0 60px; padding-bottom: 30px; border-bottom: 1px solid var(--border); }
 .main-category-title { font-size: 42px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--text-white); }
 .main-category-subtitle { color: var(--text-gray); font-size: 16px; margin-top: 10px; }
 
-/* DİAMOND (ELMAS) TEMA - Müşteri Memnuniyeti */
-.theme-diamond .section-label { color: #b9f2ff; border-color: #b9f2ff; background: rgba(185, 242, 255, 0.05); box-shadow: 0 0 10px rgba(185, 242, 255, 0.1); }
-.theme-diamond .section-title { color: #e0f7fa; text-shadow: 0 0 20px rgba(185, 242, 255, 0.3); }
-.theme-diamond .video-item { border: 1px solid rgba(185, 242, 255, 0.3); }
-.theme-diamond .video-item:hover { border-color: #b9f2ff; box-shadow: 0 8px 25px rgba(185, 242, 255, 0.15); transform: translateY(-5px); }
+/* Temel Kart Özellikleri (Ortak) */
+.theme-diamond .video-item, .theme-gold .video-item, .theme-bronze .video-item {
+  border-radius: 20px; /* Modern oval köşeler */
+  overflow: hidden;
+  background: var(--bg-card);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Daha yumuşak animasyon */
+  border: 2px solid transparent;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+.theme-diamond .video-info, .theme-gold .video-info, .theme-bronze .video-info {
+  background: transparent; border: none; padding: 20px;
+}
 
-/* ALTIN (GOLD) TEMA - MESAM Klipleri */
-.theme-gold .section-label { color: #ffd700; border-color: #ffd700; background: rgba(255, 215, 0, 0.05); box-shadow: 0 0 10px rgba(255, 215, 0, 0.1); }
-.theme-gold .section-title { color: #d4af37; text-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-.theme-gold .video-item { border: 1px solid rgba(212, 175, 55, 0.4); }
-.theme-gold .video-item:hover { border-color: #ffd700; box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15); transform: translateY(-5px); }
-/* Altın tema kime yapıldı kutusu */
-.client-name-box { padding: 12px 15px; background: rgba(212, 175, 55, 0.05); border-top: 1px solid rgba(212, 175, 55, 0.2); color: #ffd700; font-size: 13px; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+/* =========================================
+   DİAMOND (ELMAS) TEMA - Dikey Kartlar
+========================================= */
+.theme-diamond .section-label { color: #00f2fe; background: rgba(0, 242, 254, 0.1); border: 1px solid #00f2fe; box-shadow: 0 0 15px rgba(0,242,254,0.2); }
+.theme-diamond .section-title { background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 5px 15px rgba(0, 242, 254, 0.2); }
+.theme-diamond .video-item { 
+  background-image: linear-gradient(var(--bg-card), var(--bg-card)), linear-gradient(135deg, #4facfe, #00f2fe);
+  box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1);
+}
+.theme-diamond .video-item:hover { box-shadow: 0 15px 45px rgba(0, 242, 254, 0.3); transform: translateY(-10px); }
+/* Diamond için özel responsive dikey grid (Taşmayı önler) */
+.grid-diamond { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 80px; }
 
-/* BRONZ TEMA - Düğün Klipleri */
-.theme-bronze .section-label { color: #cd7f32; border-color: #cd7f32; background: rgba(205, 127, 50, 0.05); box-shadow: 0 0 10px rgba(205, 127, 50, 0.1); }
-.theme-bronze .section-title { color: #b08d57; text-shadow: 0 0 20px rgba(205, 127, 50, 0.3); }
-.theme-bronze .video-item { border: 1px solid rgba(205, 127, 50, 0.4); }
-.theme-bronze .video-item:hover { border-color: #cd7f32; box-shadow: 0 8px 25px rgba(205, 127, 50, 0.15); transform: translateY(-5px); }
+/* =========================================
+   ALTIN (GOLD) TEMA - MESAM Klipleri
+========================================= */
+.theme-gold .section-label { color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; box-shadow: 0 0 15px rgba(255,215,0,0.2); }
+.theme-gold .section-title { background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 5px 15px rgba(255, 215, 0, 0.2); }
+.theme-gold .video-item {
+  background-image: linear-gradient(var(--bg-card), var(--bg-card)), linear-gradient(135deg, #bf953f, #fcf6ba, #b38728);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+}
+.theme-gold .video-item:hover { box-shadow: 0 15px 45px rgba(255, 215, 0, 0.3); transform: translateY(-10px); }
+.client-name-box { 
+  background: linear-gradient(90deg, #1a1500, #332900); 
+  color: #ffd700; border-top: 1px solid rgba(212, 175, 55, 0.3); 
+  padding: 16px; text-align: center; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 13px;
+}
+/* Gold yatay videolar için duyarlı grid */
+.grid-gold { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 80px; }
+
+/* =========================================
+   BRONZ TEMA - Düğün Klipleri
+========================================= */
+.theme-bronze .section-label { color: #ffb880; background: rgba(205, 127, 50, 0.1); border: 1px solid #cd7f32; box-shadow: 0 0 15px rgba(205,127,50,0.2); }
+.theme-bronze .section-title { background: linear-gradient(45deg, #cd7f32, #f5d3b3, #8c5828); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 5px 15px rgba(205, 127, 50, 0.2); }
+.theme-bronze .video-item {
+  background-image: linear-gradient(var(--bg-card), var(--bg-card)), linear-gradient(135deg, #cd7f32, #f5d3b3, #8c5828);
+  box-shadow: 0 10px 30px rgba(205, 127, 50, 0.15);
+}
+.theme-bronze .video-item:hover { box-shadow: 0 15px 45px rgba(205, 127, 50, 0.3); transform: translateY(-10px); }
+/* Bronz düğün videoları (Büyük ve görkemli durması için minmax boyutu artırıldı) */
+.grid-bronze { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 80px; }
+
+/* Mobilde Düğün Klipleri Taşmasın Diye Ufak Bir Kural */
+@media (max-width: 768px) {
+  .grid-bronze { grid-template-columns: 1fr; }
+  .grid-gold { grid-template-columns: 1fr; }
+  .grid-diamond { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -403,50 +448,53 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
 
 <!-- ================= YENİ EKLENEN BÖLÜMLER BAŞLANGICI ================= -->
 
-<!-- 1. DİAMOND TEMA: MÜŞTERİ MEMNUNİYETLERİ (2 VİDEO) -->
+<!-- 1. DİAMOND TEMA: MÜŞTERİ MEMNUNİYETLERİ (DİKEY KARTLAR) -->
 <section class="container featured-section theme-diamond" aria-label="Müşteri Memnuniyetleri">
   <div class="section-header">
-    <span class="section-label">Müşteri Yorumları</span>
+    <span class="section-label">Geri Bildirimler</span>
     <h2 class="section-title">Müşteri Memnuniyetleri</h2>
     <p class="section-subtitle">Bizimle çalışan değerli müşterilerimizin dilinden NOV Edit deneyimi.</p>
   </div>
 
-  <div class="portfolio-grid" style="grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));"> <!-- 2 video olacağı için büyük durması sağlandı -->
+  <!-- Özel Dikey Grid -->
+  <div class="grid-diamond">
     
-    <!-- 1. Memnuniyet Videosu -->
+    <!-- 1. Memnuniyet Videosu (Dikey/Shorts Formatı) -->
     <div class="video-item">
-      <div class="video-orient-wrapper horizontal">
+      <!-- horizontal sınıfı SİLİNDİ, artık tam dikey kart olacak -->
+      <div class="video-orient-wrapper">
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_1" title="Müşteri Memnuniyeti 1" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#b9f2ff;">Geri Bildirim</span>
-        <h3 class="video-title">MÜŞTERİ ADI VEYA FİRMA ADI BURAYA 1</h3>
+        <span class="video-cat-label" style="color:#00f2fe;">Müşteri Yorumu</span>
+        <h3 class="video-title">MÜŞTERİ ADI VEYA FİRMA ADI 1</h3>
       </div>
     </div>
 
-    <!-- 2. Memnuniyet Videosu -->
+    <!-- 2. Memnuniyet Videosu (Dikey/Shorts Formatı) -->
     <div class="video-item">
-      <div class="video-orient-wrapper horizontal">
+      <div class="video-orient-wrapper">
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_2" title="Müşteri Memnuniyeti 2" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#b9f2ff;">Geri Bildirim</span>
-        <h3 class="video-title">MÜŞTERİ ADI VEYA FİRMA ADI BURAYA 2</h3>
+        <span class="video-cat-label" style="color:#00f2fe;">Müşteri Yorumu</span>
+        <h3 class="video-title">MÜŞTERİ ADI VEYA FİRMA ADI 2</h3>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- 2. ALTIN TEMA: MESAM MÜZİK KLİPLERİ (5 VİDEO) -->
+
+<!-- 2. ALTIN TEMA: MESAM MÜZİK KLİPLERİ (YATAY VİDEOLAR) -->
 <section class="container featured-section theme-gold" aria-label="MESAM Müzik Klipleri">
   <div class="section-header">
-    <span class="section-label">Müzik Prodüksiyon</span>
-    <h2 class="section-title">MESAM'a Yapılan Müzik Klipleri</h2>
+    <span class="section-label">Premium Prodüksiyon</span>
+    <h2 class="section-title">MESAM Müzik Klipleri</h2>
     <p class="section-subtitle">Sanatçılar için hazırladığımız, profesyonel kurgu ve renk düzenlemesine sahip müzik klipleri.</p>
   </div>
 
-  <div class="portfolio-grid">
+  <div class="grid-gold">
     
     <!-- Müzik Klibi 1 -->
     <div class="video-item">
@@ -454,11 +502,10 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_3" title="Müzik Klibi 1" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <span class="video-cat-label" style="color:#ffd700;">Resmi Klip</span>
         <h3 class="video-title">ŞARKI ADI BURAYA 1</h3>
       </div>
-      <!-- Kime Yapıldığı Kutusu -->
-      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 1</div>
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI 1</div>
     </div>
 
     <!-- Müzik Klibi 2 -->
@@ -467,10 +514,10 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_4" title="Müzik Klibi 2" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <span class="video-cat-label" style="color:#ffd700;">Resmi Klip</span>
         <h3 class="video-title">ŞARKI ADI BURAYA 2</h3>
       </div>
-      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 2</div>
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI 2</div>
     </div>
 
     <!-- Müzik Klibi 3 -->
@@ -479,10 +526,10 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_5" title="Müzik Klibi 3" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <span class="video-cat-label" style="color:#ffd700;">Resmi Klip</span>
         <h3 class="video-title">ŞARKI ADI BURAYA 3</h3>
       </div>
-      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 3</div>
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI 3</div>
     </div>
 
     <!-- Müzik Klibi 4 -->
@@ -491,10 +538,10 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_6" title="Müzik Klibi 4" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <span class="video-cat-label" style="color:#ffd700;">Resmi Klip</span>
         <h3 class="video-title">ŞARKI ADI BURAYA 4</h3>
       </div>
-      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 4</div>
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI 4</div>
     </div>
 
     <!-- Müzik Klibi 5 -->
@@ -503,16 +550,17 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_7" title="Müzik Klibi 5" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <span class="video-cat-label" style="color:#ffd700;">Resmi Klip</span>
         <h3 class="video-title">ŞARKI ADI BURAYA 5</h3>
       </div>
-      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 5</div>
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI 5</div>
     </div>
 
   </div>
 </section>
 
-<!-- 3. BRONZ TEMA: DÜĞÜN KLİPLERİ (3 VİDEO) -->
+
+<!-- 3. BRONZ TEMA: DÜĞÜN KLİPLERİ (BÜYÜK YATAY VİDEOLAR) -->
 <section class="container featured-section theme-bronze" aria-label="Düğün Klipleri">
   <div class="section-header">
     <span class="section-label">Özel Günler</span>
@@ -520,7 +568,8 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
     <p class="section-subtitle">En mutlu gününüzü sinematik ve unutulmaz bir anıya dönüştürüyoruz.</p>
   </div>
 
-  <div class="portfolio-grid" style="grid-template-columns: repeat(3, 1fr);"> <!-- 3 video yan yana şık durması için -->
+  <!-- Bronz grid daha büyük kartlar gösterecek şekilde tasarlandı -->
+  <div class="grid-bronze">
     
     <!-- Düğün Klibi 1 -->
     <div class="video-item">
@@ -528,7 +577,7 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_8" title="Düğün Klibi 1" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#cd7f32;">Sinematik Düğün</span>
+        <span class="video-cat-label" style="color:#ffb880;">Sinematik Düğün</span>
         <h3 class="video-title">ÇİFTİN İSİMLERİ BURAYA 1</h3>
       </div>
     </div>
@@ -539,7 +588,7 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_9" title="Düğün Klibi 2" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#cd7f32;">Sinematik Düğün</span>
+        <span class="video-cat-label" style="color:#ffb880;">Sinematik Düğün</span>
         <h3 class="video-title">ÇİFTİN İSİMLERİ BURAYA 2</h3>
       </div>
     </div>
@@ -550,7 +599,7 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
         <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_10" title="Düğün Klibi 3" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-cat-label" style="color:#cd7f32;">Sinematik Düğün</span>
+        <span class="video-cat-label" style="color:#ffb880;">Sinematik Düğün</span>
         <h3 class="video-title">ÇİFTİN İSİMLERİ BURAYA 3</h3>
       </div>
     </div>
@@ -566,6 +615,7 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
   </div>
 </div>
 
+<!-- ================= YENİ EKLENEN BÖLÜMLER BİTİŞİ ================= -->
 <section class="container featured-section" aria-label="Öne Çıkan Video Çalışmaları">
   <div class="section-header" style="margin-bottom: 40px;">
     <span class="section-label">Öne Çıkanlar</span>
