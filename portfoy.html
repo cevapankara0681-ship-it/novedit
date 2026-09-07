@@ -344,6 +344,33 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
 }
 .single-featured-video { display: block; width: 100%; }
 .single-featured-video .video-item { width: 100%; display: block; }
+
+/* ─── YENİ TEMALAR (DIAMOND, GOLD, BRONZE) VE ESNAF BAŞLIĞI ─── */
+
+/* Ana Kategori Başlığı Stili */
+.main-category-header { text-align: center; margin: 100px 0 60px; padding-bottom: 30px; border-bottom: 1px solid var(--border); }
+.main-category-title { font-size: 42px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--text-white); }
+.main-category-subtitle { color: var(--text-gray); font-size: 16px; margin-top: 10px; }
+
+/* DİAMOND (ELMAS) TEMA - Müşteri Memnuniyeti */
+.theme-diamond .section-label { color: #b9f2ff; border-color: #b9f2ff; background: rgba(185, 242, 255, 0.05); box-shadow: 0 0 10px rgba(185, 242, 255, 0.1); }
+.theme-diamond .section-title { color: #e0f7fa; text-shadow: 0 0 20px rgba(185, 242, 255, 0.3); }
+.theme-diamond .video-item { border: 1px solid rgba(185, 242, 255, 0.3); }
+.theme-diamond .video-item:hover { border-color: #b9f2ff; box-shadow: 0 8px 25px rgba(185, 242, 255, 0.15); transform: translateY(-5px); }
+
+/* ALTIN (GOLD) TEMA - MESAM Klipleri */
+.theme-gold .section-label { color: #ffd700; border-color: #ffd700; background: rgba(255, 215, 0, 0.05); box-shadow: 0 0 10px rgba(255, 215, 0, 0.1); }
+.theme-gold .section-title { color: #d4af37; text-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+.theme-gold .video-item { border: 1px solid rgba(212, 175, 55, 0.4); }
+.theme-gold .video-item:hover { border-color: #ffd700; box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15); transform: translateY(-5px); }
+/* Altın tema kime yapıldı kutusu */
+.client-name-box { padding: 12px 15px; background: rgba(212, 175, 55, 0.05); border-top: 1px solid rgba(212, 175, 55, 0.2); color: #ffd700; font-size: 13px; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+
+/* BRONZ TEMA - Düğün Klipleri */
+.theme-bronze .section-label { color: #cd7f32; border-color: #cd7f32; background: rgba(205, 127, 50, 0.05); box-shadow: 0 0 10px rgba(205, 127, 50, 0.1); }
+.theme-bronze .section-title { color: #b08d57; text-shadow: 0 0 20px rgba(205, 127, 50, 0.3); }
+.theme-bronze .video-item { border: 1px solid rgba(205, 127, 50, 0.4); }
+.theme-bronze .video-item:hover { border-color: #cd7f32; box-shadow: 0 8px 25px rgba(205, 127, 50, 0.15); transform: translateY(-5px); }
 </style>
 </head>
 <body>
@@ -373,6 +400,171 @@ body { background: var(--bg-dark); color: var(--text-white); line-height: 1.6; o
     </div>
   </div>
 </header>
+
+<!-- ================= YENİ EKLENEN BÖLÜMLER BAŞLANGICI ================= -->
+
+<!-- 1. DİAMOND TEMA: MÜŞTERİ MEMNUNİYETLERİ (2 VİDEO) -->
+<section class="container featured-section theme-diamond" aria-label="Müşteri Memnuniyetleri">
+  <div class="section-header">
+    <span class="section-label">Müşteri Yorumları</span>
+    <h2 class="section-title">Müşteri Memnuniyetleri</h2>
+    <p class="section-subtitle">Bizimle çalışan değerli müşterilerimizin dilinden NOV Edit deneyimi.</p>
+  </div>
+
+  <div class="portfolio-grid" style="grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));"> <!-- 2 video olacağı için büyük durması sağlandı -->
+    
+    <!-- 1. Memnuniyet Videosu -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_1" title="Müşteri Memnuniyeti 1" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#b9f2ff;">Geri Bildirim</span>
+        <h3 class="video-title">MÜŞTERİ ADI VEYA FİRMA ADI BURAYA 1</h3>
+      </div>
+    </div>
+
+    <!-- 2. Memnuniyet Videosu -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_2" title="Müşteri Memnuniyeti 2" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#b9f2ff;">Geri Bildirim</span>
+        <h3 class="video-title">MÜŞTERİ ADI VEYA FİRMA ADI BURAYA 2</h3>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 2. ALTIN TEMA: MESAM MÜZİK KLİPLERİ (5 VİDEO) -->
+<section class="container featured-section theme-gold" aria-label="MESAM Müzik Klipleri">
+  <div class="section-header">
+    <span class="section-label">Müzik Prodüksiyon</span>
+    <h2 class="section-title">MESAM'a Yapılan Müzik Klipleri</h2>
+    <p class="section-subtitle">Sanatçılar için hazırladığımız, profesyonel kurgu ve renk düzenlemesine sahip müzik klipleri.</p>
+  </div>
+
+  <div class="portfolio-grid">
+    
+    <!-- Müzik Klibi 1 -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_3" title="Müzik Klibi 1" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <h3 class="video-title">ŞARKI ADI BURAYA 1</h3>
+      </div>
+      <!-- Kime Yapıldığı Kutusu -->
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 1</div>
+    </div>
+
+    <!-- Müzik Klibi 2 -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_4" title="Müzik Klibi 2" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <h3 class="video-title">ŞARKI ADI BURAYA 2</h3>
+      </div>
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 2</div>
+    </div>
+
+    <!-- Müzik Klibi 3 -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_5" title="Müzik Klibi 3" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <h3 class="video-title">ŞARKI ADI BURAYA 3</h3>
+      </div>
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 3</div>
+    </div>
+
+    <!-- Müzik Klibi 4 -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_6" title="Müzik Klibi 4" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <h3 class="video-title">ŞARKI ADI BURAYA 4</h3>
+      </div>
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 4</div>
+    </div>
+
+    <!-- Müzik Klibi 5 -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_7" title="Müzik Klibi 5" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#ffd700;">Müzik Klibi</span>
+        <h3 class="video-title">ŞARKI ADI BURAYA 5</h3>
+      </div>
+      <div class="client-name-box">Sanatçı: KİME YAPILDIĞI BURAYA 5</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 3. BRONZ TEMA: DÜĞÜN KLİPLERİ (3 VİDEO) -->
+<section class="container featured-section theme-bronze" aria-label="Düğün Klipleri">
+  <div class="section-header">
+    <span class="section-label">Özel Günler</span>
+    <h2 class="section-title">Düğün Klipleri</h2>
+    <p class="section-subtitle">En mutlu gününüzü sinematik ve unutulmaz bir anıya dönüştürüyoruz.</p>
+  </div>
+
+  <div class="portfolio-grid" style="grid-template-columns: repeat(3, 1fr);"> <!-- 3 video yan yana şık durması için -->
+    
+    <!-- Düğün Klibi 1 -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_8" title="Düğün Klibi 1" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#cd7f32;">Sinematik Düğün</span>
+        <h3 class="video-title">ÇİFTİN İSİMLERİ BURAYA 1</h3>
+      </div>
+    </div>
+
+    <!-- Düğün Klibi 2 -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_9" title="Düğün Klibi 2" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#cd7f32;">Sinematik Düğün</span>
+        <h3 class="video-title">ÇİFTİN İSİMLERİ BURAYA 2</h3>
+      </div>
+    </div>
+
+    <!-- Düğün Klibi 3 -->
+    <div class="video-item">
+      <div class="video-orient-wrapper horizontal">
+        <iframe src="YOUTUBE_LINKI_BURAYA_GELECEK_10" title="Düğün Klibi 3" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-cat-label" style="color:#cd7f32;">Sinematik Düğün</span>
+        <h3 class="video-title">ÇİFTİN İSİMLERİ BURAYA 3</h3>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MEVCUT ESNAF VİDEOLARI İÇİN DEV ÇATI BAŞLIK -->
+<div class="container">
+  <div class="main-category-header">
+    <h1 class="main-category-title">Esnaflar İçin Hazırlanmış Videolar</h1>
+    <p class="main-category-subtitle">Bölgesel işletmeler, gıda sektörü ve yerel markalar için ürettiğimiz profesyonel kurgular.</p>
+  </div>
+</div>
 
 <section class="container featured-section" aria-label="Öne Çıkan Video Çalışmaları">
   <div class="section-header" style="margin-bottom: 40px;">
