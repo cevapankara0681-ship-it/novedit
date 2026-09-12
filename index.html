@@ -83,8 +83,15 @@
 :root {
   --bg-pure: #000000;
   --bg-gradient: linear-gradient(145deg, #050505 0%, #111111 100%);
-  --diamond-color: #ffffff; /* Tam Parlak Beyaz */
-  --diamond-glow: rgba(255, 255, 255, 0.4); /* Mavi yerine Beyaz Parlama Efekti */
+  
+  /* Sitenin Genel Parlak Beyaz Teması */
+  --theme-color: #ffffff; 
+  --theme-glow: rgba(255, 255, 255, 0.4); 
+
+  /* Sadece Diamond Paket İçin Ayrılan Renk (Mavi) */
+  --diamond-color: #00e5ff;
+  --diamond-glow: rgba(0, 229, 255, 0.4);
+  
   --text-main: #ffffff;
   --text-muted: #9ca3af;
   --glass-bg: rgba(255, 255, 255, 0.02);
@@ -105,7 +112,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 .nav .container { display: flex; justify-content: space-between; align-items: center; }
 
-/* 19 Harmanlı Üst Menü Logosu */
+/* NOV Üst Menü Logosu (Bembeyaz) */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -113,18 +120,13 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 .nav-logo-text {
   font-family: 'Syncopate', sans-serif;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 900;
   letter-spacing: 2px;
-  color: var(--diamond-color);
+  color: var(--theme-color);
+  text-shadow: 0 0 10px var(--theme-glow);
   display: flex;
   align-items: center;
-}
-.nav-logo-blend {
-  font-size: 18px;
-  color: #fff;
-  margin: 0 2px;
-  transform: translateY(-2px);
 }
 .nav-logo-sub {
   font-family: 'Syncopate', sans-serif;
@@ -138,7 +140,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 
 .nav-links { display: flex; gap: 26px; align-items: center; }
 .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
-.nav-links a:hover { color: var(--diamond-color); text-shadow: 0 0 10px var(--diamond-glow); }
+.nav-links a:hover { color: var(--theme-color); text-shadow: 0 0 10px var(--theme-glow); }
 
 /* ─── HERO (VİDEO ARKA PLAN) ─── */
 .hero-video { position: relative; width: 100%; min-height: 100vh; overflow: hidden; background: var(--bg-pure); display: flex; align-items: center; justify-content: center; }
@@ -148,11 +150,11 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%);
 }
-.hero-h1 { font-family: 'Syncopate', sans-serif; font-size: 42px; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; color: #fff; margin-bottom: 20px; max-width: 900px; line-height: 1.3; text-shadow: 0 0 30px rgba(0, 229, 255, 0.3); }
-.hero-h1 span { color: var(--diamond-color); }
+.hero-h1 { font-family: 'Syncopate', sans-serif; font-size: 42px; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; color: #fff; margin-bottom: 20px; max-width: 900px; line-height: 1.3; }
+.hero-h1 span { color: var(--theme-color); text-shadow: 0 0 20px var(--theme-glow); }
 .hero-subtitle { font-size: 15px; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; line-height: 1.8; letter-spacing: 1px; }
 
-/* ─── ÖZEL CTA BUTONLARI ─── */
+/* ─── ÖZEL CTA BUTONLARI (BEYAZ TEMA) ─── */
 .main-cta-container { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; z-index: 2; position: relative; }
 .cta-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -160,38 +162,38 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   text-decoration: none; border-radius: 50px; transition: all 0.4s ease; position: relative; overflow: hidden;
 }
 .cta-btn.primary-diamond {
-  background: var(--diamond-color); color: #000; border: 1px solid var(--diamond-color);
-  box-shadow: 0 0 20px var(--diamond-glow);
+  background: var(--theme-color); color: #000; border: 1px solid var(--theme-color);
+  box-shadow: 0 0 20px var(--theme-glow);
 }
 .cta-btn.primary-diamond:hover {
-  transform: translateY(-5px); background: transparent; color: var(--diamond-color);
-  box-shadow: 0 10px 30px var(--diamond-glow);
+  transform: translateY(-5px); background: transparent; color: var(--theme-color);
+  box-shadow: 0 10px 30px var(--theme-glow);
 }
 .cta-btn.secondary-glass {
   background: var(--glass-bg); color: var(--text-main); border: 1px solid var(--glass-border);
   backdrop-filter: blur(10px);
 }
 .cta-btn.secondary-glass:hover {
-  transform: translateY(-5px); border-color: var(--diamond-color); background: rgba(0, 229, 255, 0.05);
+  transform: translateY(-5px); border-color: var(--theme-color); background: rgba(255, 255, 255, 0.05);
 }
 
 /* ─── GENEL SECTİON STİLLERİ ─── */
 section { padding: 100px 0; position: relative; }
 .section-header { text-align: center; margin-bottom: 60px; }
-.section-label { display: inline-block; padding: 6px 16px; background: var(--glass-bg); border: 1px solid var(--diamond-color); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--diamond-color); margin-bottom: 20px; border-radius: 30px; box-shadow: 0 0 10px var(--diamond-glow); }
+.section-label { display: inline-block; padding: 6px 16px; background: var(--glass-bg); border: 1px solid var(--theme-color); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--theme-color); margin-bottom: 20px; border-radius: 30px; box-shadow: 0 0 10px var(--theme-glow); }
 .section-title { font-size: 32px; font-weight: 800; margin-bottom: 15px; color: var(--text-main); text-transform: uppercase; letter-spacing: 2px; }
 .section-subtitle { color: var(--text-muted); font-size: 14px; max-width: 600px; margin: 0 auto; line-height: 1.8; }
 
-/* ─── HİZMETLERİMİZ (DIAMOND KARTLAR) ─── */
+/* ─── HİZMETLERİMİZ KARTLARI ─── */
 .services-section { background: var(--bg-pure); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
 .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 .service-col { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 40px 30px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; backdrop-filter: blur(10px); }
-.service-col:hover { transform: translateY(-10px); border-color: var(--diamond-color); box-shadow: 0 10px 30px rgba(0,229,255,0.1); }
-.service-icon { font-size: 34px; margin-bottom: 20px; display: block; color: var(--diamond-color); text-shadow: 0 0 15px var(--diamond-glow); }
+.service-col:hover { transform: translateY(-10px); border-color: var(--theme-color); box-shadow: 0 10px 30px rgba(255,255,255,0.1); }
+.service-icon { font-size: 34px; margin-bottom: 20px; display: block; color: var(--theme-color); text-shadow: 0 0 15px var(--theme-glow); }
 .service-col-title { font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text-main); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
 .service-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .service-list li { font-size: 13px; color: var(--text-muted); padding-left: 20px; position: relative; line-height: 1.6; }
-.service-list li::before { content: '✦'; position: absolute; left: 0; top: 1px; color: var(--diamond-color); font-size: 10px; }
+.service-list li::before { content: '✦'; position: absolute; left: 0; top: 1px; color: var(--theme-color); font-size: 10px; }
 
 /* ─── REFERANSLAR MARQUEE ─── */
 .marquee-section { padding: 40px 0; border-bottom: 1px solid var(--glass-border); background: var(--glass-bg); overflow: hidden; }
@@ -202,7 +204,7 @@ section { padding: 100px 0; position: relative; }
 .marquee-track { display: flex; gap: 0; width: max-content; animation: marquee-scroll 35s linear infinite; }
 .marquee-item { display: flex; align-items: center; gap: 20px; padding: 0 50px; white-space: nowrap; }
 .marquee-brand { font-size: 16px; font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.3); transition: color 0.3s ease; }
-.marquee-item:hover .marquee-brand { color: var(--diamond-color); text-shadow: 0 0 10px var(--diamond-glow); }
+.marquee-item:hover .marquee-brand { color: var(--theme-color); text-shadow: 0 0 10px var(--theme-glow); }
 .marquee-dot { width: 6px; height: 6px; transform: rotate(45deg); background: rgba(255,255,255,0.1); flex-shrink: 0; }
 
 @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -211,36 +213,35 @@ section { padding: 100px 0; position: relative; }
 .faq-section { background: var(--bg-pure); }
 .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
 .faq-item { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; overflow: hidden; transition: all 0.3s ease; }
-.faq-item:hover { border-color: rgba(0, 229, 255, 0.3); }
+.faq-item:hover { border-color: rgba(255, 255, 255, 0.3); }
 .faq-question { padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 14px; color: var(--text-main); user-select: none; letter-spacing: 1px; }
 .faq-answer { padding: 0 25px 20px; color: var(--text-muted); font-size: 13px; line-height: 1.8; display: none; }
 .faq-item.open .faq-answer { display: block; }
-.faq-toggle { font-size: 20px; font-weight: 300; color: var(--diamond-color); transition: transform 0.3s ease; }
+.faq-toggle { font-size: 20px; font-weight: 300; color: var(--theme-color); transition: transform 0.3s ease; }
 .faq-item.open .faq-toggle { transform: rotate(45deg); }
 
-/* ─── LOKASYON / İLETİŞİM (TÜRKİYE GENELİ) ─── */
+/* ─── LOKASYON / İLETİŞİM ─── */
 .location-section { background: var(--bg-gradient); border-top: 1px solid var(--glass-border); padding: 80px 0; }
 .contact-panel { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 50px; text-align: center; max-width: 800px; margin: 0 auto; position: relative; overflow: hidden; }
-.contact-panel::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 2px; background: var(--diamond-color); box-shadow: 0 0 20px var(--diamond-glow); }
+.contact-panel::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 2px; background: var(--theme-color); box-shadow: 0 0 20px var(--theme-glow); }
 .contact-title { font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: #fff; }
 .contact-desc { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; }
 .contact-info-boxes { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
 .info-box { border: 1px solid var(--glass-border); padding: 20px 30px; border-radius: 8px; background: rgba(0,0,0,0.5); }
-.info-box h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--diamond-color); margin-bottom: 5px; }
+.info-box h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--theme-color); margin-bottom: 5px; }
 .info-box p { font-size: 14px; font-weight: 600; color: #fff; }
 
 /* ─── YENİ KUSURSUZ FOOTER ─── */
 .site-footer { padding: 80px 0 40px; background: var(--bg-pure); font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--glass-border); }
 .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center; margin-bottom: 60px; }
 .footer-col { display: flex; flex-direction: column; align-items: center; gap: 15px; }
-.footer-logo { font-family: 'Syncopate', sans-serif; font-size: 24px; font-weight: 900; color: var(--diamond-color); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: 2px; }
-.footer-logo span { color: #fff; }
+.footer-logo { font-family: 'Syncopate', sans-serif; font-size: 24px; font-weight: 900; color: var(--theme-color); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: 2px; }
 .footer-desc { line-height: 1.8; max-width: 340px; margin: 0 auto 10px; }
-.footer-umbrella { display: inline-block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--diamond-color); border: 1px solid rgba(0, 229, 255, 0.3); padding: 6px 12px; border-radius: 4px; }
+.footer-umbrella { display: inline-block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--theme-color); border: 1px solid rgba(255, 255, 255, 0.3); padding: 6px 12px; border-radius: 4px; }
 .footer-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text-main); margin-bottom: 10px; }
 .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; padding: 0; }
 .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
-.footer-links a:hover { color: var(--diamond-color); }
+.footer-links a:hover { color: var(--theme-color); text-shadow: 0 0 5px var(--theme-glow); }
 .footer-bottom { border-top: 1px solid var(--glass-border); padding-top: 30px; text-align: center; font-size: 12px; letter-spacing: 1px; }
 
 /* ─── FADE & SCROLLBAR ─── */
@@ -248,7 +249,7 @@ section { padding: 100px 0; position: relative; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-pure); }
-::-webkit-scrollbar-thumb { background: var(--diamond-color); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--theme-color); border-radius: 10px; }
 
 /* ─── WHATSAPP FLOAT ─── */
 .whatsapp-float { position: fixed; right: 20px; bottom: 20px; z-index: 9999; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: #fff; border-radius: 50%; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); transition: transform 0.3s ease; }
@@ -259,7 +260,7 @@ section { padding: 100px 0; position: relative; }
 @media (max-width: 900px) {
   .services-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-  .nav-links { display: none; /* Mobil menü basit tutuldu, dilerseniz hamburger eklenebilir */ }
+  .nav-links { display: none; }
   .hero-h1 { font-size: 26px; letter-spacing: 2px; }
   .main-cta-container { flex-direction: column; }
   .cta-btn { width: 100%; }
@@ -272,7 +273,7 @@ section { padding: 100px 0; position: relative; }
 <!-- ÜST NAVİGASYON -->
 <nav class="nav" role="navigation" aria-label="Ana Menü">
   <div class="container">
-    <!-- N19V Logo Tasarımı -->
+    <!-- Düzeltilmiş NOV Logo Tasarımı -->
     <a href="index.html" class="nav-logo" aria-label="NOV Production Ana Sayfa">
       <div class="nav-logo-text">NOV</div>
       <div class="nav-logo-sub">PRODUCTION</div>
@@ -290,7 +291,6 @@ section { padding: 100px 0; position: relative; }
   
 <!-- HERO SECTİON -->
 <section class="hero-video" aria-label="NOV Production Tanıtım">
-  <!-- Arka plan video linkinizi buraya ekleyebilirsiniz -->
   <video autoplay muted loop playsinline preload="metadata" aria-label="Yapay Zeka Destekli Kurgu Tanıtımı">
     <source src="videolar/tanitim.mp4" type="video/mp4">
   </video>
@@ -312,7 +312,7 @@ section { padding: 100px 0; position: relative; }
   </div>
 </section>
 
-<!-- HİZMETLERİMİZ (DIAMOND KARTLAR) -->
+<!-- HİZMETLERİMİZ KARTLARI -->
 <section id="hizmetlerimiz" class="services-section">
   <div class="container">
     <div class="section-header fade-up">
@@ -403,7 +403,7 @@ section { padding: 100px 0; position: relative; }
   </div>
 </section>
 
-<!-- İLETİŞİM / LOKASYON (TÜRKİYE GENELİ) -->
+<!-- İLETİŞİM / LOKASYON -->
 <section id="iletisim" class="location-section">
   <div class="container fade-up">
     <div class="contact-panel">
@@ -459,7 +459,7 @@ section { padding: 100px 0; position: relative; }
         <ul class="footer-links">
           <li>Hizmet Bölgesi: Tüm Türkiye</li>
           <li><a href="tel:+905331400419">+90 (533) 140 04 19</a></li>
-          <li><a href="https://wa.me/905331400419" style="color: var(--diamond-color); font-weight: 600;">WhatsApp Proje Destek →</a></li>
+          <li><a href="https://wa.me/905331400419" style="color: var(--theme-color); font-weight: 600;">WhatsApp Proje Destek →</a></li>
         </ul>
       </div>
 
