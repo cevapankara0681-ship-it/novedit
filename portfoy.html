@@ -103,6 +103,22 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   background: transparent;
   position: relative;
 }
+
+.brand-logo-main {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 70px;
+  font-weight: 900;
+  letter-spacing: 12px;
+  color: var(--diamond-color);
+  text-shadow: 0 0 30px var(--diamond-glow);
+  line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .brand-logo-main { font-size: 45px; letter-spacing: 6px; }
+}
+
+
 .logo-wrapper {
   display: flex;
   flex-direction: column;
@@ -482,7 +498,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 <header class="brand-header">
   <div class="container">
     <div class="logo-wrapper">
-      <div class="nav-logo-text">NOV</div>
+      <div class="brand-logo-main">NOV</div>
       <div class="logo-subtext">PRODUCTION</div>
     </div>
   </div>
