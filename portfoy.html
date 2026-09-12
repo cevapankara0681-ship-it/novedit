@@ -45,7 +45,7 @@
   --bg-pure: #000000;
   --bg-gradient: linear-gradient(145deg, #050505 0%, #111111 100%);
   
-  /* Sitenin Genel Parlak Beyaz Teması (Logo, Butonlar vb. için) */
+  /* Sitenin Genel Parlak Beyaz Teması (Logo, Butonlar, Etiketler vb. için) */
   --theme-color: #ffffff;
   --theme-glow: rgba(255, 255, 255, 0.4);
 
@@ -103,7 +103,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   color: #000;
   background: var(--theme-color);
   border-color: var(--theme-color);
-  box-shadow: 0 0 15px var(--diamond-glow);
+  box-shadow: 0 0 15px var(--theme-glow);
 }
 
 /* ─── YENİ HARMANLANMIŞ LOGO ─── */
@@ -128,25 +128,13 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   .brand-logo-main { font-size: 45px; letter-spacing: 6px; }
 }
 
-
 .logo-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.logo-text {
-  font-family: 'Syncopate', sans-serif;
-  font-size: 85px !important;
-  font-weight: 900;
-  letter-spacing: 12px;
-  color: var(--theme-color) !important;
-  text-shadow: 0 0 30px var(--diamond-glow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
+
 /* 19 Sayısı O harfinin yerini alıyor ve harmanlanıyor */
 .logo-number-blend {
   font-size: 50px; 
@@ -202,7 +190,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 .card:hover { transform: translateY(-8px); }
 
-/* Temalar */
+/* Temalar (Paket renkleri aynı bırakıldı) */
 .theme-diamond {
   border: 1px solid rgba(0, 229, 255, 0.25);
   box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05), 0 10px 30px rgba(0, 229, 255, 0.08);
@@ -264,7 +252,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 .theme-gold .card-features li::before { color: var(--gold-color); }
 .theme-silver .card-features li::before { color: var(--silver-color); }
 
-/* ─── BUTONLAR ─── */
+/* ─── BUTONLAR (Genel Beyaz Temaya Uygun) ─── */
 .btn-group { display: flex; gap: 10px; flex-direction: column; }
 .btn {
   display: inline-block;
@@ -283,12 +271,12 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   background: var(--theme-color);
   color: #000;
   border: 1px solid var(--theme-color);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+  box-shadow: 0 0 15px var(--theme-glow);
 }
 .btn-primary:hover {
   background: transparent;
   color: var(--theme-color);
-  box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 25px var(--theme-glow);
 }
 .btn-outline {
   background: transparent;
@@ -315,7 +303,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   text-transform: uppercase;
   letter-spacing: 1px;
   text-decoration: none;
-  box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+  box-shadow: 0 10px 30px var(--theme-glow);
   z-index: 1000;
   transition: all 0.3s ease;
   border: 2px solid transparent;
@@ -353,10 +341,10 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 .testimonials-scroll::-webkit-scrollbar, .portfolio-scroll::-webkit-scrollbar { height: 4px; }
 .testimonials-scroll::-webkit-scrollbar-track, .portfolio-scroll::-webkit-scrollbar-track { background: var(--bg-pure); }
-.testimonials-scroll::-webkit-scrollbar-thumb, .portfolio-scroll::-webkit-scrollbar-thumb { background: var(--diamond-color); border-radius: 10px; }
+.testimonials-scroll::-webkit-scrollbar-thumb, .portfolio-scroll::-webkit-scrollbar-thumb { background: var(--theme-color); border-radius: 10px; }
 
 .vertical-video-card {
-  flex: 0 0 280px; /* Dikey kartlar daha estetik durması için biraz daha dar */
+  flex: 0 0 280px; 
   scroll-snap-align: start;
   background: #050505;
   border: 1px solid var(--glass-border);
@@ -365,15 +353,15 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   transition: all 0.4s ease;
 }
 .vertical-video-card:hover {
-  border-color: var(--diamond-color);
-  box-shadow: 0 5px 20px rgba(0, 229, 255, 0.15);
+  border-color: var(--theme-color);
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.15);
 }
 
 /* Dikey Video Çerçevesi (9:16 oranı) */
 .video-wrapper-vertical {
   position: relative;
   width: 100%;
-  padding-bottom: 177.78%; /* 16:9 Dikey Yükseklik Oranı */
+  padding-bottom: 177.78%; 
   background: #000;
 }
 .video-wrapper-vertical iframe {
@@ -402,17 +390,17 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   overflow: hidden;
   transition: all 0.4s ease;
 }
-.video-card:hover { border-color: var(--diamond-color); box-shadow: 0 5px 20px rgba(0, 229, 255, 0.15); }
-.video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; /* Yatay Yükseklik Oranı */ background: #000; }
+.video-card:hover { border-color: var(--theme-color); box-shadow: 0 5px 20px rgba(255, 255, 255, 0.15); }
+.video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; }
 .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 .video-info { padding: 15px; }
-.video-tag { font-size: 10px; font-weight: 800; color: var(--diamond-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; display: block; }
+.video-tag { font-size: 10px; font-weight: 800; color: var(--theme-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; display: block; }
 .video-title { font-size: 14px; font-weight: 600; color: #fff; }
 
 /* ─── İLETİŞİM / MÜŞTERİYE ULAŞ BANNERI ─── */
 .contact-banner {
-  background: linear-gradient(90deg, rgba(0, 229, 255, 0.08), transparent);
-  border-left: 3px solid var(--diamond-color);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent);
+  border-left: 3px solid var(--theme-color);
   padding: 30px;
   border-radius: 8px;
   margin-top: 40px;
@@ -442,7 +430,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   font-family: 'Syncopate', sans-serif;
   font-size: 24px;
   font-weight: 900;
-  color: var(--diamond-color);
+  color: var(--theme-color);
   text-decoration: none;
   display: block;
   margin-bottom: 15px;
@@ -456,8 +444,8 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--diamond-color);
-  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--theme-color);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 6px 12px;
   border-radius: 4px;
 }
@@ -471,7 +459,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
-.footer-links a:hover { color: var(--diamond-color); }
+.footer-links a:hover { color: var(--theme-color); }
 .footer-bottom {
   border-top: 1px solid var(--glass-border);
   padding-top: 30px;
@@ -489,7 +477,6 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 @media (max-width: 480px) {
   .packages-grid { grid-template-columns: 1fr; }
   .floating-demo { bottom: 20px; right: 20px; padding: 12px 20px; font-size: 11px; }
-  .logo-text { font-size: 55px; }
   .logo-number-blend { font-size: 40px; }
   .logo-subtext { font-size: 11px; letter-spacing: 12px; }
 }
@@ -659,8 +646,6 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 
     <div class="testimonials-scroll">
       
-      <!-- Video linklerini iframe "src" kısmına ekleyebilirsiniz -->
-
       <div class="vertical-video-card">
         <div class="video-wrapper-vertical">
           <iframe src="https://www.youtube.com/embed/sNPLD8D2cOI?rel=0&modestbranding=1&vq=hd1080" title="Müşteri Memnuniyeti" allowfullscreen loading="lazy"></iframe>
@@ -771,7 +756,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
         <ul class="footer-links">
           <li>Hizmet Bölgesi: Türkiye</li>
           <li><a href="tel:+905331400419">+90 (533) 140 04 19</a></li>
-          <li><a href="https://wa.me/905331400419" style="color: var(--diamond-color); font-weight: 600;">WhatsApp Proje Destek →</a></li>
+          <li><a href="https://wa.me/905331400419" style="color: var(--theme-color); font-weight: 600;">WhatsApp Proje Destek →</a></li>
         </ul>
       </div>
 
