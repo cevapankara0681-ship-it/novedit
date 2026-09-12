@@ -192,11 +192,13 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 
 /* Temalar (Paket renkleri aynı bırakıldı) */
 .theme-diamond {
-  border: 1px solid rgba(0, 229, 255, 0.25);
-  box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05), 0 10px 30px rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05), 0 10px 30px rgba(255, 255, 255, 0.08);
 }
-.theme-diamond:hover { box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.1), 0 15px 40px var(--diamond-glow); border-color: var(--diamond-color); }
-
+.theme-diamond:hover { 
+  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.1), 0 15px 40px var(--theme-glow); 
+  border-color: var(--theme-color); 
+}
 .theme-gold {
   border: 1px solid rgba(251, 211, 65, 0.25);
   box-shadow: inset 0 0 20px rgba(251, 211, 65, 0.05), 0 10px 30px rgba(251, 211, 65, 0.08);
