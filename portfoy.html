@@ -579,18 +579,24 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   box-shadow: 0 0 15px var(--theme-glow);
 }
 
-/* 9:16 Dikey Iframe Alanı */
-.video-container-vertical {
-  width: 250px;
+/* 16:9 Yatay Iframe Alanı ve Parlak Beyaz Gölge Efekti */
+.video-container-horizontal {
+  width: 100%;
+  max-width: 450px;
   position: relative;
-  padding-bottom: 444.44px; /* 250px genişliğin 9:16 oranı */
+  padding-bottom: 56.25%; /* 16:9 Kusursuz Yatay Oran */
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   background: #000;
+  
+  /* İstenen parlak beyaz ışıklı gölge */
+  box-shadow: 0 0 45px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.5);
+  margin: 0 auto;
+  transition: box-shadow 0.3s ease;
 }
-.video-container-vertical iframe {
+
+.video-container-horizontal iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -599,11 +605,12 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   border: 0;
 }
 
+/* Kartın genel yüksekliğini dengelemek için mobil uyumluluk */
 @media (max-width: 768px) {
-  .demo-card-container { padding: 25px 15px; }
+  .demo-card-container { padding: 30px 20px; }
   .photo-wrapper img { width: 110px; height: 145px; }
-  .video-container-vertical { width: 220px; padding-bottom: 391.11px; }
-}  
+  .video-container-horizontal { max-width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -639,7 +646,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
       <div class="demo-body">
         <!-- Sol Taraf: Girdi (Fotoğraflar) -->
         <div class="demo-input-area">
-          <h3 class="demo-step-title">1. Aşama: Gönderilen Fotoğraflar</h3>
+          <h3 class="demo-step-title">Gönderilen Fotoğraflar</h3>
           <div class="photo-grid">
             <div class="photo-wrapper">
               <img src="on-yuz.png" alt="Ön Profil" />
@@ -654,7 +661,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 
         <!-- Sağ Taraf: Çıktı (Videolar) -->
         <div class="demo-output-area">
-          <h3 class="demo-step-title">2. Aşama: Ortaya Çıkan Sonuç</h3>
+          <h3 class="demo-step-title">Ortaya Çıkan Sonuç</h3>
           
           <!-- Paket Seçici Butonlar -->
           <div class="package-tabs">
@@ -663,11 +670,10 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
             <button class="tab-btn" onclick="changeDemoVideo('diamond', this)">Diamond Paket</button>
           </div>
 
-          <!-- Dikey YouTube Video Alanı (9:16) -->
-          <div class="video-container-vertical">
-            <!-- NOT: src içindeki YOUTUBE_ID_EKO kısmını Eko paket videonuzun ID'si ile değiştirin -->
-            <iframe id="demo-iframe" src="https://www.youtube.com/embed/YOUTUBE_ID_EKO?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
-          </div>
+<!-- Yatay YouTube Video Alanı (16:9) ve Parlak Beyaz Gölgeli Çerçeve -->
+<div class="video-container-horizontal">
+  <iframe id="demo-iframe" src="https://www.youtube.com/embed/YOUTUBE_ID_EKO?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
+</div>
         </div>
       </div>
 
