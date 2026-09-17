@@ -606,10 +606,43 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 
 /* Kartın genel yüksekliğini dengelemek için mobil uyumluluk */
+/* Mobil Düzeltmeler ve Taşma (Overflow) Engelleme */
 @media (max-width: 768px) {
-  .demo-card-container { padding: 30px 20px; }
-  .photo-wrapper img { width: 110px; height: 145px; }
-  .video-container-horizontal { max-width: 100%; }
+  .demo-card-container { 
+    padding: 20px 10px; /* Mobilde kartın iç boşluğunu daraltıp içeriğe yer açıyoruz */
+  }
+  
+  .demo-step {
+    min-width: 100%; /* 300px sınırını kaldırıp tam ekrana uyduruyoruz */
+    width: 100%;
+  }
+  
+  .photo-wrapper img { 
+    width: 90px; 
+    height: 120px; 
+  }
+  
+  /* Butonların dışarı taşmasını engelleyen esnek yapı */
+  .package-tabs { 
+    width: 100%;
+    gap: 4px; /* Butonlar arası boşluğu küçülttük */
+    padding: 4px;
+    justify-content: space-between; /* Ekrana eşit yayılmasını sağladık */
+  }
+  
+  .tab-btn {
+    flex: 1; /* Butonların genişliği ekrana göre otomatik daralacak */
+    padding: 8px 4px; /* Buton iç boşluklarını minimuma indirdik */
+    font-size: 10px; /* Mobilde metinleri küçülttük */
+    text-align: center;
+    white-space: nowrap; /* Yazıların iki satıra bölünmesini engelledik */
+  }
+  
+  /* Videonun ekrandan taşmasını kesin olarak engelliyoruz */
+  .video-container-horizontal { 
+    width: 100% !important; 
+    max-width: 100% !important; 
+  }
 }
 </style>
 </head>
