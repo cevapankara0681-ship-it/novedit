@@ -482,6 +482,128 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   .logo-number-blend { font-size: 40px; }
   .logo-subtext { font-size: 11px; letter-spacing: 12px; }
 }
+
+/* --- DEMO VİTRİNİ STİLLERİ (KOYU TEMA UYUMLU) --- */
+.demo-card-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 50px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.demo-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 40px;
+  justify-content: center;
+}
+
+.demo-input-area, .demo-output-area {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.demo-step-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--theme-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Fotoğraf Bölümü */
+.photo-grid {
+  display: flex;
+  gap: 20px;
+}
+.photo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.photo-wrapper img {
+  width: 130px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+.photo-wrapper span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* Sekmeler */
+.package-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  border-radius: 30px;
+  border: 1px solid var(--glass-border);
+}
+.tab-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+.tab-btn:hover {
+  color: #fff;
+}
+.tab-btn.active {
+  background: var(--theme-color);
+  color: #000;
+  box-shadow: 0 0 15px var(--theme-glow);
+}
+
+/* 9:16 Dikey Iframe Alanı */
+.video-container-vertical {
+  width: 250px;
+  position: relative;
+  padding-bottom: 444.44px; /* 250px genişliğin 9:16 oranı */
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  background: #000;
+}
+.video-container-vertical iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .demo-card-container { padding: 25px 15px; }
+  .photo-wrapper img { width: 110px; height: 145px; }
+  .video-container-vertical { width: 220px; padding-bottom: 391.11px; }
+}  
 </style>
 </head>
 <body>
@@ -505,6 +627,54 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 
 <main class="container">
 
+<section class="panel-section" style="border-top:none; padding-top:0;">
+  <div class="container">
+    <div class="demo-card-container">
+      
+      <div class="demo-header">
+        <h2 class="panel-title" style="text-align: center;">Fotoğraftan Klibe Dönüşüm Serüveni</h2>
+        <p class="panel-subtitle" style="text-align: center; max-width: 600px; margin: 10px auto 0;">Bize sadece iki açılı fotoğrafınızı gönderin, sizi profesyonel bir müzik klibinin başrolü yapalım. Paketler arası kalite farkını aşağıdan inceleyebilirsiniz.</p>
+      </div>
+
+      <div class="demo-body">
+        <!-- Sol Taraf: Girdi (Fotoğraflar) -->
+        <div class="demo-input-area">
+          <h3 class="demo-step-title">1. Aşama: Gönderilen Fotoğraflar</h3>
+          <div class="photo-grid">
+            <div class="photo-wrapper">
+              <img src="on-yuz.png" alt="Ön Profil" />
+              <span>Ön Yüz</span>
+            </div>
+            <div class="photo-wrapper">
+              <img src="sag-yuz.png" alt="Sağ Profil" />
+              <span>Sağ Yüz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sağ Taraf: Çıktı (Videolar) -->
+        <div class="demo-output-area">
+          <h3 class="demo-step-title">2. Aşama: Ortaya Çıkan Sonuç</h3>
+          
+          <!-- Paket Seçici Butonlar -->
+          <div class="package-tabs">
+            <button class="tab-btn active" onclick="changeDemoVideo('eko', this)">Eko Paket</button>
+            <button class="tab-btn" onclick="changeDemoVideo('gold', this)">Gold Paket</button>
+            <button class="tab-btn" onclick="changeDemoVideo('diamond', this)">Diamond Paket</button>
+          </div>
+
+          <!-- Dikey YouTube Video Alanı (9:16) -->
+          <div class="video-container-vertical">
+            <!-- NOT: src içindeki YOUTUBE_ID_EKO kısmını Eko paket videonuzun ID'si ile değiştirin -->
+            <iframe id="demo-iframe" src="https://www.youtube.com/embed/YOUTUBE_ID_EKO?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+  
   <!-- MÜZİK KLİBİ PAKETLERİ -->
   <div class="section-title-wrapper" id="paketler-muzik">
     <h2 class="section-title">Müzik Klibi Paketleri</h2>
@@ -770,5 +940,25 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   </div>
 </footer>
 
+<script>
+  // Kendi YouTube Video ID'lerinizi buraya yazın
+  // vq=hd1080 parametresi videoların kalitesini zorlar
+  const youtubeLinks = {
+    eko: 'https://www.youtube.com/embed/YOUTUBE_ID_EKO?rel=0&modestbranding=1&vq=hd1080&autoplay=1',
+    gold: 'https://www.youtube.com/embed/YOUTUBE_ID_GOLD?rel=0&modestbranding=1&vq=hd1080&autoplay=1',
+    diamond: 'https://www.youtube.com/embed/YOUTUBE_ID_DIAMOND?rel=0&modestbranding=1&vq=hd1080&autoplay=1'
+  };
+
+  function changeDemoVideo(paket, btnElement) {
+    // Iframe src'sini güncelle (Otomatik olarak oynamaya başlar)
+    const iframe = document.getElementById('demo-iframe');
+    iframe.src = youtubeLinks[paket];
+
+    // Aktif buton rengini değiştir
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+  }
+</script>
+  
 </body>
 </html>
