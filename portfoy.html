@@ -644,6 +644,68 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
     max-width: 100% !important; 
   }
 }
+
+/* Yakınlaştırma (Zoom) Butonu Tasarımı */
+.zoom-video-btn {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.zoom-video-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* SİNEMA MODU (Tam Ekran Zoom Durumu) */
+.video-container-horizontal.is-zoomed {
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100% !important;
+  padding-bottom: 0; /* Oranı sıfırlıyoruz */
+  z-index: 999999;
+  background: rgba(0, 0, 0, 0.95);
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.video-container-horizontal.is-zoomed iframe {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 56.25vw; /* Genişliğe göre 16:9 oranı korur */
+  transform: translateY(-50%);
+}
+
+/* Zoom modundayken butonun stili ve konumu değişir */
+.video-container-horizontal.is-zoomed .zoom-video-btn {
+  bottom: 40px;
+  background: rgba(255, 0, 0, 0.7);
+  border-color: rgba(255, 0, 0, 0.9);
+  padding: 12px 24px;
+  font-size: 13px;
+}
+
 </style>
 </head>
 <body>
@@ -706,6 +768,9 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 <!-- Yatay YouTube Video Alanı (16:9) ve Parlak Beyaz Gölgeli Çerçeve -->
 <div class="video-container-horizontal">
   <iframe id="demo-iframe" src="https://www.youtube.com/embed/UZhPFS91LSA?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
+  <button id="zoom-btn" class="zoom-video-btn" onclick="toggleZoom()">
+    🔍 Yakınlaştırmak İçin Tıklayın
+  </button>
 </div>
         </div>
       </div>
@@ -980,23 +1045,57 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 </footer>
 
 <script>
-  // Kendi YouTube Video ID'lerinizi buraya yazın
-  // vq=hd1080 parametresi videoların kalitesini zorlar
-  const youtubeLinks = {
-   eko: 'https://www.youtube.com/embed/UZhPFS91LSA?rel=0&modestbranding=1&vq=hd1080&autoplay=1',
-   gold: 'https://www.youtube.com/embed/N69AdsyyQXs?rel=0&modestbranding=1&vq=hd1080&autoplay=1',
-    diamond: 'https://www.youtube.com/embed/qLma_L4TyqQ?rel=0&modestbranding=1&vq=hd1080&autoplay=1'
+  // Sadece Temel Linkler (Autoplay parametrelerini JS ile biz yöneteceğiz)
+  const youtubeDemoLinks = {
+    eko: 'https://www.youtube.com/embed/UZhPFS91LSA?rel=0&modestbranding=1&vq=hd1080',
+    gold: 'https://www.youtube.com/embed/N69AdsyyQXs?rel=0&modestbranding=1&vq=hd1080',
+    diamond: 'https://www.youtube.com/embed/qLma_L4TyqQ?rel=0&modestbranding=1&vq=hd1080'
   };
 
-  function changeDemoVideo(paket, btnElement) {
-    // Iframe src'sini güncelle (Otomatik olarak oynamaya başlar)
-    const iframe = document.getElementById('demo-iframe');
-    iframe.src = youtubeLinks[paket];
+  const iframe = document.getElementById('demo-iframe');
+  let isAutoPlayed = false;
 
-    // Aktif buton rengini değiştir
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  // 1. Sekmeler Arası Geçiş (Kullanıcı tıkladığı için sesli ve otomatik başlar)
+  function changeDemoVideo(paket, btnElement) {
+    iframe.src = youtubeDemoLinks[paket] + "&autoplay=1"; 
+
+    document.querySelectorAll('.package-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
     btnElement.classList.add('active');
   }
+
+  // 2. Sinema Modu (Yakınlaştır / Uzaklaştır) Mantığı
+  function toggleZoom() {
+    const videoBox = document.getElementById('video-box');
+    const zoomBtn = document.getElementById('zoom-btn');
+    
+    videoBox.classList.toggle('is-zoomed');
+    
+    if(videoBox.classList.contains('is-zoomed')) {
+      zoomBtn.innerHTML = "✖ Uzaklaştır (Kapat)";
+      document.body.style.overflow = "hidden"; // Arka planda sayfanın kaymasını engeller
+    } else {
+      zoomBtn.innerHTML = "🔍 Yakınlaştırmak İçin Tıklayın";
+      document.body.style.overflow = "auto"; // Sayfa kaydırmayı geri açar
+    }
+  }
+
+  // 3. Ekrana Gelince Otomatik Başlatma (Scroll Observer)
+  document.addEventListener("DOMContentLoaded", function() {
+    const videoBox = document.getElementById('video-box');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // Video kutusu ekranın %50'sine girdiğinde ve daha önce oynatılmadıysa
+        if (entry.isIntersecting && !isAutoPlayed) {
+          isAutoPlayed = true;
+          // Ekranda kaydırarak gelindiği için kurallar gereği sessiz (mute=1) oynatıyoruz
+          iframe.src = youtubeDemoLinks['eko'] + "&autoplay=1&mute=1";
+        }
+      });
+    }, { threshold: 0.5 }); 
+
+    observer.observe(videoBox);
+  });
 </script>
   
 </body>
