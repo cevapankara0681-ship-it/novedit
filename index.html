@@ -270,6 +270,66 @@ section { padding: 100px 0; position: relative; }
 
 <body>
 
+<style>
+  /* Sağ Üst Premium Navigasyon Menüsü */
+  .premium-nav-container {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    display: flex;
+    gap: 12px;
+    z-index: 1000;
+  }
+
+  .premium-nav-container a {
+    color: #888888;
+    text-decoration: none;
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .premium-nav-container a:hover {
+    color: #ffffff;
+    background-color: #050505;
+    border: 1px solid #1a1a1a;
+  }
+
+  /* Mobil Uyumluluk: Telefondan girildiğinde ortaya hizalanıp alt alta esner */
+  @media (max-width: 992px) {
+    .premium-nav-container {
+      position: relative;
+      top: 0;
+      right: 0;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px 10px 0 10px;
+      gap: 8px;
+    }
+    
+    .premium-nav-container a {
+      font-size: 11px;
+      padding: 6px 10px;
+    }
+  }
+</style>
+
+<!-- Yönlendirme Butonları -->
+<nav class="premium-nav-container">
+  <a href="calisma-sureci.html">Çalışma Süreci</a>
+  <a href="calisma-kosullari.html">Çalışma Koşulları</a>
+  <a href="odeme ve iade politikasi.html">Ödeme & İade</a>
+  <a href="kvkk.html">KVKK</a>
+  <a href="gizlilik.html">Gizlilik</a>
+  <a href="iletisim.html">İletişim</a>
+</nav>
+
 <!-- ÜST NAVİGASYON -->
 <nav class="nav" role="navigation" aria-label="Ana Menü">
   <div class="container">
