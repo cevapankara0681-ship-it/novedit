@@ -455,38 +455,62 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 
 /* Tıklamaya Gerek Kalmadan 3 Paket Yan Yana Canlı Görünüm */
+/* =========================================================
+   PAKET SONUÇLARI GRID VE TAŞMAYI ÖNLEYİCİ VİDEO CSS
+   ========================================================= */
+
+/* Masaüstünde yan yana, mobilde alt alta kusursuz dizilim */
 .demo-results-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   width: 100%;
+  margin-top: 20px;
 }
+
 .demo-video-card {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
+  background: rgba(20, 20, 25, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 15px;
-  border: 1px solid var(--glass-border);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: all 0.3s ease;
+  gap: 15px;
 }
-.demo-video-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--theme-color);
+
+/* DIŞARI TAŞMAYI ÖNLEYEN KAPSAYICI (Çok Önemli) */
+.video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Yatay videolar için 16:9 oranı. Videolar Shorts/Dikey ise burayı 9 / 16 yapın */
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
 }
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+  pointer-events: auto !important; /* Mobilde doğrudan play tuşuna basılmasını sağlar */
+}
+
+/* Rozetler (Badges) */
 .demo-badge {
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  margin-bottom: 12px;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  align-self: flex-start; /* Sadece yazının kapladığı alan kadar genişler */
 }
-.eko-badge { background: var(--silver-color); color: #000; }
-.gold-badge { background: var(--gold-color); color: #000; }
-.diamond-badge { background: #ffffff; color: #000; box-shadow: 0 0 10px rgba(255,255,255,0.4); }
+
+.eko-badge { background: #2e7d32; color: #fff; }
+.gold-badge { background: #fbc02d; color: #000; }
+.diamond-badge { background: #0288d1; color: #fff; }
 
 .video-container-horizontal {
   width: 100%;
@@ -931,51 +955,56 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
           </div>
         </div>
 
-        <!-- 3 Paket Çıktısı Yan Yana Canlı Görünüm -->
-        <div class="demo-output-area">
-          <h3 class="demo-step-title">Ortaya Çıkan Paket Sonuçları</h3>
-          
-          <div class="demo-results-grid">
-            
-            <!-- Eko Demo -->
-           <div class="package-video-card">
-             <div class="video-container">
-                  <iframe
-                    src="https://www.youtube.com/embed/UZhPFS91LSA?rel=0&modestbranding=1&vq=hd1080"
-      title="Paket Sonuç Videosu" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-      allowfullscreen>
-    </iframe>
+<!-- 3 Paket Çıktısı Yan Yana Canlı Görünüm -->
+<div class="demo-output-area">
+  <h3 class="demo-step-title">Ortaya Çıkan Paket Sonuçları</h3>
+  
+  <div class="demo-results-grid">
+    
+    <!-- Eko Demo -->
+    <div class="demo-video-card">
+      <span class="demo-badge eko-badge">Eko Paket Sonucu</span>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/UZhPFS91LSA?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" 
+          title="Eko Paket Sonuç Videosu" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Gold Demo -->
+    <div class="demo-video-card">
+      <span class="demo-badge gold-badge">Gold Paket Sonucu</span>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/N69AdsyyQXs?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" 
+          title="Gold Paket Sonuç Videosu" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Diamond Demo -->
+    <div class="demo-video-card">
+      <span class="demo-badge diamond-badge">Diamond Paket Sonucu</span>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/qLma_L4TyqQ?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" 
+          title="Diamond Paket Sonuç Videosu" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
   </div>
 </div>
-                src="https://www.youtube.com/embed/VİDEO_ID_BURAYA?playsinline=1&rel=0&modestbranding=1&enablejsapi=1" 
-                 title="EKO Sonuç Videosu"
-                <iframe src="https://www.youtube.com/embed/UZhPFS91LSA?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
-              </div>
-            </div>
-
-            <!-- Gold Demo -->
-            <div class="demo-video-card">
-              <span class="demo-badge gold-badge">Gold Paket Sonucu</span>
-              <div class="video-container-horizontal">
-                <iframe src="https://www.youtube.com/embed/N69AdsyyQXs?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
-              </div>
-            </div>
-
-            <!-- Diamond Demo -->
-            <div class="demo-video-card">
-              <span class="demo-badge diamond-badge">Diamond Paket Sonucu</span>
-              <div class="video-container-horizontal">
-                <iframe src="https://www.youtube.com/embed/qLma_L4TyqQ?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
 </section>
   
   <!-- MÜZİK KLİBİ PAKETLERİ -->
