@@ -460,23 +460,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
    ========================================================= */
 
 /* Masaüstünde yan yana, mobilde alt alta kusursuz dizilim */
-.demo-results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  width: 100%;
-  margin-top: 20px;
-}
 
-.demo-video-card {
-  background: rgba(20, 20, 25, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 15px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
 
 /* DIŞARI TAŞMAYI ÖNLEYEN KAPSAYICI (Çok Önemli) */
 .video-container {
@@ -498,7 +482,62 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   pointer-events: auto !important; /* Mobilde doğrudan play tuşuna basılmasını sağlar */
 }
 
-/* Rozetler (Badges) */
+/* --- YENİ VİDEO GRID VE SIKIŞMAYI ÖNLEYİCİ KODLAR --- */
+
+/* Videoları asla daraltmayan, sığmazsa alta atan kapsayıcı */
+.demo-results-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 25px !important;
+  width: 100% !important;
+  margin-top: 20px;
+}
+
+/* Video Kartı %100 Genişlikte Esnemeye Ayarlandı */
+.demo-video-card {
+  background: rgba(20, 20, 25, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box; /* Padding taşmasını önler */
+}
+
+/* Videolar için daha stabil olan Padding yöntemi (16:9 oranı) */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* aspect-ratio yerine her tarayıcıda çalışan kesin 16:9 oranı */
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+  pointer-events: auto !important;
+}
+
+/* MOBİL GÖRÜNÜM (Kartları tam ekran genişliğine yayar) */
+@media (max-width: 768px) {
+  .demo-results-grid {
+    grid-template-columns: 1fr !important; /* Telefonda yan yana zorlama, alt alta diz */
+    gap: 20px !important;
+  }
+  .demo-video-card {
+    padding: 10px !important;
+  }
+} 
+
 /* =========================================================
    PARLAK ROZET (BADGE) RENKLERİ
    ========================================================= */
@@ -535,59 +574,6 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   color: #000; 
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
   border: 1px solid #f0f0f0;
-}
-
-/* =========================================================
-   VİDEO BOYUTLANDIRMA VE MOBİLDE BÜYÜTME
-   ========================================================= */
-
-.demo-video-card {
-  background: rgba(20, 20, 25, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 15px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-}
-
-.video-container {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9; /* Videoların en-boy oranını korur */
-  background: #000;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  border: none;
-  pointer-events: auto !important;
-}
-
-/* MOBİLDE VİDEOLARI MAKSİMUM BÜYÜTME */
-@media (max-width: 768px) {
-  .demo-results-grid {
-    gap: 25px; /* Kartlar arası boşluğu biraz açtık */
-  }
-
-  .demo-video-card {
-    padding: 10px !important; /* Kartın iç boşluğunu kıstık ki video büyüsün */
-    margin: 0 !important;
-    width: 100% !important;
-  }
-
-  .video-container {
-    width: 100% !important;
-    max-width: 100% !important; 
-    border-radius: 6px;
-  }
 }
 
 /* ─── ÖRNEK VİDEOLAR BÖLÜMÜ STİLLERİ ─── */
@@ -1394,6 +1380,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
         <p>Müşteri temsilcimiz ile direkt görüşerek vizyonunuzu kusursuz bir projeye dönüştürün. Türkiye'nin her yerine hizmet vermekteyiz.</p>
       </div>
       <div>
+
         <a href="https://wa.me/905331400419?text=Merhaba,%20video%20kurgu%20paketleriniz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" class="btn btn-primary">Müşteri Temsilcisine Ulaşın</a>
       </div>
     </div>
