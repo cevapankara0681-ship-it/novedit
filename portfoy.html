@@ -499,35 +499,95 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 
 /* Rozetler (Badges) */
+/* =========================================================
+   PARLAK ROZET (BADGE) RENKLERİ
+   ========================================================= */
 .demo-badge {
   display: inline-block;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  align-self: flex-start; /* Sadece yazının kapladığı alan kadar genişler */
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
 }
 
-.eko-badge { background: #2e7d32; color: #fff; }
-.gold-badge { background: #fbc02d; color: #000; }
-.diamond-badge { background: #0288d1; color: #fff; }
+/* Eko - Parlak Gümüş (Silver) */
+.eko-badge { 
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  color: #222; 
+  box-shadow: 0 0 15px rgba(235, 237, 238, 0.7);
+  border: 1px solid #fff;
+}
 
-.video-container-horizontal {
+/* Gold - Parlak Altın */
+.gold-badge { 
+  background: linear-gradient(135deg, #ffdf00 0%, #d4af37 100%);
+  color: #000; 
+  box-shadow: 0 0 15px rgba(255, 223, 0, 0.6);
+  border: 1px solid #fff9c4;
+}
+
+/* Diamond - Parlak Beyaz */
+.diamond-badge { 
+  background: #ffffff;
+  color: #000; 
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+  border: 1px solid #f0f0f0;
+}
+
+/* =========================================================
+   VİDEO BOYUTLANDIRMA VE MOBİLDE BÜYÜTME
+   ========================================================= */
+
+.demo-video-card {
+  background: rgba(20, 20, 25, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   width: 100%;
+}
+
+.video-container {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 Oran */
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Videoların en-boy oranını korur */
+  background: #000;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: #000;
 }
-.video-container-horizontal iframe {
+
+.video-container iframe {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+  pointer-events: auto !important;
+}
+
+/* MOBİLDE VİDEOLARI MAKSİMUM BÜYÜTME */
+@media (max-width: 768px) {
+  .demo-results-grid {
+    gap: 25px; /* Kartlar arası boşluğu biraz açtık */
+  }
+
+  .demo-video-card {
+    padding: 10px !important; /* Kartın iç boşluğunu kıstık ki video büyüsün */
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .video-container {
+    width: 100% !important;
+    max-width: 100% !important; 
+    border-radius: 6px;
+  }
 }
 
 /* ─── ÖRNEK VİDEOLAR BÖLÜMÜ STİLLERİ ─── */
