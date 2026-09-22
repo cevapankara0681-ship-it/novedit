@@ -690,17 +690,198 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   .photo-wrapper img { width: 95px; height: 120px; }
 }
 
+/* =========================================================
+   SABİT GEZİNTİ MENÜSÜ (DESKTOP & MOBİL OPTİMİZASYONU)
+   ========================================================= */
+
+/* Masaüstü Varsayılan Sabit Menü */
+.nav-sticky-bar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 9999;
+}
+
+.nav-sticky-btn {
+  background: rgba(20, 20, 25, 0.85);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.nav-sticky-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+/* MOBİL ÖZEL OPTİMİZASYON (768px ve Altı) */
+@media (max-width: 768px) {
+  /* Sayfa altı sabit menü içerikleri kapatmasın diye en alta boşluk veriyoruz */
+  body {
+    padding-bottom: 75px !important;
+  }
+
+  /* Mobil Menüyü En Alta Sabitleme */
+  .nav-sticky-bar {
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) !important;
+    background: rgba(10, 10, 12, 0.96) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0 !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .nav-sticky-btn {
+    flex: 1;
+    text-align: center;
+    padding: 11px 8px !important;
+    font-size: 13px !important;
+    margin: 0 4px;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .nav-sticky-btn:active {
+    background: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  /* Logoyu ve Başlığı Üstte Serbest Bırakma */
+  .header-logo-container {
+    position: relative;
+    z-index: 10;
+    margin-top: 10px;
+  }
+}
+
+/* =========================================================
+   PAKET SONUÇLARI VE VİDEO BOYUTLANDIRMA (SİTE İÇİ OYNATMA)
+   ========================================================= */
+
+.package-video-card {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Video kapsayıcı - Yatay (16:9) veya Dikey (9:16) desteği */
+.video-container {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  /* Varsayılan yatay video oranı */
+  aspect-ratio: 16 / 9;
+}
+
+/* Eğer paket videoları Dikey (YouTube Shorts / 9:16) ise bu sınıfı ekleyin */
+.video-container.vertical {
+  aspect-ratio: 9 / 16;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+  /* YouTube harici yönlendirmeleri engelleyip iframe içi tıklamayı sağlama */
+  pointer-events: auto !important;
+}
+
+@media (max-width: 768px) {
+  /* 1. Sayfa sonundaki içerikler alt barın altında kalmasın diye boşluk */
+  body {
+    padding-bottom: 70px !important;
+  }
+
+  /* 2. Geri butonu üstte kalsın, esneklik (flex) çakışmasını engelle */
+  .nav-container {
+    display: block !important; 
+    padding: 15px;
+    text-align: left;
+  }
+  
+  .back-btn {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* 3. Linkleri üstten koparıp EN ALTA sabitle */
+  .nav-right-links {
+    position: fixed !important;
+    top: auto !important;     /* Üstteki hizalamayı tamamen iptal eder */
+    bottom: 0 !important;     /* En alta yapıştırır */
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 9999;
+    
+    /* Alt bar tasarımı ve cam efekti */
+    background: rgba(10, 10, 12, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* 6 linki yan yana dizip sağa/sola kaydırılabilir (scroll) yapıyoruz */
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    padding: 12px 15px calc(12px + env(safe-area-inset-bottom));
+    gap: 10px;
+    
+    /* Çirkin scroll çubuğunu gizler, sadece dokunmatik kaydırma çalışır */
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+  }
+
+  .nav-right-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 4. Alt bar içindeki butonların boyutları */
+  .nav-link {
+    font-size: 13px !important;
+    padding: 8px 14px !important;
+    white-space: nowrap !important; /* Metnin alt satıra düşmesini engeller */
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+  }
+}
+  
 </style>
 </head>
 <body>
 
 <!-- SABİT YANDAN MENÜ ETİKETLERİ -->
-<div class="side-nav-tags">
-  <a href="#demo-section" class="side-tag-link"><span class="dot"></span> Demolar</a>
-  <a href="#paketler-muzik" class="side-tag-link"><span class="dot"></span> Paket Fiyatları</a>
-  <a href="#ornekler" class="side-tag-link"><span class="dot"></span> Örnek Videolar</a>
-  <a href="#memnuniyet" class="side-tag-link"><span class="dot"></span> Müşteri Memnuniyeti</a>
-</div>
+<nav class="nav-sticky-bar">
+  <a href="#demolar" class="nav-sticky-btn">Demolar</a>
+  <a href="#fiyatlar" class="nav-sticky-btn">Fiyatlar</a>
+  <a href="#ornekler" class="nav-sticky-btn">Örnekler</a>
+</nav>
 
 <!-- ÜST NAVİGASYON -->
 <nav class="top-nav">
