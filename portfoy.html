@@ -955,6 +955,36 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
     text-align: center;
   }
 }
+
+/* =========================================================
+   PAKET SONUÇLARI - MOBİLDE ALT ALTA BÜYÜK GÖRÜNÜM
+   ========================================================= */
+
+.paket-sonuclari-dikey {
+  display: flex;
+  flex-direction: column; /* Mobilde kartları alt alta dizer */
+  gap: 30px;              /* Kartlar arasındaki yukarı-aşağı boşluk */
+  width: 100%;
+}
+
+/* Videonun ve Kartın Büyüklüğünü Garantileyen Yapı */
+.paket-sonuclari-dikey .video-card {
+  width: 100%;
+  margin: 0; 
+}
+
+/* Masaüstünde (PC) Yan Yana Görünmeye Devam Etsin İsterseniz: */
+@media (min-width: 769px) {
+  .paket-sonuclari-dikey {
+    flex-direction: row; /* Masaüstünde yan yana 3'lü dizer */
+    justify-content: space-between;
+  }
+  
+  .paket-sonuclari-dikey .video-card {
+    flex: 1; /* Üç kartın da eşit genişlikte olmasını sağlar */
+    max-width: 32%;
+  }
+}
   
 </style>
 </head>
@@ -1015,51 +1045,61 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
           </div>
         </div>
 
-<!-- 3 Paket Çıktısı Yan Yana Canlı Görünüm -->
+<!-- 3 Paket Çıktısı Alt Alta Görünüm -->
 <div class="demo-output-area">
-  <h3 class="demo-step-title">Ortaya Çıkan Paket Sonuçları</h3>
+  <h3 class="category-title theme-diamond-title" style="margin-bottom: 25px;">✦ Ortaya Çıkan Paket Sonuçları</h3>
   
-  <div class="demo-results-grid">
+  <!-- Sadece bu div'i alt alta dizecek şekilde güncelledik -->
+  <div class="paket-sonuclari-dikey">
     
-    <!-- Eko Demo -->
-    <div class="demo-video-card">
-      <span class="demo-badge eko-badge">Eko Paket Sonucu</span>
-      <div class="video-container">
+    <!-- EKO PAKET (SILVER TEMA) -->
+    <div class="video-card theme-silver">
+      <div class="video-wrapper">
         <iframe 
           src="https://www.youtube.com/embed/UZhPFS91LSA?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" 
-          title="Eko Paket Sonuç Videosu" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          title="Eko Paket Sonucu" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen 
           loading="lazy">
         </iframe>
       </div>
+      <div class="video-info">
+        <span class="video-tag" style="color: var(--silver-color);">Eko Paket</span>
+        <h3 class="video-title">Eko Paket Sonucu</h3>
+      </div>
     </div>
 
-    <!-- Gold Demo -->
-    <div class="demo-video-card">
-      <span class="demo-badge gold-badge">Gold Paket Sonucu</span>
-      <div class="video-container">
+    <!-- GOLD PAKET (GOLD TEMA) -->
+    <div class="video-card theme-gold">
+      <div class="video-wrapper">
         <iframe 
           src="https://www.youtube.com/embed/N69AdsyyQXs?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" 
-          title="Gold Paket Sonuç Videosu" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          title="Gold Paket Sonucu" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen 
           loading="lazy">
         </iframe>
       </div>
+      <div class="video-info">
+        <span class="video-tag" style="color: var(--gold-color);">Gold Paket</span>
+        <h3 class="video-title">Gold Paket Sonucu</h3>
+      </div>
     </div>
 
-    <!-- Diamond Demo -->
-    <div class="demo-video-card">
-      <span class="demo-badge diamond-badge">Diamond Paket Sonucu</span>
-      <div class="video-container">
+    <!-- DIAMOND PAKET (DIAMOND TEMA) -->
+    <div class="video-card theme-diamond">
+      <div class="video-wrapper">
         <iframe 
           src="https://www.youtube.com/embed/qLma_L4TyqQ?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" 
-          title="Diamond Paket Sonuç Videosu" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          title="Diamond Paket Sonucu" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen 
           loading="lazy">
         </iframe>
+      </div>
+      <div class="video-info">
+        <span class="video-tag" style="color: var(--diamond-color);">Diamond Paket</span>
+        <h3 class="video-title">Diamond Paket Sonucu</h3>
       </div>
     </div>
 
