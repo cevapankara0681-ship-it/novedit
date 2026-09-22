@@ -985,6 +985,34 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
     max-width: 32%;
   }
 }
+
+/* Ortaya Çıkan Paket Sonuçları İçin Kaydırmasız Kapsayıcı */
+.paket-sonuclari-grid {
+  display: flex;
+  flex-direction: column; /* Mobilde alt alta dizer */
+  gap: 20px;
+  width: 100%;
+}
+
+/* Kendi gönderdiğiniz video-card özellikleri (referans) bu kartlara uygulanır.
+   Sadece mobilde tam genişlik kaplamasını sağladık. */
+.paket-sonuclari-grid .video-card {
+  width: 100%;
+  flex: none; /* Sabit 320px kuralını ezmek için */
+}
+
+/* PC/Tablet Ekranlar İçin (Yan yana sıralama istenirse) */
+@media (min-width: 768px) {
+  .paket-sonuclari-grid {
+    flex-direction: row;
+    flex-wrap: wrap; /* Sığmazsa alt satıra iner, asla scroll çıkarmaz */
+    justify-content: space-between;
+  }
+  
+  .paket-sonuclari-grid .video-card {
+    width: calc(33.333% - 15px); /* 3 kart yan yana */
+  }
+}
   
 </style>
 </head>
@@ -1045,23 +1073,17 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
           </div>
         </div>
 
-<!-- 3 Paket Çıktısı Alt Alta Görünüm -->
-<div class="demo-output-area">
+<!-- 3 Paket Çıktısı (Kaydırmasız, Örnekler Tasarımıyla Birebir Aynı) -->
+<div class="demo-output-area" style="margin-top: 40px;">
   <h3 class="category-title theme-diamond-title" style="margin-bottom: 25px;">✦ Ortaya Çıkan Paket Sonuçları</h3>
   
-  <!-- Sadece bu div'i alt alta dizecek şekilde güncelledik -->
-  <div class="paket-sonuclari-dikey">
+  <!-- "portfolio-scroll" YERİNE "paket-sonuclari-grid" KULLANIYORUZ (Kaydırma Yok) -->
+  <div class="paket-sonuclari-grid">
     
     <!-- EKO PAKET (SILVER TEMA) -->
     <div class="video-card theme-silver">
       <div class="video-wrapper">
-        <iframe 
-          src="https://www.youtube.com/embed/UZhPFS91LSA?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" 
-          title="Eko Paket Sonucu" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen 
-          loading="lazy">
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/UZhPFS91LSA?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" title="Eko Paket Sonucu" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
         <span class="video-tag" style="color: var(--silver-color);">Eko Paket</span>
@@ -1072,13 +1094,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
     <!-- GOLD PAKET (GOLD TEMA) -->
     <div class="video-card theme-gold">
       <div class="video-wrapper">
-        <iframe 
-          src="https://www.youtube.com/embed/N69AdsyyQXs?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" 
-          title="Gold Paket Sonucu" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen 
-          loading="lazy">
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/N69AdsyyQXs?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" title="Gold Paket Sonucu" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
         <span class="video-tag" style="color: var(--gold-color);">Gold Paket</span>
@@ -1089,13 +1105,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
     <!-- DIAMOND PAKET (DIAMOND TEMA) -->
     <div class="video-card theme-diamond">
       <div class="video-wrapper">
-        <iframe 
-          src="https://www.youtube.com/embed/qLma_L4TyqQ?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" 
-          title="Diamond Paket Sonucu" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen 
-          loading="lazy">
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/qLma_L4TyqQ?playsinline=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080" title="Diamond Paket Sonucu" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
         <span class="video-tag" style="color: var(--diamond-color);">Diamond Paket</span>
@@ -1105,6 +1115,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 
   </div>
 </div>
+        
 </section>
   
   <!-- MÜZİK KLİBİ PAKETLERİ -->
