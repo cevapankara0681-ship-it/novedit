@@ -45,11 +45,11 @@
   --bg-pure: #000000;
   --bg-gradient: linear-gradient(145deg, #050505 0%, #111111 100%);
   
-  /* Sitenin Genel Parlak Beyaz Teması (Logo, Butonlar, Etiketler vb. için) */
+  /* Sitenin Genel Parlak Beyaz Teması */
   --theme-color: #ffffff;
   --theme-glow: rgba(255, 255, 255, 0.4);
 
-  /* Sadece Diamond Paket İçin Ayrılan Renk (Mavi) */
+  /* Diamond Paket Renk */
   --diamond-color: #ffffff;
   --diamond-glow: rgba(255, 255, 255, 0.4);
   
@@ -71,16 +71,21 @@ html { scroll-behavior: smooth; background-color: var(--bg-pure); }
 body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
 .container { width: 90%; max-width: 1300px; margin: auto; }
 
-/* ─── ÜST NAVİGASYON (ANA SAYFAYA DÖN) ─── */
+/* ─── ÜST NAVİGASYON ─── */
 .top-nav {
-  padding: 25px 0;
-  display: flex;
-  justify-content: flex-start;
+  padding: 20px 0;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 .back-btn {
   display: inline-flex;
@@ -93,7 +98,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   color: var(--text-muted);
   text-decoration: none;
   border: 1px solid var(--glass-border);
-  padding: 10px 20px;
+  padding: 8px 18px;
   border-radius: 30px;
   background: var(--glass-bg);
   backdrop-filter: blur(5px);
@@ -106,14 +111,86 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   box-shadow: 0 0 15px var(--theme-glow);
 }
 
-/* ─── YENİ HARMANLANMIŞ LOGO ─── */
+.nav-right-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.nav-link {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.nav-link:hover {
+  color: #fff;
+  border-color: var(--theme-color);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* ─── YANDAN SABİT ETIKETLER (SIDE NAV) ─── */
+.side-nav-tags {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.side-tag-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.side-tag-link:hover {
+  background: var(--theme-color);
+  color: #000;
+  border-color: var(--theme-color);
+  box-shadow: 0 0 15px var(--theme-glow);
+  transform: translateX(-5px);
+}
+.side-tag-link .dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--theme-color);
+  border-radius: 50%;
+}
+.side-tag-link:hover .dot {
+  background-color: #000;
+}
+
+/* ─── LOGO ─── */
 .brand-header {
   text-align: center;
-  padding: 100px 0 50px;
+  padding: 110px 0 40px;
   background: transparent;
   position: relative;
 }
-
 .brand-logo-main {
   font-family: 'Syncopate', sans-serif;
   font-size: 70px;
@@ -123,26 +200,11 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   text-shadow: 0 0 30px var(--theme-glow);
   line-height: 1;
 }
-
-@media (max-width: 480px) {
-  .brand-logo-main { font-size: 45px; letter-spacing: 6px; }
-}
-
 .logo-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-/* 19 Sayısı O harfinin yerini alıyor ve harmanlanıyor */
-.logo-number-blend {
-  font-size: 50px; 
-  color: #ffffff;
-  text-shadow: 0 0 15px rgba(255,255,255,0.3);
-  margin: 0 5px;
-  display: inline-block;
-  transform: translateY(-3px); 
 }
 .logo-subtext {
   font-family: 'Syncopate', sans-serif;
@@ -157,7 +219,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 /* ─── PAKET BÖLÜMÜ BAŞLIKLARI ─── */
 .section-title-wrapper {
   text-align: center;
-  margin: 70px 0 40px;
+  margin: 60px 0 35px;
 }
 .section-title {
   font-size: 28px;
@@ -168,7 +230,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   margin-bottom: 10px;
 }
 
-/* ─── KART DÜZENİ (SAYDAM METALLİC MODERN TASARIM) ─── */
+/* ─── KART DÜZENİ ─── */
 .packages-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -190,7 +252,6 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 .card:hover { transform: translateY(-8px); }
 
-/* Temalar (Paket renkleri aynı bırakıldı) */
 .theme-diamond {
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05), 0 10px 30px rgba(255, 255, 255, 0.08);
@@ -254,7 +315,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 .theme-gold .card-features li::before { color: var(--gold-color); }
 .theme-silver .card-features li::before { color: var(--silver-color); }
 
-/* ─── BUTONLAR (Genel Beyaz Temaya Uygun) ─── */
+/* ─── BUTONLAR ─── */
 .btn-group { display: flex; gap: 10px; flex-direction: column; }
 .btn {
   display: inline-block;
@@ -291,14 +352,14 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 .extra-note { text-align: center; font-size: 12px; color: var(--text-muted); letter-spacing: 1px; margin-top: -10px; margin-bottom: 60px; }
 
-/* ─── DEMO TALEBİ BUTONU ─── */
+/* ─── SABİT BİLGİ AL BUTONU ─── */
 .floating-demo {
   position: fixed;
   bottom: 30px;
   right: 30px;
   background: var(--theme-color);
   color: #000;
-  padding: 16px 24px;
+  padding: 16px 26px;
   border-radius: 30px;
   font-weight: 800;
   font-size: 13px;
@@ -333,40 +394,110 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 .panel-title { font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; color: #fff; }
 .panel-subtitle { font-size: 13px; color: var(--text-muted); }
 
-/* ─── MÜŞTERİ MEMNUNİYETİ DİKEY VİDEO KARTLARI (9:16) ─── */
-.testimonials-scroll {
+/* ─── DEMO VİTRİNİ ─── */
+.demo-card-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+.demo-body {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+.demo-input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 25px;
+}
+.demo-step-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--theme-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.photo-grid {
   display: flex;
   gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 20px;
+  justify-content: center;
 }
-.testimonials-scroll::-webkit-scrollbar, .portfolio-scroll::-webkit-scrollbar { height: 4px; }
-.testimonials-scroll::-webkit-scrollbar-track, .portfolio-scroll::-webkit-scrollbar-track { background: var(--bg-pure); }
-.testimonials-scroll::-webkit-scrollbar-thumb, .portfolio-scroll::-webkit-scrollbar-thumb { background: var(--theme-color); border-radius: 10px; }
-
-.vertical-video-card {
-  flex: 0 0 280px; 
-  scroll-snap-align: start;
-  background: #050505;
-  border: 1px solid var(--glass-border);
+.photo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.photo-wrapper img {
+  width: 120px;
+  height: 150px;
+  object-fit: cover;
   border-radius: 12px;
-  overflow: hidden;
-  transition: all 0.4s ease;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
-.vertical-video-card:hover {
-  border-color: var(--theme-color);
-  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.15);
+.photo-wrapper span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 1px;
 }
 
-/* Dikey Video Çerçevesi (9:16 oranı) */
-.video-wrapper-vertical {
-  position: relative;
+/* Tıklamaya Gerek Kalmadan 3 Paket Yan Yana Canlı Görünüm */
+.demo-results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   width: 100%;
-  padding-bottom: 177.78%; 
+}
+.demo-video-card {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 15px;
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+.demo-video-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--theme-color);
+}
+.demo-badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+.eko-badge { background: var(--silver-color); color: #000; }
+.gold-badge { background: var(--gold-color); color: #000; }
+.diamond-badge { background: #ffffff; color: #000; box-shadow: 0 0 10px rgba(255,255,255,0.4); }
+
+.video-container-horizontal {
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Oran */
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background: #000;
 }
-.video-wrapper-vertical iframe {
+.video-container-horizontal iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -375,14 +506,32 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   border: 0;
 }
 
-/* ─── ÖRNEK VİDEOLAR YATAY KARTI (16:9) ─── */
+/* ─── ÖRNEK VİDEOLAR BÖLÜMÜ STİLLERİ ─── */
+.category-title {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.theme-diamond-title { color: var(--diamond-color); }
+.theme-gold-title { color: var(--gold-color); }
+.theme-silver-title { color: var(--silver-color); }
+
 .portfolio-scroll {
   display: flex;
   gap: 20px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
+.portfolio-scroll::-webkit-scrollbar, .testimonials-scroll::-webkit-scrollbar { height: 4px; }
+.portfolio-scroll::-webkit-scrollbar-track, .testimonials-scroll::-webkit-scrollbar-track { background: var(--bg-pure); }
+.portfolio-scroll::-webkit-scrollbar-thumb, .testimonials-scroll::-webkit-scrollbar-thumb { background: var(--theme-color); border-radius: 10px; }
+
 .video-card {
   flex: 0 0 320px;
   scroll-snap-align: start;
@@ -399,7 +548,43 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 .video-tag { font-size: 10px; font-weight: 800; color: var(--theme-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; display: block; }
 .video-title { font-size: 14px; font-weight: 600; color: #fff; }
 
-/* ─── İLETİŞİM / MÜŞTERİYE ULAŞ BANNERI ─── */
+/* ─── MÜŞTERİ MEMNUNİYETİ DİKEY VİDEO KARTLARI (9:16) ─── */
+.testimonials-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+}
+.vertical-video-card {
+  flex: 0 0 280px; 
+  scroll-snap-align: start;
+  background: #050505;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+.vertical-video-card:hover {
+  border-color: var(--theme-color);
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.15);
+}
+.video-wrapper-vertical {
+  position: relative;
+  width: 100%;
+  padding-bottom: 177.78%; 
+  background: #000;
+}
+.video-wrapper-vertical iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ─── İLETİŞİM BANNERI ─── */
 .contact-banner {
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent);
   border-left: 3px solid var(--theme-color);
@@ -415,7 +600,7 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 .contact-banner-text h4 { font-size: 18px; margin-bottom: 5px; }
 .contact-banner-text p { font-size: 13px; color: var(--text-muted); }
 
-/* ─── KUSURSUZ FOOTER ─── */
+/* ─── FOOTER ─── */
 .site-footer {
   padding: 80px 0 40px;
   background: var(--bg-pure);
@@ -438,7 +623,6 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   margin-bottom: 15px;
   letter-spacing: 2px;
 }
-.footer-logo span { color: #fff; }
 .footer-desc { line-height: 1.8; max-width: 340px; margin-bottom: 20px; }
 .footer-umbrella {
   display: inline-block;
@@ -471,253 +655,69 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 }
 
 /* ─── MOBİL UYUM ─── */
+@media (max-width: 1024px) {
+  .demo-results-grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 900px) {
+  .nav-container { flex-direction: column; align-items: flex-start; }
+  .nav-right-links { width: 100%; justify-content: flex-start; }
   .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .footer-desc { max-width: 100%; margin: 0 auto 20px; }
   .contact-banner { flex-direction: column; text-align: center; }
+  
+  .side-nav-tags {
+    right: 10px;
+    top: auto;
+    bottom: 85px;
+    transform: none;
+    flex-direction: row;
+    overflow-x: auto;
+    max-width: calc(100vw - 20px);
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 30px;
+  }
+  .side-tag-link {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
 }
 @media (max-width: 480px) {
   .packages-grid { grid-template-columns: 1fr; }
   .floating-demo { bottom: 20px; right: 20px; padding: 12px 20px; font-size: 11px; }
-  .logo-number-blend { font-size: 40px; }
+  .brand-logo-main { font-size: 45px; letter-spacing: 6px; }
   .logo-subtext { font-size: 11px; letter-spacing: 12px; }
-}
-
-/* --- DEMO VİTRİNİ STİLLERİ (KOYU TEMA UYUMLU) --- */
-.demo-card-container {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  padding: 40px;
-  margin-bottom: 50px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-}
-
-.demo-body {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  margin-top: 40px;
-  justify-content: center;
-}
-
-.demo-input-area, .demo-output-area {
-  flex: 1;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.demo-step-title {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--theme-color);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-/* Fotoğraf Bölümü */
-.photo-grid {
-  display: flex;
-  gap: 20px;
-}
-.photo-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-.photo-wrapper img {
-  width: 130px;
-  height: 170px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-}
-.photo-wrapper span {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-}
-
-/* Sekmeler */
-.package-tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 25px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 5px;
-  border-radius: 30px;
-  border: 1px solid var(--glass-border);
-}
-.tab-btn {
-  border: none;
-  background: transparent;
-  padding: 10px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-muted);
-  transition: all 0.3s ease;
-}
-.tab-btn:hover {
-  color: #fff;
-}
-.tab-btn.active {
-  background: var(--theme-color);
-  color: #000;
-  box-shadow: 0 0 15px var(--theme-glow);
-}
-
-/* 16:9 Yatay Iframe Alanı ve Parlak Beyaz Gölge Efekti */
-.video-container-horizontal {
-  width: 100%;
-  max-width: 450px;
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 Kusursuz Yatay Oran */
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  background: #000;
-  
-  /* İstenen parlak beyaz ışıklı gölge */
-  box-shadow: 0 0 45px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.5);
-  margin: 0 auto;
-  transition: box-shadow 0.3s ease;
-}
-
-.video-container-horizontal iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-/* Kartın genel yüksekliğini dengelemek için mobil uyumluluk */
-/* Mobil Düzeltmeler ve Taşma (Overflow) Engelleme */
-@media (max-width: 768px) {
-  .demo-card-container { 
-    padding: 20px 10px; /* Mobilde kartın iç boşluğunu daraltıp içeriğe yer açıyoruz */
-  }
-  
-  .demo-step {
-    min-width: 100%; /* 300px sınırını kaldırıp tam ekrana uyduruyoruz */
-    width: 100%;
-  }
-  
-  .photo-wrapper img { 
-    width: 90px; 
-    height: 120px; 
-  }
-  
-  /* Butonların dışarı taşmasını engelleyen esnek yapı */
-  .package-tabs { 
-    width: 100%;
-    gap: 4px; /* Butonlar arası boşluğu küçülttük */
-    padding: 4px;
-    justify-content: space-between; /* Ekrana eşit yayılmasını sağladık */
-  }
-  
-  .tab-btn {
-    flex: 1; /* Butonların genişliği ekrana göre otomatik daralacak */
-    padding: 8px 4px; /* Buton iç boşluklarını minimuma indirdik */
-    font-size: 10px; /* Mobilde metinleri küçülttük */
-    text-align: center;
-    white-space: nowrap; /* Yazıların iki satıra bölünmesini engelledik */
-  }
-  
-  /* Videonun ekrandan taşmasını kesin olarak engelliyoruz */
-  .video-container-horizontal { 
-    width: 100% !important; 
-    max-width: 100% !important; 
-  }
-}
-
-/* Yakınlaştırma (Zoom) Butonu Tasarımı */
-.zoom-video-btn {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #fff;
-  padding: 8px 18px;
-  border-radius: 30px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  cursor: pointer;
-  z-index: 10;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.zoom-video-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* SİNEMA MODU (Tam Ekran Zoom Durumu) */
-.video-container-horizontal.is-zoomed {
-  position: fixed;
-  top: 0; 
-  left: 0; 
-  width: 100vw !important;
-  height: 100vh !important;
-  max-width: 100% !important;
-  padding-bottom: 0; /* Oranı sıfırlıyoruz */
-  z-index: 999999;
-  background: rgba(0, 0, 0, 0.95);
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-}
-
-.video-container-horizontal.is-zoomed iframe {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 56.25vw; /* Genişliğe göre 16:9 oranı korur */
-  transform: translateY(-50%);
-}
-
-/* Zoom modundayken butonun stili ve konumu değişir */
-.video-container-horizontal.is-zoomed .zoom-video-btn {
-  bottom: 40px;
-  background: rgba(255, 0, 0, 0.7);
-  border-color: rgba(255, 0, 0, 0.9);
-  padding: 12px 24px;
-  font-size: 13px;
+  .photo-wrapper img { width: 95px; height: 120px; }
 }
 
 </style>
 </head>
 <body>
 
-<!-- ANA SAYFAYA DÖN BUTONU -->
+<!-- SABİT YANDAN MENÜ ETİKETLERİ -->
+<div class="side-nav-tags">
+  <a href="#demo-section" class="side-tag-link"><span class="dot"></span> Demolar</a>
+  <a href="#paketler-muzik" class="side-tag-link"><span class="dot"></span> Paket Fiyatları</a>
+  <a href="#ornekler" class="side-tag-link"><span class="dot"></span> Örnek Videolar</a>
+  <a href="#memnuniyet" class="side-tag-link"><span class="dot"></span> Müşteri Memnuniyeti</a>
+</div>
+
+<!-- ÜST NAVİGASYON -->
 <nav class="top-nav">
-  <div class="container">
+  <div class="container nav-container">
     <a href="index.html" class="back-btn">← Ana Sayfaya Dön</a>
+    <div class="nav-right-links">
+      <a href="calisma-sureci.html" class="nav-link">Çalışma Süreci</a>
+      <a href="calisma-kosullari.html" class="nav-link">Çalışma Koşulları</a>
+      <a href="odeme ve iade politikasi.html" class="nav-link">Ödeme &amp; İade</a>
+      <a href="kvkk.html" class="nav-link">KVKK</a>
+      <a href="gizlilik.html" class="nav-link">Gizlilik</a>
+      <a href="iletisim.html" class="nav-link">İletişim</a>
+    </div>
   </div>
 </nav>
 
-<!-- HARMANLANMIŞ LOGO -->
+<!-- BRAND LOGO -->
 <header class="brand-header">
   <div class="container">
     <div class="logo-wrapper">
@@ -729,17 +729,20 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 
 <main class="container">
 
-<section class="panel-section" style="border-top:none; padding-top:0;">
+<!-- DEMO VİTRİNİ -->
+<section id="demo-section" class="panel-section" style="border-top:none; padding-top:0;">
   <div class="container">
     <div class="demo-card-container">
       
       <div class="demo-header">
         <h2 class="panel-title" style="text-align: center;">Fotoğraftan Klibe Dönüşüm Serüveni</h2>
-        <p class="panel-subtitle" style="text-align: center; max-width: 600px; margin: 10px auto 0;">Bize sadece iki açılı fotoğrafınızı gönderin, sizi profesyonel bir müzik klibinin başrolü yapalım. Paketler arası kalite farkını aşağıdan inceleyebilirsiniz.</p>
+        <p class="panel-subtitle" style="text-align: center; max-width: 600px; margin: 10px auto 0;">
+          Bize sadece iki açılı fotoğrafınızı gönderin, sizi profesyonel bir müzik klibinin başrolü yapalım. Paketlerin ürettiği canlı sonuçları aşağıdan yan yana inceleyebilirsiniz.
+        </p>
       </div>
 
       <div class="demo-body">
-        <!-- Sol Taraf: Girdi (Fotoğraflar) -->
+        <!-- Girdi Fotoğrafları -->
         <div class="demo-input-area">
           <h3 class="demo-step-title">Gönderilen Fotoğraflar</h3>
           <div class="photo-grid">
@@ -754,24 +757,37 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
           </div>
         </div>
 
-        <!-- Sağ Taraf: Çıktı (Videolar) -->
+        <!-- 3 Paket Çıktısı Yan Yana Canlı Görünüm -->
         <div class="demo-output-area">
-          <h3 class="demo-step-title">Ortaya Çıkan Sonuç</h3>
-          <p style="font-size: 12px; color: #aaa; text-align: center; margin-top: 0; margin-bottom: 20px; font-weight: 400;">
-    (Paket sonuçları için butonlara tıklayın.)
-  </p>
+          <h3 class="demo-step-title">Ortaya Çıkan Paket Sonuçları</h3>
           
-          <!-- Paket Seçici Butonlar -->
-          <div class="package-tabs">
-            <button class="tab-btn active" onclick="changeDemoVideo('eko', this)">Eko Paket</button>
-            <button class="tab-btn" onclick="changeDemoVideo('gold', this)">Gold Paket</button>
-            <button class="tab-btn" onclick="changeDemoVideo('diamond', this)">Diamond Paket</button>
-          </div>
+          <div class="demo-results-grid">
+            
+            <!-- Eko Demo -->
+            <div class="demo-video-card">
+              <span class="demo-badge eko-badge">Eko Paket Sonucu</span>
+              <div class="video-container-horizontal">
+                <iframe src="https://www.youtube.com/embed/UZhPFS91LSA?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </div>
 
-<!-- Yatay YouTube Video Alanı (16:9) ve Parlak Beyaz Gölgeli Çerçeve -->
-<div class="video-container-horizontal">
-  <iframe id="demo-iframe" src="https://www.youtube.com/embed/UZhPFS91LSA?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
-</div>
+            <!-- Gold Demo -->
+            <div class="demo-video-card">
+              <span class="demo-badge gold-badge">Gold Paket Sonucu</span>
+              <div class="video-container-horizontal">
+                <iframe src="https://www.youtube.com/embed/N69AdsyyQXs?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </div>
+
+            <!-- Diamond Demo -->
+            <div class="demo-video-card">
+              <span class="demo-badge diamond-badge">Diamond Paket Sonucu</span>
+              <div class="video-container-horizontal">
+                <iframe src="https://www.youtube.com/embed/qLma_L4TyqQ?rel=0&modestbranding=1&vq=hd1080" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -856,7 +872,6 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   </div>
   <p class="extra-note">* Müzik kliplerinde belirtilen süreleri aşan kurgular için ekstra dakika başı ücret 1000 TL olarak ücretlendirilir.</p>
 
-
   <!-- DÜĞÜN KLİBİ PAKETLERİ -->
   <div class="section-title-wrapper" id="paketler-dugun">
     <h2 class="section-title">Düğün Klibi Paketleri</h2>
@@ -912,7 +927,112 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
 
 </main>
 
-<!-- MÜŞTERİ MEMNUNİYETİ (DİKEY VİDEO YORUMLAR) -->
+<!-- ÖRNEK VİDEOLAR (FİYATLARIN HEMEN ARDINDAN GELEN BÖLÜM) -->
+<section id="ornekler" class="panel-section" style="border-top:none; margin-top:20px; padding-top:40px;">
+  <div class="container">
+    <div class="panel-header">
+      <h2 class="panel-title">Örnek Çalışmalar</h2>
+      <p class="panel-subtitle">Diamond, Gold ve Eko Paket Yapay Zeka Destekli Müzik Klip Referanslarımız</p>
+    </div>
+
+    <!-- DIAMOND ÖRNEKLERİ -->
+    <div class="example-category-wrapper">
+      <h3 class="category-title theme-diamond-title">✦ Diamond Örnekleri</h3>
+      <div class="portfolio-scroll">
+        
+        <div class="video-card theme-diamond">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/Q6wI5M4kv48?rel=0&modestbranding=1&vq=hd1080" title="Adını Sevdim Ben - Diamond Müzik Klibi" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="color: var(--diamond-color);">Diamond Paket</span>
+            <h3 class="video-title">Adını Sevdim Ben</h3>
+          </div>
+        </div>
+
+        <div class="video-card theme-diamond">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/W8EFFHrg5aQ?rel=0&modestbranding=1&vq=hd1080" title="Beni Allah Korudu - Diamond Müzik Klibi" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="color: var(--diamond-color);">Diamond Paket</span>
+            <h3 class="video-title">Beni Allah Korudu</h3>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GOLD ÖRNEKLERİ -->
+    <div class="example-category-wrapper" style="margin-top: 40px;">
+      <h3 class="category-title theme-gold-title">✦ Gold Örnekleri</h3>
+      <div class="portfolio-scroll">
+
+        <div class="video-card theme-gold">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/Lae4fQ1Lyfs?rel=0&modestbranding=1&vq=hd1080" title="Gözü Sürmelim - Gold Müzik Klibi" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="color: var(--gold-color);">Gold Paket</span>
+            <h3 class="video-title">Gözü Sürmelim</h3>
+          </div>
+        </div>
+
+        <div class="video-card theme-gold">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/GsepM8svVXM?rel=0&modestbranding=1&vq=hd1080" title="Çaylavyu - Gold Müzik Klibi" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="color: var(--gold-color);">Gold Paket</span>
+            <h3 class="video-title">Çaylavyu</h3>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- EKO ÖRNEKLERİ -->
+    <div class="example-category-wrapper" style="margin-top: 40px;">
+      <h3 class="category-title theme-silver-title">✦ Eko Örnekleri</h3>
+      <div class="portfolio-scroll">
+
+        <div class="video-card theme-silver">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/Xw5P1DQVJp8?rel=0&modestbranding=1&vq=hd1080" title="Delicesine - Eko Müzik Klibi" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="color: var(--silver-color);">Eko Paket</span>
+            <h3 class="video-title">Delicesine</h3>
+          </div>
+        </div>
+        
+        <div class="video-card theme-silver">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/eSZUgJw9aTk?rel=0&modestbranding=1&vq=hd1080" title="Yarim Olsaydın - Eko Müzik Klibi" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="color: var(--silver-color);">Eko Paket</span>
+            <h3 class="video-title">Yarim Olsaydın</h3>
+          </div>
+        </div>
+
+        <div class="video-card theme-silver">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/zD9-nCUTTbI?rel=0&modestbranding=1&vq=hd1080" title="Uğurlar Olsun - Eko Müzik Klibi" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-tag" style="color: var(--silver-color);">Eko Paket</span>
+            <h3 class="video-title">Uğurlar Olsun</h3>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MÜŞTERİ MEMNUNİYETİ -->
 <section id="memnuniyet" class="panel-section">
   <div class="container">
     <div class="panel-header">
@@ -957,56 +1077,10 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   </div>
 </section>
 
-<!-- ÖRNEK VİDEOLAR (AYRI PANEL - ALTTA) -->
-<section id="ornekler" class="panel-section" style="border-top:none; margin-top:0; padding-top:20px;">
-  <div class="container">
-    <div class="panel-header">
-      <h2 class="panel-title">Örnek Çalışmalar</h2>
-      <p class="panel-subtitle">Düğün Klipleri ve Yapay Zeka Destekli Müzik Klipleri Referanslarımız</p>
-    </div>
+<!-- SABİT BİLGİ AL BUTONU -->
+<a href="https://wa.me/905331400419?text=Merhaba,%20paketleriniz%20hakk%C4%B1nda%20detayl%C4%B1%20bilgi%20almak%20istiyorum." target="_blank" class="floating-demo">Bilgi Al</a>
 
-    <div class="portfolio-scroll">
-      
-      <!-- Düğün (Sinematik) Örnekleri -->
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/Xw5P1DQVJp8?rel=0&modestbranding=1&vq=hd1080" title="Delicesine - Müzik Klibi" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="video-info">
-          <span class="video-tag">"Delicesine"</span>
-          <h3 class="video-title">Özel Eko Müzik Klibi</h3>
-        </div>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/eSZUgJw9aTk?rel=0&modestbranding=1&vq=hd1080" title="Yarim Olsaydın - Müzik Klibi" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="video-info">
-          <span class="video-tag">"Yarim Olsaydın"</span>
-          <h3 class="video-title">Özel Eko Müzik Klibi</h3>
-        </div>
-      </div>
-
-      <!-- Müzik Klibi Örnekleri -->
-      <div class="video-card">
-        <div class="video-wrapper">
-         <iframe src="https://www.youtube.com/embed/zD9-nCUTTbI?rel=0&modestbranding=1&vq=hd1080" title="Uğurlar Olsun - Müzik Klibi" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="video-info">
-          <span class="video-tag">"Uğurlar Olsun"</span>
-          <h3 class="video-title">Gold Müzik Klibi</h3>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- DEMO TALEP ET (SABİT BUTON) -->
-<a href="https://wa.me/905331400419?text=Merhaba,%20paketler%20hakk%C4%B1nda%20detayl%C4%B1%20bilgi%20ve%20Demo%20talep%20ediyorum." target="_blank" class="floating-demo">Demo Talep Et</a>
-
-<!-- YENİLENMİŞ PROFESYONEL FOOTER -->
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -1021,14 +1095,14 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
         <h4 class="footer-title">Kurgu Paketleri</h4>
         <ul class="footer-links">
           <li><a href="#paketler-muzik">Diamond Müzik Klibi</a></li>
-          <li><a href="#paketler-muzik">Gold & Eko Müzik Klibi</a></li>
+          <li><a href="#paketler-muzik">Gold &amp; Eko Müzik Klibi</a></li>
           <li><a href="#paketler-dugun">Diamond Düğün Hikayesi</a></li>
           <li><a href="#paketler-dugun">Eko Düğün Kurgusu</a></li>
         </ul>
       </div>
       
       <div>
-        <h4 class="footer-title">İletişim & Destek</h4>
+        <h4 class="footer-title">İletişim &amp; Destek</h4>
         <ul class="footer-links">
           <li>Hizmet Bölgesi: Türkiye</li>
           <li><a href="tel:+905331400419">+90 (533) 140 04 19</a></li>
@@ -1044,59 +1118,5 @@ body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6
   </div>
 </footer>
 
-<script>
-  // Sadece Temel Linkler (Autoplay parametrelerini JS ile biz yöneteceğiz)
-  const youtubeDemoLinks = {
-    eko: 'https://www.youtube.com/embed/UZhPFS91LSA?rel=0&modestbranding=1&vq=hd1080',
-    gold: 'https://www.youtube.com/embed/N69AdsyyQXs?rel=0&modestbranding=1&vq=hd1080',
-    diamond: 'https://www.youtube.com/embed/qLma_L4TyqQ?rel=0&modestbranding=1&vq=hd1080'
-  };
-
-  const iframe = document.getElementById('demo-iframe');
-  let isAutoPlayed = false;
-
-  // 1. Sekmeler Arası Geçiş (Kullanıcı tıkladığı için sesli ve otomatik başlar)
-  function changeDemoVideo(paket, btnElement) {
-    iframe.src = youtubeDemoLinks[paket] + "&autoplay=1"; 
-
-    document.querySelectorAll('.package-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
-    btnElement.classList.add('active');
-  }
-
-  // 2. Sinema Modu (Yakınlaştır / Uzaklaştır) Mantığı
-  function toggleZoom() {
-    const videoBox = document.getElementById('video-box');
-    const zoomBtn = document.getElementById('zoom-btn');
-    
-    videoBox.classList.toggle('is-zoomed');
-    
-    if(videoBox.classList.contains('is-zoomed')) {
-      zoomBtn.innerHTML = "✖ Uzaklaştır (Kapat)";
-      document.body.style.overflow = "hidden"; // Arka planda sayfanın kaymasını engeller
-    } else {
-      zoomBtn.innerHTML = "🔍 Yakınlaştırmak İçin Tıklayın";
-      document.body.style.overflow = "auto"; // Sayfa kaydırmayı geri açar
-    }
-  }
-
-  // 3. Ekrana Gelince Otomatik Başlatma (Scroll Observer)
-  document.addEventListener("DOMContentLoaded", function() {
-    const videoBox = document.getElementById('video-box');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        // Video kutusu ekranın %50'sine girdiğinde ve daha önce oynatılmadıysa
-        if (entry.isIntersecting && !isAutoPlayed) {
-          isAutoPlayed = true;
-          // Ekranda kaydırarak gelindiği için kurallar gereği sessiz (mute=1) oynatıyoruz
-          iframe.src = youtubeDemoLinks['eko'] + "&autoplay=1&mute=1";
-        }
-      });
-    }, { threshold: 0.5 }); 
-
-    observer.observe(videoBox);
-  });
-</script>
-  
 </body>
 </html>
