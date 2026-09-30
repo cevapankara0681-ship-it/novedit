@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- 🚀 SEO: VURUCU BAŞLIK VE AÇIKLAMA -->
+<title>NOV PRODUCTION | Yapay Zeka Müzik & Dublaj Hizmetleri</title>
+<meta name="description" content="Kendi sesinizi müziğe dönüştürün veya size özel yazdığımız sözlerle sıfırdan yapay zeka şarkıları oluşturalım. Profesyonel dublaj hizmetleri NOV Production'da.">
+<meta name="keywords" content="yapay zeka müzik, kendi sesinle şarkı yap, ai şarkı, şarkı sözü yazımı, profesyonel dublaj, ai dublaj, ses klonlama, yaman medya">
+<meta name="author" content="NOV PRODUCTION">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://www.novedit.com.tr/muzik-yapim.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="NOV PRODUCTION | Kendi Sesinle Müziğini Yarat">
+<meta property="og:description" content="Stüdyo kalitesinde müzik üretimi. Kendi sesinizle şarkılar, özgün söz yazımı ve profesyonel dublaj hizmetleri.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Syncopate:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ─── KÖK RENKLER VE TEMEL AYARLAR ─── */
+:root {
+  --bg-pure: #000000;
+  --bg-gradient: linear-gradient(145deg, #050505 0%, #111111 100%);
+  --theme-color: #ffffff; 
+  --theme-glow: rgba(255, 255, 255, 0.2); 
+  --text-main: #ffffff;
+  --text-muted: #9ca3af;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+  --gold: #d4af37;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+html { scroll-behavior: smooth; background-color: var(--bg-pure); }
+body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
+.container { width: 90%; max-width: 1200px; margin: auto; }
+
+/* ─── ÜST NAVİGASYON (SİTE GENELİ ORTAK) ─── */
+.top-nav { padding: 20px 0; position: absolute; top: 0; left: 0; width: 100%; z-index: 1000; }
+.nav-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+.back-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; border: 1px solid var(--glass-border); padding: 8px 18px; border-radius: 30px; background: var(--glass-bg); backdrop-filter: blur(5px); transition: all 0.3s ease; }
+.back-btn:hover { color: #000; background: var(--theme-color); border-color: var(--theme-color); box-shadow: 0 0 15px var(--theme-glow); }
+
+.nav-right-links { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.nav-link { font-size: 11px; font-weight: 600; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 20px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); backdrop-filter: blur(5px); transition: all 0.3s ease; white-space: nowrap; }
+.nav-link:hover { color: #fff; border-color: var(--theme-color); background: rgba(255, 255, 255, 0.1); box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+
+/* ─── BRAND LOGO (HEADER ALTI) ─── */
+.brand-header { text-align: center; padding: 110px 0 40px; background: transparent; position: relative; }
+.brand-logo-main { font-family: 'Syncopate', sans-serif; font-size: 70px; font-weight: 900; letter-spacing: 12px; color: var(--theme-color); text-shadow: 0 0 30px var(--theme-glow); line-height: 1; }
+.logo-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.logo-subtext { font-family: 'Syncopate', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 16px; margin-top: 10px; color: #ffffff; margin-right: -16px; }
+
+/* ─── GİRİŞ (HERO) KISMI ─── */
+.cinema-intro { text-align: center; padding: 20px 0 40px; }
+.cinema-intro h1 { font-family: 'Syncopate', sans-serif; font-size: 30px; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 15px; }
+.cinema-intro p { font-size: 14px; color: var(--text-muted); max-width: 750px; margin: 0 auto; line-height: 1.8; }
+
+/* ─── MÜZİK PORTFÖYÜ (SADELEŞTİRİLMİŞ SLIDER) ─── */
+.music-showcase { position: relative; width: 100%; padding-bottom: 60px; border-bottom: 1px solid var(--glass-border); }
+.slider-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 0 5%; gap: 30px; }
+.slider-container::-webkit-scrollbar { display: none; } 
+
+.music-card { flex: 0 0 100%; max-width: 600px; scroll-snap-align: center; margin: 0 auto; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; }
+.music-cover { height: 250px; background: #111; display: flex; align-items: center; justify-content: center; position: relative; background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border); }
+.music-cover::before { content: '🎵'; font-size: 50px; opacity: 0.2; }
+.music-info { padding: 30px; flex-grow: 1; }
+.music-title { font-family: 'Syncopate', sans-serif; font-size: 18px; font-weight: 800; letter-spacing: 1px; color: var(--theme-color); text-transform: uppercase; margin-bottom: 5px; }
+.music-type { font-size: 11px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: block; }
+.music-desc { font-size: 13px; color: #ccc; line-height: 1.6; margin-bottom: 25px; }
+
+/* NATIVE AUDIO PLAYER STİLİ */
+audio { width: 100%; outline: none; border-radius: 30px; }
+audio::-webkit-media-controls-panel { background-color: rgba(255, 255, 255, 0.9); }
+
+.slider-hint { text-align: center; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-top: 30px; display: flex; align-items: center; justify-content: center; gap: 15px; }
+.slider-hint span { display: inline-block; width: 40px; height: 1px; background: var(--glass-border); }
+
+/* ─── PAKETLER VE FİYATLANDIRMA ─── */
+.pricing-section { padding: 80px 0; }
+.section-title { text-align: center; font-family: 'Syncopate', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: 2px; margin-bottom: 50px; text-transform: uppercase; }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 50px; }
+.price-card { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 50px 40px; border-radius: 12px; position: relative; transition: transform 0.3s ease; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.price-card:hover { transform: translateY(-5px); border-color: var(--theme-color); }
+.price-card.premium { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 10px 40px rgba(212, 175, 55, 0.05); }
+.price-card.premium::before { content: 'KENDİ SESİNLE'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #000; font-size: 10px; font-weight: 800; padding: 4px 15px; border-radius: 20px; letter-spacing: 2px; }
+
+.plan-name { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: var(--theme-color); }
+.plan-price { font-size: 38px; font-weight: 900; margin-bottom: 30px; color: var(--theme-color); }
+.plan-price span { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+
+.plan-features { list-style: none; text-align: left; margin: 0 auto; display: inline-block; }
+.plan-features li { font-size: 13px; color: #ccc; margin-bottom: 15px; padding-left: 24px; position: relative; font-weight: 500; }
+.plan-features li::before { content: '✦'; position: absolute; left: 0; top: 0; font-size: 12px; color: var(--gold); }
+
+/* ─── ÖZEL DUBLAJ BANNER ─── */
+.dubbing-banner { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); border: 1px solid rgba(255,255,255,0.15); padding: 50px; border-radius: 16px; text-align: center; position: relative; overflow: hidden; }
+.dubbing-banner::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 60%); pointer-events: none; }
+.dubbing-title { font-family: 'Syncopate', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: 2px; color: var(--theme-color); margin-bottom: 15px; }
+.dubbing-desc { font-size: 14px; color: var(--text-muted); max-width: 600px; margin: 0 auto 30px; line-height: 1.8; }
+.btn-white { display: inline-block; background: var(--theme-color); color: #000; padding: 14px 35px; border-radius: 30px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; transition: all 0.3s; position: relative; z-index: 2; }
+.btn-white:hover { background: #000; color: var(--theme-color); border: 1px solid var(--theme-color); }
+
+/* ─── BİLGİLENDİRME & SÜREÇ ─── */
+.info-section { padding: 60px 0; background: var(--bg-pure); border-top: 1px solid var(--glass-border); }
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+.info-box h4 { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: var(--theme-color); }
+.info-box p { font-size: 13px; color: var(--text-muted); line-height: 1.8; margin-bottom: 15px; text-align: justify; }
+
+/* ─── ORTAK FOOTER ─── */
+.site-footer { padding: 80px 0 40px; background: var(--bg-pure); font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--glass-border); }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+.footer-logo { font-family: 'Syncopate', sans-serif; font-size: 24px; font-weight: 900; color: var(--theme-color); text-decoration: none; display: block; margin-bottom: 15px; letter-spacing: 2px; }
+.footer-desc { line-height: 1.8; max-width: 340px; margin-bottom: 20px; }
+.footer-umbrella { display: inline-block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--theme-color); border: 1px solid rgba(255, 255, 255, 0.3); padding: 6px 12px; border-radius: 4px; }
+.footer-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text-main); margin-bottom: 20px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+.footer-links a:hover { color: var(--theme-color); }
+.footer-bottom { border-top: 1px solid var(--glass-border); padding-top: 30px; text-align: center; font-size: 12px; letter-spacing: 1px; }
+
+/* ─── SABİT BİLGİ AL BUTONU ─── */
+.floating-demo { position: fixed; bottom: 30px; right: 30px; background: var(--theme-color); color: #000; padding: 16px 26px; border-radius: 30px; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; box-shadow: 0 10px 30px var(--theme-glow); z-index: 1000; transition: all 0.3s ease; border: 2px solid transparent; }
+.floating-demo:hover { background: #000; color: var(--theme-color); border-color: var(--theme-color); transform: translateY(-4px); }
+
+/* ─── MOBİL UYUM (NAV & FOOTER DAHİL) ─── */
+@media (max-width: 900px) {
+  .nav-container { flex-direction: column; align-items: flex-start; }
+  .nav-right-links { width: 100%; justify-content: flex-start; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+  .footer-desc { max-width: 100%; margin: 0 auto 20px; }
+}
+
+@media (max-width: 768px) {
+  .cinema-intro h1 { font-size: 20px; }
+  .price-card { padding: 40px 20px; }
+  .dubbing-banner { padding: 40px 20px; }
+  
+  /* Mobil alt bar (diğer sayfadaki gibi) */
+  body { padding-bottom: 70px !important; }
+  .nav-container { display: block !important; padding: 15px; text-align: left; }
+  .back-btn { position: relative; z-index: 10; }
+  
+  .nav-right-links {
+    position: fixed !important; top: auto !important; bottom: 0 !important;
+    left: 0; right: 0; width: 100%; z-index: 9999;
+    background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex !important; flex-wrap: nowrap !important; overflow-x: auto;
+    padding: 12px 15px calc(12px + env(safe-area-inset-bottom)); gap: 10px; scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .nav-right-links::-webkit-scrollbar { display: none; }
+  
+  .nav-link { font-size: 13px !important; padding: 8px 14px !important; white-space: nowrap !important; background: rgba(255, 255, 255, 0.08); border-radius: 8px; color: #fff; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .floating-demo { bottom: 20px; right: 20px; padding: 12px 20px; font-size: 11px; }
+  .brand-logo-main { font-size: 45px; letter-spacing: 6px; }
+  .logo-subtext { font-size: 11px; letter-spacing: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ÜST NAVİGASYON -->
+<nav class="top-nav">
+  <div class="container nav-container">
+    <a href="index.html" class="back-btn">← Ana Sayfaya Dön</a>
+    <div class="nav-right-links">
+      <a href="calisma-sureci.html" class="nav-link">Çalışma Süreci</a>
+      <a href="calisma-kosullari.html" class="nav-link">Çalışma Koşulları</a>
+      <a href="odeme-ve-iade-politikasi.html" class="nav-link">Ödeme & İade</a>
+      <a href="kvkk.html" class="nav-link">KVKK</a>
+      <a href="gizlilik.html" class="nav-link">Gizlilik</a>
+      <a href="iletisim.html" class="nav-link">İletişim</a>
+    </div>
+  </div>
+</nav>
+
+<!-- BRAND LOGO -->
+<header class="brand-header">
+  <div class="container">
+    <div class="logo-wrapper">
+      <div class="brand-logo-main">NOV</div>
+      <div class="logo-subtext">PRODUCTION</div>
+    </div>
+  </div>
+</header>
+
+<!-- GİRİŞ -->
+<section class="cinema-intro">
+  <div class="container">
+    <h1>KENDİ MÜZİĞİNİZİ YARATIN</h1>
+    <p>Sesinizi bir başyapıta dönüştürün. İster kendi ses dosyanızı gönderin, ister size özel yazdığımız sözlerle yapay zekanın gücünü kullanarak sıfırdan hit şarkılar üretelim. Ayrıca profesyonel projeleriniz için kusursuz dublaj hizmetleri.</p>
+  </div>
+</section>
+
+<!-- MÜZİK PORTFÖYÜ (SES DOSYALARI İÇİN ÖZEL ALAN) -->
+<section id="portfoy" class="music-showcase">
+  <div class="slider-container" id="sliderContainer">
+    
+    <!-- ÖRNEK MÜZİK KARTI 1 -->
+    <article class="music-card">
+      <!-- Görsel Arka Plan Eklenebilir: style="background-image: url('cover1.jpg');" -->
+      <div class="music-cover"></div>
+      <div class="music-info">
+        <h2 class="music-title">GECEYE SİTEM</h2>
+        <span class="music-type">Rap / Vokal Klonlama Örneği</span>
+        <p class="music-desc">Müşterimizin gönderdiği 1 dakikalık ses kaydı, yapay zeka ile profesyonel bir stüdyo vokalistine dönüştürüldü. Altyapı ve miksaj tamamen bize aittir.</p>
+        
+        <!-- Ses Dosyanızı (mp3, wav) buraya ekleyeceksiniz -->
+        <audio controls controlsList="nodownload">
+          <!-- <source src="sizin-ses-dosyaniz.mp3" type="audio/mpeg"> -->
+          Tarayıcınız ses oynatıcısını desteklemiyor.
+        </audio>
+      </div>
+    </article>
+
+    <!-- ÖRNEK MÜZİK KARTI 2 -->
+    <article class="music-card">
+      <div class="music-cover"></div>
+      <div class="music-info">
+        <h2 class="music-title">SONSUZ YOLCULUK</h2>
+        <span class="music-type">Pop / Özgün Yapım Örneği</span>
+        <p class="music-desc">Müşterimizin sadece anlattığı bir hikaye üzerinden sözleri tarafımızca yazıldı ve kendi sesleri kullanılmadan yapay zeka aracılığıyla tamamen sıfırdan üretildi.</p>
+        
+        <!-- Ses Dosyanızı (mp3, wav) buraya ekleyeceksiniz -->
+        <audio controls controlsList="nodownload">
+          <!-- <source src="sizin-ses-dosyaniz-2.mp3" type="audio/mpeg"> -->
+          Tarayıcınız ses oynatıcısını desteklemiyor.
+        </audio>
+      </div>
+    </article>
+
+  </div>
+  
+  <div class="slider-hint">
+    <span></span> DİĞER ÖRNEKLER İÇİN KAYDIRIN <span></span>
+  </div>
+</section>
+
+<!-- PAKETLER VE FİYATLANDIRMA -->
+<section id="paketler" class="pricing-section">
+  <div class="container">
+    <h2 class="section-title">MÜZİK ÜRETİM PAKETLERİ</h2>
+    
+    <div class="pricing-grid">
+      <!-- Özgün Üretim Paketi (Sessiz) -->
+      <div class="price-card">
+        <h3 class="plan-name">Sıfırdan Özel Müzik</h3>
+        <div class="plan-price">5.999 ₺ <span>/ Parça Başına</span></div>
+        <ul class="plan-features">
+          <li>Sizin belirlediğiniz konuya göre söz yazımı</li>
+          <li>Sizin sesiniz <strong>kullanılmadan</strong> üretim</li>
+          <li>Kusursuz Yapay Zeka (AI) Vokalisti</li>
+          <li>İstenilen müzik türünde altyapı (Beat)</li>
+          <li>Stüdyo Kalitesinde Miksaj ve Mastering</li>
+          <li>Müzik Platformlarına Uygun Teslimat</li>
+        </ul>
+      </div>
+
+      <!-- Kendi Sesiyle Müzik Paketi -->
+      <div class="price-card premium">
+        <h3 class="plan-name">Kendi Sesinle Müzik</h3>
+        <div class="plan-price">8.999 ₺ <span>/ Parça Başına</span></div>
+        <ul class="plan-features">
+          <li>Sizin belirlediğiniz konuya göre söz yazımı</li>
+          <li><strong>Kendi ses dosyanızın kullanılması</strong></li>
+          <li>Sesin yapay zeka ile mükemmel şarkıcıya dönüşümü</li>
+          <li>İstenilen müzik türünde altyapı (Beat)</li>
+          <li>Stüdyo Kalitesinde Miksaj ve Mastering</li>
+          <li>Tamamen size ait, benzersiz vokal dokusu</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DUBLAJ BANNER -->
+    <div class="dubbing-banner">
+      <h3 class="dubbing-title">PROFESYONEL DUBLAJ VE SESLENDİRME</h3>
+      <p class="dubbing-desc">Film, reklam, YouTube videoları veya kurumsal tanıtımlarınız için yapay zeka destekli profesyonel dublaj hizmeti sunuyoruz. Sınır tanımayan dil seçenekleri ve kusursuz duygu aktarımıyla projenize ruh katın.</p>
+      <a href="https://wa.me/905331400419?text=Merhaba,%20profesyonel%20dublaj%20hizmetiniz%20i%C3%A7in%20fiyat%20almak%20istiyorum." class="btn-white">Projenizi Anlatın, Fiyat Alın</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SÜREÇ, BİLGİLENDİRME VE SEO İÇERİĞİ -->
+<section id="bilgi" class="info-section">
+  <div class="container info-grid">
+    <div class="info-box">
+      <h4>Nasıl Çalışır? (Kendi Sesinizle)</h4>
+      <p>Kendi sesinizle müzik yapmak için şarkı söylemeyi bilmenize gerek yok! Bize sadece birkaç dakikalık net bir konuşma veya mırıldanma ses kaydınızı iletiyorsunuz. Yapay zeka altyapımız, sesinizin tınısını klonlayarak onu kusursuz bir ritim ve melodi ile stüdyo vokalistine dönüştürüyor.</p>
+    </div>
+    <div class="info-box">
+      <h4>Söz Yazımı & Altyapı</h4>
+      <p>Aklınızda bir hikaye var ama söze dökemiyor musunuz? Uzman ekibimiz, anlattığınız hikayeyi veya duyguyu alarak profesyonel şarkı sözlerine dönüştürür. Ardından istediğiniz müzik türünde (Pop, Rap, Rock, Sinematik vb.) özgün altyapılar oluşturularak vokal ile harmanlanır.</p>
+    </div>
+    <div class="info-box">
+      <h4>Dublaj ve Dil Uyarlaması</h4>
+      <p>Dublaj hizmetimiz sadece seslendirmeden ibaret değildir. Videolarınızın orjinal duygu tonunu koruyarak, karakterlerin dudak senkronizasyonlarına en uygun yapay zeka ses profillerini seçiyor ve projenizi bir üst seviyeye taşıyoruz. Fiyatlandırma projenin metin uzunluğuna ve kapsamına göre özel olarak yapılmaktadır.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORTAK FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      
+      <div>
+        <a href="#" class="footer-logo">NOV</a>
+        <p class="footer-desc">Türkiye genelinde yapay zeka destekli film prodüksiyonu, müzik üretimi ve kusursuz sinematik kurgular üretiyoruz. Modern teknolojiyi sanatla buluşturan edit merkezi.</p>
+        <span class="footer-umbrella">Bir YAMAN MEDYA Kuruluşudur</span>
+      </div>
+      
+      <div>
+        <h4 class="footer-title">Hızlı Erişim</h4>
+        <ul class="footer-links">
+          <li><a href="film-yapim.html">Yapay Zeka Film Yapımı</a></li>
+          <li><a href="#paketler">Müzik Üretim Paketleri</a></li>
+          <li><a href="portfoy.html#paketler-muzik">Müzik Klibi Hizmetleri</a></li>
+          <li><a href="portfoy.html#paketler-dugun">Düğün Klibi Hizmetleri</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="footer-title">İletişim & Destek</h4>
+        <ul class="footer-links">
+          <li>Hizmet Bölgesi: Türkiye Geneli</li>
+          <li><a href="tel:+905331400419">+90 (533) 140 04 19</a></li>
+          <li><a href="https://wa.me/905331400419" style="color: var(--theme-color); font-weight: 600;">WhatsApp Proje Destek →</a></li>
+        </ul>
+      </div>
+
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2026 NOV PRODUCTION. Tüm Hakları Yaman Medya Tarafından Saklıdır. Türkiye'nin Dijital Kurgu Çözümü.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- SABİT BİLGİ AL BUTONU -->
+<a href="https://wa.me/905331400419?text=Merhaba,%20m%C3%BCzik%20ve%20ses%20%C3%BCretim%20hizmetleri%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" class="floating-demo">Bilgi Al</a>
+
+</body>
+</html>
