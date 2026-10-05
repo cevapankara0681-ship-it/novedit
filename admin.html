@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nov Admin | Aylık Müşteri Yönetimi</title>
+    <title>Nov Admin | Müşteri Yönetimi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #f5f5f5; }
         .glass-panel { background: #121212; border: 1px solid #2a2a2a; }
@@ -38,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody id="clientsTable" class="text-sm divide-y divide-neutral-800">
-                    <tr><td colspan="5" class="p-4 text-center text-gray-500">Veriler Supabase'den yükleniyor...</td></tr>
+                    <tr><td colspan="5" class="p-4 text-center text-gray-500">Yükleniyor...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -61,11 +60,11 @@
                 </div>
                 
                 <div class="space-y-2">
-                    <label class="text-xs text-gray-400">Panel Kullanıcı Adı</label>
+                    <label class="text-xs text-gray-400">Panel Kullanıcı Adı (Örn: demo)</label>
                     <input type="text" id="kullanici_adi" required class="w-full px-4 py-2 rounded-lg input-dark">
                 </div>
                 <div class="space-y-2">
-                    <label class="text-xs text-gray-400">Panel Şifresi</label>
+                    <label class="text-xs text-gray-400">Panel Şifresi (Örn: 123)</label>
                     <input type="text" id="sifre" required class="w-full px-4 py-2 rounded-lg input-dark">
                 </div>
 
@@ -91,24 +90,32 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const SUPABASE_URL = 'https://lcwsccfautsefmxskinf.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_3hqQFmO9okI3O5ITKgJbsA_0Ga23UUz';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         let clientsList = [];
 
         async function fetchClients() {
             const { data, error } = await supabaseClient.from('musteriler').select('*').order('id', { ascending: false });
-            if (error) { document.getElementById('clientsTable').innerHTML = '<tr><td colspan="5" class="p-4 text-red-500">Bağlantı Hatası! Bilgileri kontrol edin.</td></tr>'; return; }
-            clientsList = data;
+            if (error) { 
+                document.getElementById('clientsTable').innerHTML = '<tr><td colspan="5" class="p-4 text-red-500">Bağlantı Hatası: ' + error.message + '</td></tr>'; 
+                return; 
+            }
+            clientsList = data || [];
             renderTable();
         }
 
         function renderTable() {
             const tbody = document.getElementById('clientsTable');
             tbody.innerHTML = '';
-            if (clientsList.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">Henüz müşteri eklenmedi.</td></tr>'; return; }
+            if (clientsList.length === 0) { 
+                tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">Henüz müşteri eklenmedi. Üstteki butondan ekleyin.</td></tr>'; 
+                return; 
+            }
 
             clientsList.forEach(c => {
                 tbody.innerHTML += `
@@ -140,8 +147,8 @@
         }
 
         async function updateStage(id, newStage) {
-            await supabaseClient.from('musteriler').update({ proje_asama: parseInt(newStage) }).eq('id', id);
-            // Müşteri sayfayı yenilediği an yeni aşamayı görecek.
+            const { error } = await supabaseClient.from('musteriler').update({ proje_asama: parseInt(newStage) }).eq('id', id);
+            if (error) alert("Aşama güncellenemedi: " + error.message);
         }
 
         async function saveClient(e) {
@@ -149,25 +156,38 @@
             const id = document.getElementById('clientId').value;
             const clientData = {
                 firma_adi: document.getElementById('firma_adi').value,
-                kullanici_adi: document.getElementById('kullanici_adi').value,
-                sifre: document.getElementById('sifre').value,
+                kullanici_adi: document.getElementById('kullanici_adi').value.trim(),
+                sifre: document.getElementById('sifre').value.trim(),
                 proje_adi: document.getElementById('proje_adi').value,
                 kalan_gun: parseInt(document.getElementById('kalan_gun').value),
                 odeme_tarihi: document.getElementById('odeme_tarihi').value,
                 odenen_tutar: document.getElementById('odenen_tutar').value
             };
 
-            if (id) { await supabaseClient.from('musteriler').update(clientData).eq('id', id); } 
-            else { clientData.proje_asama = 1; await supabaseClient.from('musteriler').insert([clientData]); }
+            let error;
+            if (id) { 
+                const res = await supabaseClient.from('musteriler').update(clientData).eq('id', id); 
+                error = res.error;
+            } else { 
+                clientData.proje_asama = 1; 
+                clientData.gecmis_isler = []; 
+                const res = await supabaseClient.from('musteriler').insert([clientData]); 
+                error = res.error;
+            }
             
-            closeModal();
-            fetchClients();
+            if (error) {
+                alert("Kayıt Hatası: " + error.message);
+            } else {
+                closeModal();
+                fetchClients();
+            }
         }
 
         async function deleteClient(id) {
-            if(confirm('Müşteriyi sistemden tamamen silmek istediğinize emin misiniz?')) {
-                await supabaseClient.from('musteriler').delete().eq('id', id);
-                fetchClients();
+            if(confirm('Müşteriyi sistemden silmek istediğinize emin misiniz?')) {
+                const { error } = await supabaseClient.from('musteriler').delete().eq('id', id);
+                if (error) alert("Silme hatası: " + error.message);
+                else fetchClients();
             }
         }
 
