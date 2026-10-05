@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nov Admin | Aylık Müşteri Yönetimi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #f5f5f5; }
+        .glass-panel { background: #121212; border: 1px solid #2a2a2a; }
+        .input-dark { background-color: #1a1a1a !important; border: 1px solid #333 !important; color: white !important; }
+        .input-dark:focus { border-color: #fff !important; outline: none !important; }
+        .btn-brand { background-color: #fff; color: #000; transition: all 0.2s; }
+        .btn-brand:hover { background-color: #ccc; }
+    </style>
+</head>
+<body class="min-h-screen p-6">
+
+    <header class="flex justify-between items-center mb-8 glass-panel p-6 rounded-xl border-l-4 border-l-white">
+        <div>
+            <h1 class="text-3xl font-bold tracking-widest uppercase">NOV Admin</h1>
+            <p class="text-sm text-gray-400 mt-1">Aylık Sözleşmeli Müşteri (Retainer) Yönetimi</p>
+        </div>
+        <button onclick="openModal()" class="btn-brand px-6 py-2 rounded-lg font-bold shadow-lg">+ Yeni Müşteri Oluştur</button>
+    </header>
+
+    <div class="glass-panel rounded-xl overflow-hidden shadow-2xl">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-neutral-900 text-gray-400 text-xs uppercase tracking-wider">
+                        <th class="p-4 border-b border-neutral-800">Sanatçı & Giriş Bilgileri</th>
+                        <th class="p-4 border-b border-neutral-800">Aktif Klip Projesi</th>
+                        <th class="p-4 border-b border-neutral-800">Klip Aşaması (Canlı)</th>
+                        <th class="p-4 border-b border-neutral-800">Sözleşme & Ödeme</th>
+                        <th class="p-4 border-b border-neutral-800 text-right">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody id="clientsTable" class="text-sm divide-y divide-neutral-800">
+                    <tr><td colspan="5" class="p-4 text-center text-gray-500">Veriler Supabase'den yükleniyor...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Müşteri Ekleme Modal'ı -->
+    <div id="clientModal" class="fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center p-4 z-50">
+        <div class="glass-panel p-8 rounded-xl w-full max-w-2xl border border-neutral-700">
+            <h2 id="modalTitle" class="text-xl font-bold mb-6 border-b border-neutral-800 pb-4">Müşteri Profili</h2>
+            <form id="clientForm" onsubmit="saveClient(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="hidden" id="clientId">
+                
+                <div class="space-y-2">
+                    <label class="text-xs text-gray-400">Sanatçı / Firma Adı</label>
+                    <input type="text" id="firma_adi" required class="w-full px-4 py-2 rounded-lg input-dark" placeholder="Örn: X Sanatçısı">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs text-gray-400">Aktif Klip Adı</label>
+                    <input type="text" id="proje_adi" required class="w-full px-4 py-2 rounded-lg input-dark" placeholder="Örn: Yaz Şarkısı - Müzik Klibi">
+                </div>
+                
+                <div class="space-y-2">
+                    <label class="text-xs text-gray-400">Panel Kullanıcı Adı</label>
+                    <input type="text" id="kullanici_adi" required class="w-full px-4 py-2 rounded-lg input-dark">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs text-gray-400">Panel Şifresi</label>
+                    <input type="text" id="sifre" required class="w-full px-4 py-2 rounded-lg input-dark">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-xs text-gray-400">Kalan Süre (Gün)</label>
+                    <input type="number" id="kalan_gun" required class="w-full px-4 py-2 rounded-lg input-dark" placeholder="30">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs text-gray-400">Sonraki Ödeme Tarihi</label>
+                    <input type="text" id="odeme_tarihi" class="w-full px-4 py-2 rounded-lg input-dark" placeholder="Örn: 25 Kasım 2026">
+                </div>
+
+                <div class="space-y-2 md:col-span-2">
+                    <label class="text-xs text-gray-400">Aylık Sabit Tutar</label>
+                    <input type="text" id="odenen_tutar" class="w-full px-4 py-2 rounded-lg input-dark" placeholder="Örn: ₺45.000">
+                </div>
+
+                <div class="md:col-span-2 flex justify-end gap-4 mt-6">
+                    <button type="button" onclick="closeModal()" class="px-6 py-2 rounded-lg border border-neutral-700 hover:bg-neutral-800">İptal</button>
+                    <button type="submit" id="saveBtn" class="btn-brand px-8 py-2 rounded-lg font-bold">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://lcwsccfautsefmxskinf.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_3hqQFmO9okI3O5ITKgJbsA_0Ga23UUz';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let clientsList = [];
+
+        async function fetchClients() {
+            const { data, error } = await supabaseClient.from('musteriler').select('*').order('id', { ascending: false });
+            if (error) { document.getElementById('clientsTable').innerHTML = '<tr><td colspan="5" class="p-4 text-red-500">Bağlantı Hatası! Bilgileri kontrol edin.</td></tr>'; return; }
+            clientsList = data;
+            renderTable();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('clientsTable');
+            tbody.innerHTML = '';
+            if (clientsList.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">Henüz müşteri eklenmedi.</td></tr>'; return; }
+
+            clientsList.forEach(c => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-neutral-800/50 transition-colors">
+                        <td class="p-4">
+                            <div class="font-bold text-white text-lg">${c.firma_adi}</div>
+                            <div class="text-gray-500 text-xs mt-1">K.Adı: <span class="text-gray-300">${c.kullanici_adi}</span> | Şifre: <span class="text-gray-300">${c.sifre}</span></div>
+                        </td>
+                        <td class="p-4 font-semibold text-gray-200">${c.proje_adi}</td>
+                        <td class="p-4">
+                            <select onchange="updateStage(${c.id}, this.value)" class="bg-neutral-900 border border-neutral-700 text-sm rounded px-3 py-2 text-white outline-none w-full max-w-[200px]">
+                                <option value="1" ${c.proje_asama == 1 ? 'selected' : ''}>1. Senaryo / Planlama</option>
+                                <option value="2" ${c.proje_asama == 2 ? 'selected' : ''}>2. Çekim Aşamasında</option>
+                                <option value="3" ${c.proje_asama == 3 ? 'selected' : ''}>3. Kurgu & Montaj</option>
+                                <option value="4" ${c.proje_asama == 4 ? 'selected' : ''}>4. Hazır / Teslim</option>
+                            </select>
+                        </td>
+                        <td class="p-4">
+                            <div class="text-sm"><span class="font-bold text-white text-lg">${c.kalan_gun}</span> Gün Kaldı</div>
+                            <div class="text-gray-500 text-xs mt-1">Ödeme: ${c.odeme_tarihi}</div>
+                        </td>
+                        <td class="p-4 text-right">
+                            <button onclick="editClient(${c.id})" class="text-blue-400 hover:text-blue-300 mr-3 text-sm">Düzenle</button>
+                            <button onclick="deleteClient(${c.id})" class="text-red-500 hover:text-red-400 text-sm">Sil</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        async function updateStage(id, newStage) {
+            await supabaseClient.from('musteriler').update({ proje_asama: parseInt(newStage) }).eq('id', id);
+            // Müşteri sayfayı yenilediği an yeni aşamayı görecek.
+        }
+
+        async function saveClient(e) {
+            e.preventDefault();
+            const id = document.getElementById('clientId').value;
+            const clientData = {
+                firma_adi: document.getElementById('firma_adi').value,
+                kullanici_adi: document.getElementById('kullanici_adi').value,
+                sifre: document.getElementById('sifre').value,
+                proje_adi: document.getElementById('proje_adi').value,
+                kalan_gun: parseInt(document.getElementById('kalan_gun').value),
+                odeme_tarihi: document.getElementById('odeme_tarihi').value,
+                odenen_tutar: document.getElementById('odenen_tutar').value
+            };
+
+            if (id) { await supabaseClient.from('musteriler').update(clientData).eq('id', id); } 
+            else { clientData.proje_asama = 1; await supabaseClient.from('musteriler').insert([clientData]); }
+            
+            closeModal();
+            fetchClients();
+        }
+
+        async function deleteClient(id) {
+            if(confirm('Müşteriyi sistemden tamamen silmek istediğinize emin misiniz?')) {
+                await supabaseClient.from('musteriler').delete().eq('id', id);
+                fetchClients();
+            }
+        }
+
+        function openModal() { document.getElementById('clientForm').reset(); document.getElementById('clientId').value = ''; document.getElementById('clientModal').classList.replace('hidden', 'flex'); }
+        function editClient(id) {
+            const c = clientsList.find(x => x.id === id);
+            if(!c) return;
+            document.getElementById('clientId').value = c.id; document.getElementById('firma_adi').value = c.firma_adi;
+            document.getElementById('proje_adi').value = c.proje_adi; document.getElementById('kullanici_adi').value = c.kullanici_adi;
+            document.getElementById('sifre').value = c.sifre; document.getElementById('kalan_gun').value = c.kalan_gun;
+            document.getElementById('odeme_tarihi').value = c.odeme_tarihi; document.getElementById('odenen_tutar').value = c.odenen_tutar;
+            document.getElementById('clientModal').classList.replace('hidden', 'flex');
+        }
+        function closeModal() { document.getElementById('clientModal').classList.replace('flex', 'hidden'); }
+
+        fetchClients();
+    </script>
+</body>
+</html>

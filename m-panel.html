@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nov Production | Müşteri Portalı</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #f5f5f5; }
+        .glass-panel { background: rgba(18, 18, 18, 0.85); backdrop-filter: blur(10px); border: 1px solid #2a2a2a; }
+        .input-dark { background-color: #111 !important; border: 1px solid #333 !important; color: white !important; }
+        .input-dark:focus { border-color: #fff !important; outline: none !important; }
+        .btn-brand { background-color: #fff; color: #000; transition: all 0.2s; }
+        .btn-brand:hover { background-color: #ccc; }
+        .progress-line { height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #fff; width: 0%; transition: width 1s ease-in-out; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- GİRİŞ EKRANI -->
+    <div id="loginScreen" class="glass-panel p-8 rounded-2xl w-full max-w-md shadow-2xl">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold tracking-widest uppercase mb-2">NOV Production</h1>
+            <p class="text-sm text-gray-400">Sanatçı & Yapım Portalı</p>
+        </div>
+        
+        <form onsubmit="handleLogin(event)" class="space-y-6">
+            <div>
+                <label class="block text-sm text-gray-400 mb-2">Kullanıcı Adı</label>
+                <input type="text" id="username" required class="input-dark w-full px-4 py-3 rounded-xl">
+            </div>
+            <div>
+                <label class="block text-sm text-gray-400 mb-2">Şifre</label>
+                <input type="password" id="password" required class="input-dark w-full px-4 py-3 rounded-xl">
+            </div>
+            <p id="errorMsg" class="text-red-500 text-sm hidden text-center">Giriş bilgileri hatalı.</p>
+            <button type="submit" id="loginBtn" class="btn-brand w-full py-3 rounded-xl font-bold text-lg">Giriş Yap</button>
+        </form>
+    </div>
+
+    <!-- MÜŞTERİ PANELİ -->
+    <div id="dashboardScreen" class="hidden w-full max-w-5xl space-y-6">
+        <header class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold">Hoş Geldin, <span id="clientName" class="text-white">...</span></h1>
+                <p class="text-sm text-gray-400 mt-1">Aylık VIP Prodüksiyon Paketi</p>
+            </div>
+            <button onclick="location.reload()" class="text-sm text-gray-400 hover:text-white border border-gray-800 px-4 py-2 rounded-lg bg-neutral-900">Güvenli Çıkış</button>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Abonelik & Ödeme -->
+            <div class="glass-panel p-6 rounded-2xl flex flex-col justify-center border-t-2 border-t-neutral-700">
+                <h3 class="text-gray-400 text-sm mb-4">Sözleşme Durumu</h3>
+                <div class="text-4xl font-black mb-2" id="kalanGunText">0<span class="text-lg font-normal text-gray-400"> Gün Kaldı</span></div>
+                <div class="progress-line mb-4"><div id="progressFill" class="progress-fill"></div></div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-500">Sonraki Ödeme:</span>
+                    <span id="odemeTarihiText" class="text-white font-semibold">-</span>
+                </div>
+                <div class="flex justify-between text-sm mt-2">
+                    <span class="text-gray-500">Aylık Tutar:</span>
+                    <span id="odenenTutarText" class="text-white font-semibold">-</span>
+                </div>
+            </div>
+
+            <!-- Proje Takibi -->
+            <div class="glass-panel p-6 rounded-2xl md:col-span-2 border-t-2 border-t-white">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="text-gray-400 text-sm">Üzerinde Çalışılan Proje</h3>
+                        <h2 id="projeAdiText" class="text-2xl font-bold mt-1">-</h2>
+                    </div>
+                    <span id="projeAsamaBadge" class="bg-white text-black px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">Yükleniyor...</span>
+                </div>
+                
+                <!-- Animasyonlu Aşamalar -->
+                <div class="relative flex justify-between mt-12 px-2">
+                    <div class="absolute top-1/2 left-0 w-full h-1 bg-neutral-800 -translate-y-1/2 z-0 rounded"></div>
+                    <div id="stepProgressLine" class="absolute top-1/2 left-0 h-1 bg-white -translate-y-1/2 z-0 rounded transition-all duration-1000" style="width: 0%;"></div>
+                    
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div id="step1" class="w-6 h-6 rounded-full bg-neutral-800 border-2 border-neutral-600 flex items-center justify-center text-xs transition-all">1</div>
+                        <span class="text-xs text-gray-400 mt-3 absolute top-6 w-20 text-center">Senaryo</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div id="step2" class="w-6 h-6 rounded-full bg-neutral-800 border-2 border-neutral-600 flex items-center justify-center text-xs transition-all">2</div>
+                        <span class="text-xs text-gray-400 mt-3 absolute top-6 w-20 text-center">Çekim</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div id="step3" class="w-6 h-6 rounded-full bg-neutral-800 border-2 border-neutral-600 flex items-center justify-center text-xs transition-all">3</div>
+                        <span class="text-xs text-gray-400 mt-3 absolute top-6 w-24 text-center">Kurgu & Montaj</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div id="step4" class="w-6 h-6 rounded-full bg-neutral-800 border-2 border-neutral-600 flex items-center justify-center text-xs transition-all">4</div>
+                        <span class="text-xs text-gray-400 mt-3 absolute top-6 w-20 text-center">Teslim</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://lcwsccfautsefmxskinf.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_3hqQFmO9okI3O5ITKgJbsA_0Ga23UUz';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            btn.innerText = 'Giriş Yapılıyor...';
+            
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
+
+            const { data, error } = await supabaseClient.from('musteriler').select('*').eq('kullanici_adi', user).eq('sifre', pass).maybeSingle();
+
+            if (error || !data) {
+                document.getElementById('errorMsg').classList.remove('hidden');
+                btn.innerText = 'Giriş Yap';
+            } else {
+                renderDashboard(data);
+            }
+        }
+
+        function renderDashboard(data) {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.body.classList.remove('items-center');
+            document.body.classList.add('items-start', 'pt-10');
+            
+            const dashboard = document.getElementById('dashboardScreen');
+            dashboard.classList.remove('hidden');
+            dashboard.classList.add('flex', 'flex-col');
+
+            document.getElementById('clientName').innerText = data.firma_adi;
+            document.getElementById('kalanGunText').innerHTML = `${data.kalan_gun}<span class="text-lg font-normal text-gray-400"> Gün Kaldı</span>`;
+            document.getElementById('odemeTarihiText').innerText = data.odeme_tarihi || '-';
+            document.getElementById('odenenTutarText').innerText = data.odenen_tutar || '-';
+            document.getElementById('projeAdiText').innerText = data.proje_adi || 'Aktif Proje Yok';
+
+            const percent = Math.min(100, Math.max(0, (data.kalan_gun / 30) * 100));
+            document.getElementById('progressFill').style.width = `${percent}%`;
+
+            updateStepper(data.proje_asama);
+        }
+
+        function updateStepper(asama) {
+            const line = document.getElementById('stepProgressLine');
+            const badge = document.getElementById('projeAsamaBadge');
+            
+            const asamaMetinleri = { 1: "Senaryo & Planlama", 2: "Çekim Aşamasında", 3: "Kurgu & Montaj", 4: "Teslim Edildi" };
+            badge.innerText = asamaMetinleri[asama] || "Hazırlanıyor";
+
+            // Çizgi ilerlemesi
+            const linePercents = { 1: "0%", 2: "33%", 3: "66%", 4: "100%" };
+            setTimeout(() => { line.style.width = linePercents[asama] || "0%"; }, 100);
+
+            for(let i = 1; i <= 4; i++) {
+                const stepEl = document.getElementById(`step${i}`);
+                if(i < asama) {
+                    stepEl.className = "w-6 h-6 rounded-full bg-white text-black flex items-center justify-center text-xs font-bold transition-all";
+                    stepEl.innerText = "✓";
+                } else if(i === asama) {
+                    stepEl.className = "w-8 h-8 rounded-full bg-black border-4 border-white text-white flex items-center justify-center text-xs font-bold shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all";
+                    stepEl.innerText = i;
+                } else {
+                    stepEl.className = "w-6 h-6 rounded-full bg-neutral-800 border-2 border-neutral-600 text-gray-500 flex items-center justify-center text-xs transition-all";
+                    stepEl.innerText = i;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
